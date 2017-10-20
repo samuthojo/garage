@@ -32,8 +32,10 @@ Route::post('customers/update', 'Cms@updateCustomer');
 
 Route::get('cars', 'Cms@cars');
 
-Route::post('models/create/{type}', 'Cms@store');
+Route::post('models/create', 'Cms@newModel');
 Route::get('models/{car_make}', 'Cms@models');
+Route::get('models/model/{model}', 'Cms@modelDetails');
+Route::get('models/view/{car_make}', 'Cms@viewModels')->name('models');
 
 Route::get('categories', 'Cms@categories');
 
@@ -48,10 +50,9 @@ Route::post('services/from_existing', 'Cms@newService2');
 Route::post('services/update', 'Cms@updateService');
 Route::post('services/status/update', 'Cms@updateServiceStatus');
 
-Route::get('requested_services', 'Cms@requested_services');
-Route::get('requested_services/{service}/reschedule', 'Cms@reschedule');
-Route::post('requested_services/{service}/date', 'Cms@newDate');
-Route::post('requested_services/{service}/status', 'Cms@updateRequestedService');
+Route::get('requested_services', 'Cms@requestedServices');
+Route::get('requested_services/{service}', 'Cms@requestedServiceDetails');
+
 
 Route::get('change_password_form', 'Cms@change_password_form');
 Route::post('change_password', 'Cms@change_password');

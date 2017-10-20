@@ -35,12 +35,16 @@ function newProduct() {
   } else {
     closeModal('product_modal');
     var link = 'create/product';
+    var myForm = document.getElementById('product_form');
+    var formData = new FormData(myForm);
     $.ajax({
             type: 'post',
             dataType: 'html',
             url: link,
+            data: formData,
             cache: false,
-            data: product,
+            contentType: false,
+            processData: false,
             success: function (result) {
                 $("#main_content").html(result);
             }
@@ -109,12 +113,17 @@ function editProduct() {
     } else {
       closeModal('edit_product_modal');
       var link = 'update/product';
+      var myForm = document.getElementById('edit_product_form');
+      var formData = new FormData(myForm);
+      formData.append('id', product_id);
       $.ajax({
               type: 'post',
               dataType: 'html',
               url: link,
+              data: formData,
               cache: false,
-              data: product,
+              contentType: false,
+              processData: false,
               success: function (result) {
                   $("#main_content").html(result);
               }
@@ -151,8 +160,7 @@ function deleteProduct() {
 }
 
 function fetchModels(id) {
-  var e = document.getElementById(id);
-  var car_id = e.options[e.selectedIndex].value;
+  var car_id = $('#' + id).val();
   var link = 'models/' + car_id; //fetch all models of this make
   $.getJSON(link)
    .done(function (data) {
@@ -166,7 +174,6 @@ function fetchModels(id) {
 
 function setUpModels(models, id) {
     var mySelect = document.getElementById(id);
-    var length = mySelect.options.length;
 
     //Leave the first two options, delete the rest
     $('#' + id).find('option').not(':first, :eq(1)').remove();

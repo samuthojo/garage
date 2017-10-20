@@ -13,19 +13,21 @@
     <div class="panel-heading">
         <h3 class="panel-title pull-left"
           style="font-weight: bold;">Product Details:</h3>
-        <span class="pull-right text-danger"
-          onclick="showDeleteModal({{$product->id}})">
-          <i class="fa fa-trash-o fa-2x" style="cursor: pointer;"></i>
-        </span>
-        <span class="pull-right text-info"
-          onclick=
-          "showEditProductModal({{$category}}, {{$product}}, {{$car}}, {{$car_model}})">
-          <i class="fa fa-pencil fa-2x action" style="cursor: pointer;"></i>
-        </span>
-        <span class="pull-right text-primary"
-          onclick="menu_links('products')">
-          <i class="fa fa-arrow-left fa-2x action" style="cursor: pointer;"></i>
-        </span>
+        <div class="btn-group pull-right">
+          <button type="button" class="btn btn-primary"
+            onclick="menu_links('products')">
+            <i class="fa fa-arrow-left"></i>
+          </button>
+          <button type="button" class="btn btn-primary"
+            onclick=
+            "showEditProductModal({{$category}}, {{$product}}, {{$car}}, {{$car_model}})">
+            <i class="fa fa-pencil"></i>
+          </button>
+          <button type="button" class="btn btn-danger"
+            onclick="showDeleteModal({{$product->id}})">
+            <i class="fa fa-trash-o"></i>
+          </button>
+        </div>
         <div class="clearfix"></div>
     </div>
     <div class="panel-body">
@@ -66,7 +68,7 @@
           @if($product->has_includes)
             <tr>
               <th>Has Includes: </th>
-                <td>{{ $product->has_includes }}</td>
+                <td>{{ ($product->has_includes) ? 'Yes' : 'No' }}</td>
             </tr>
             <tr>
               <th>Includes: </th>

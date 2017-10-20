@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class CarModel extends Model
 {
@@ -27,6 +28,14 @@ class CarModel extends Model
 
   public function service_as_products() {
     return $this->hasMany('App\ServiceAsProduct');
+  }
+
+  public function getCreatedAtAttribute($value) {
+    return Carbon::parse($value)->format("j M \\'y");
+  }
+
+  public function getUpdatedAtAttribute($value) {
+    return Carbon::parse($value)->format("j M \\'y");
   }
 
 }

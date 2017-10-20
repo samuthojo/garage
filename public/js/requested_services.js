@@ -1,7 +1,7 @@
 var requested_service_id = "";
 
-function viewItems(id) {
-  var link = 'orders/' + id;
+function viewCustomers(id) {
+  var link = 'requested_services/' + id;
   $.ajax({
     url: link,
     dataType: 'html',
@@ -31,7 +31,6 @@ function acceptOrder() {
     url: link,
     dataType: 'html',
     data: formData,
-    async: false,
     cache: false,
     contentType: false,
     processData: false,
@@ -57,7 +56,6 @@ function rejectOrder() {
       url: link,
       dataType: 'html',
       data:formData,
-      async: false,
       cache: false,
       contentType: false,
       processData: false,
@@ -79,7 +77,6 @@ function markAsServiced() {
     url: link,
     dataType: 'html',
     data: formData,
-    async: false,
     cache: false,
     contentType: false,
     processData: false,

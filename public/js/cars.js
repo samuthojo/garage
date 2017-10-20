@@ -28,7 +28,6 @@ function newCar() {
             dataType: 'html',
             url: link,
             data: formData,
-            async: false,
             cache: false,
             contentType: false,
             processData: false,
@@ -84,7 +83,6 @@ function editCar() {
             dataType: 'html',
             url: link,
             data: formData,
-            async: false,
             cache: false,
             contentType: false,
             processData: false,
@@ -121,4 +119,15 @@ function deleteCar() {
             $("#main_content").html(result);
         }
     });
+}
+
+function viewModels(id) {
+  var link = 'models/view/' + id; //fetch all models of this make
+  $.ajax({
+        url: link,
+        dataType: 'html',
+        success: function (result) {
+          $("#main_content").html(result);
+        }
+  });
 }

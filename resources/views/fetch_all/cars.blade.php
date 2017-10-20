@@ -6,7 +6,8 @@
   <div class="panel-heading">
     <h3 style="font-weight: bold;" class="panel-title pull-left">
       Cars: </h3>
-      <span onclick="showCarModal()" class="pull-right text-primary">
+      <span onclick="showCarModal()" class="pull-right text-primary"
+        title="Add New Car">
         <i class="fa fa-plus-circle fa-2x" style="cursor: pointer;"></i>
       </span>
      <div class="clearfix"></div>
@@ -32,11 +33,18 @@
                         <div class="btn-group">
                           <button type="button" class="btn btn-small btn-primary"
                             onclick="viewCar({{ $car->id }})">
-                            <span class="glyphicon glyphicon-eye-open"></span>
+                            <!-- <span class="glyphicon glyphicon-eye-open"></span> -->
+                            Car Details
+                          </button>
+                          <button type="button" class="btn btn-small btn-primary"
+                            onclick="viewModels({{ $car->id }})">
+                            <!-- <span class="glyphicon glyphicon-eye-open"></span> -->
+                            View Models
                           </button>
                           <button type="button" class="btn btn-danger"
                            onclick="showDeleteModal({{ $car->id }})">
-                            <span class="glyphicon glyphicon-trash"></span>
+                            <!-- <span class="glyphicon glyphicon-trash"></span> -->
+                            Delete Car
                           </button>
                        </div>
                       </td>

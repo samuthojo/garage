@@ -51,10 +51,6 @@
         Cars
         <span style="font-size:16px;"></span></a>
       </li>
-      <li class="link" id="cars"><a href="javascript:menu_links('models');">
-        Models
-        <span style="font-size:16px;"></span></a>
-      </li>
       <li class="link" id="customers">
         <a href="javascript:menu_links('customers');">
         Customers

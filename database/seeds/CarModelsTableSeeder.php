@@ -18,10 +18,10 @@ class CarModelsTableSeeder extends Seeder
                   'Mazda', 'Discovery', 'Hyundai',
                   'Audi', 'Jeep', 'Honda', 'Lexus',
             ];
-      $pictures = [ 'Nissan Patrol.jpg', 'Mark II.jpg', 'Suzuki.jpg',
-                    'BMW.jpg', 'Mazda.jpg', 'Discovery.jpg', 'Hyundai.jpg',
-                    'Audi.jpg', 'Jeep.jpg', 'Honda.jpg', 'Lexus.jpg',
-                  ];
+      $pictures = ['nissan.jpg', 'toyota.jpg', 'suzuki.jpg',
+                 'bmw.jpg', 'mazda.jpg', 'land-rover.jpg',
+                 'hyundai.jpg', 'audi.jpg', 'jeep.jpg',
+                 'honda.jpg', 'lexus.jpg', ];
       $index = 0;
       foreach ($models as $model) {
           $carModel = [

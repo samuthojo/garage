@@ -31,7 +31,6 @@ function verifyCustomer() {
     type: 'post',
     dataType: 'html',
     data: formData,
-    async: false,
     cache: false,
     contentType: false,
     processData: false,

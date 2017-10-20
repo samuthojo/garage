@@ -170,12 +170,13 @@ class Cms extends Controller
       return $this->services();
     }
 
-    public function products(Category $categories) {
+    public function products() {
+      $categories = Category::all();
       $products = Product::orderBy('date_modified', 'desc')->get();
       $cars = Car::all();
       return view('fetch_all.products', [
           'products' => $products,
-          'categories' => $categories->get(),
+          'categories' => $categories,
           'cars' => $cars,
       ]);
     }
@@ -228,44 +229,54 @@ class Cms extends Controller
     public function updateOrder(Request $request) {
       extract($request->all());
       Order::where('id', $id)->update(['status' => $status,]);
-      $device = Device::where('customer_id', 12)->first();
-      $tokens = $device->token;
       if($status == "accepted") {
         //To do: Send Push Notification
-        $fcm = new FCM();
-        $push = new Push();
-
-        $data = array();
-        $data['date'] = '2017-10-09';
-        $data['title'] = "Order Confirmation";
-        $data['message'] = "Your order has been accepted!";
-
-        $push->setTitle("Order Confirmation");
-        $push->setIsBackground(FALSE);
-        $push->setData($data);
-
-        // sending
-        $fcm->send($tokens, $push->getPush());
-        return 'sent';
       } else if($status == "rejected") {
         //To do: Send Push Notification
       }
       return $this->orders();
     }
 
-    public function requested_services() {
-      // $requests = DB::table('customer_services')
-      //               ->select('service_as_product_id')
-      //               ->groupBy('service_as_product_id')
-      //               ->get();
-      // foreach ($requests as $reques) {
-      //   (CustomerService) $reques;
-      //   $reques->service_as_product_id = $value;
-      //   return $reques->serviceAsProduct()->first()->service()->first()->name;
-      // }
-      //       return $reques;
-      //
-      // return view('fetch_all.requested_services', compact('requests'));
+    public function requestedServices() {
+      $service_as_product_ids =
+        DB::table('customer_services')
+          ->select('service_as_product_id')
+          ->groupBy('service_as_product_id')
+          ->get()->map( function($data) {
+            return $mydata = $data->service_as_product_id;
+          });
+      $service_as_products = ServiceAsProduct::whereIn('id', $service_as_product_ids)
+                            ->get()
+                            ->map( function($serv) {
+                              $service = $serv;
+                              $service->service = $serv->service()->first()->name;
+                              $service->car = $serv->car()->first()->name;
+                              $service->model = $serv->car_model()->first()->model_name;
+                              $service->customers = $serv->customerServices()->count();
+                              return $service;
+                            });
+      return view('fetch_all.requested_services', compact('service_as_products'));
+    }
+
+    public function requestedServiceDetails(ServiceAsProduct $service) {
+      $serv = $service->service()->first()->name;
+      $car = $service->car()->first()->name;
+      $model = $service->car_model()->first()->model_name;
+
+      $details = $service->customerServices()
+                         ->get()
+                         ->map( function($c) {
+                           $serv = $c;
+
+                           $customer = $c->customer()->first();
+
+                           $serv->customer = $customer->name;
+                           $serv->phonenumber = $customer->phonenumber;
+
+                           return $serv;
+                         });
+       return view('specific.requested_service', compact('details', 'serv',
+                                                              'car', 'model'));
     }
 
     public function change_password_form() {
@@ -337,12 +348,12 @@ class Cms extends Controller
     }
 
     public function update(Request $request, $type) {
-      $id = $request->only('id');
+      $id = $request->input('id');
       if($type == 'category') {
         Category::where('id', $id)->update(request()->except('id'));
         return $this->categories();
       } else if($type == 'product') {
-        $data = $request->except('image');
+        $data = $request->except('id', 'image');
         if($request->hasFile('image')) {
           $picture = $request->file('image');
           if($picture->isValid()) {
@@ -362,7 +373,7 @@ class Cms extends Controller
           $logo = $request->file('picture');
           if($logo->isValid()) {
             $picture = $logo->getClientOriginalName();
-            $logo->move('uploads/cars', $image);
+            $logo->move('uploads/cars', $picture);
             $data = array_add($data, 'picture', $picture);
             $data = array_add($data, 'num_models', $num_models);
             Car::where('id', $id)->update($data);
@@ -420,5 +431,17 @@ class Cms extends Controller
       $models = $car_make->models()->get();
 
       return response()->json($models);
+    }
+
+    public function viewModels(Car $car_make) {
+      $models = $car_make->models;
+      $cars = Car::all();
+      return view('specific.models', compact('models', 'car_make', 'cars'));
+    }
+
+    public function modelDetails(CarModel $model) {
+      $model->car = $model->car()->first()->name;
+      $cars = Car::all();
+      return view('specific.model', compact('model', 'cars'));
     }
 }

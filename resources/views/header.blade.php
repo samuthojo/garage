@@ -51,9 +51,13 @@
   <script src="{{ asset('js/main.js') }}"></script>
 
   <style>
-    .modal-body {
-      max-height: 100%;
+    /*.modal-dialog{
+        overflow-y: initial !important
     }
+    .modal-body{
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
+    }*/
     .form-control {
       width: 200px;
     }

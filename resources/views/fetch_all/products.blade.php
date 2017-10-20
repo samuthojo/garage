@@ -1,4 +1,5 @@
 <script src="{{ asset('js/products.js') }}"></script>
+<script src="{{ asset('js/jquery.validate.js') }}"></script>
 @include('modals.product_modal')
 <div class="panel panel-default">
   <div class="panel-heading">

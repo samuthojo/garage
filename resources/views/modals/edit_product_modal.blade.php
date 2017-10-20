@@ -14,7 +14,7 @@
             @include('alerts.alert3', ['alert_id' => 'edit_product_alert'])
             <div class="form-group">
               <label for="sel5">Category:</label>
-               <select id="sel5">
+               <select id="sel5" name="category_id">
                  <option disabled selected value="#">Choose category</option>
                  @foreach($categories as $category)
                     <option value="{{$category->id}}">{{$category->name}}</option>
@@ -28,7 +28,7 @@
           </div>
           <div class="form-group">
             <label for="sel6">Car:</label>
-             <select id="sel6" onchange="fetchModels(sel6)">
+             <select id="sel6" name="car_id" onchange="fetchModels('sel6')">
                <option disabled selected value="#">Choose car</option>
                <option value="">all</option>
                @foreach($cars as $car)
@@ -38,7 +38,7 @@
           </div>
           <div class="form-group">
             <label for="sel7">Model:</label>
-             <select id="sel7">
+             <select id="sel7" name="car_model_id">
                <option disabled selected value="#">Choose model</option>
                <option value="">all</option>
                @foreach($models as $model)
@@ -68,10 +68,10 @@
           </div>
           <div class="form-group">
             <label for="sel8">Has includes:</label>
-             <select id="sel8">
+             <select id="sel8" name="has_includes">
                <option disabled selected value="">specify</option>
-                  <option>Yes</option>
-                  <option>No</option>
+                  <option value="{{1}}">Yes</option>
+                  <option value="{{0}}">No</option>
              </select>
         </div>
           <div class="form-group">

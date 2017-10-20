@@ -61,9 +61,6 @@ function menu_links(arg) {
     else if(arg == "cars"){
       link = "cars";
     }
-    else if(arg == "models"){
-      link = "models";
-    }
     else if(arg == "customers"){
       link = "customers";
     }

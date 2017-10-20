@@ -14,7 +14,7 @@
             @include('alerts.alert2', ['alert_id' => 'product_alert'])
           <div class="form-group">
               <label class="control-label col-sm-2" for="sel2">Category:</label>
-               <select id="sel2" class="form-control">
+               <select id="sel1" class="form-control" name="category_id">
                  <option disabled selected value="#">Choose category</option>
                  @foreach($categories as $category)
                     <option value="{{$category->id}}">{{$category->name}}</option>
@@ -28,7 +28,8 @@
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="sel2">Car:</label>
-             <select id="sel2" onchange="fetchModels('sel2')" class="form-control">
+             <select id="sel2" onchange="fetchModels('sel2')" class="form-control"
+               name="car_id">
                <option disabled selected value="#">Choose car</option>
                <option value="">all</option>
                @foreach($cars as $car)
@@ -38,7 +39,7 @@
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="sel3">Model:</label>
-             <select id="sel3" class="form-control">
+             <select id="sel3" class="form-control" name="car_model_id">
                <option disabled selected value="#">Choose model</option>
                <option value="">all</option>
              </select>
@@ -65,10 +66,10 @@
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="sel4">Has includes:</label>
-             <select id="sel4" class="form-control">
+             <select id="sel4" class="form-control" name="has_includes">
                <option disabled selected value="">specify</option>
-                  <option>Yes</option>
-                  <option>No</option>
+                  <option value="{{1}}">Yes</option>
+                  <option value="{{0}}">No</option>
              </select>
         </div>
           <div class="form-group">

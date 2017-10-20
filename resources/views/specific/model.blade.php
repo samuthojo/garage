@@ -1,28 +1,22 @@
-<style>
-  .action {
-    margin-right: 10px;
-  }
-</style>
+<script src="{{ asset('js/models.js')}}"></script>
+@include('modals.confirmation_modal', ['text' => 'model',
+                                       'function' => 'deleteModel()'])
 
-<script src="{{ asset('js/cars.js')}}"></script>
-@include('modals.confirmation_modal', ['text' => 'car',
-                                       'function' => 'deleteCar()'])
-
-@include('modals.edit_car')
+@include('modals.edit_model', ['title' => $model->car])
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title pull-left"
-          style="font-weight: bold;">Car Details:</h3>
+          style="font-weight: bold;">Model Details:</h3>
       <div class="btn-group pull-right">
         <button type="button" class="btn btn-primary"
-          onclick="menu_links('cars')">
+          onclick="viewModels({{$model->car_id}})">
           <i class="fa fa-arrow-left"></i>
         </button>
-        <button type="button" class="btn btn-primary" onclick="showEditCarModal({{$car}})">
+        <button type="button" class="btn btn-primary" onclick="showEditModel({{$model}})">
           <i class="fa fa-pencil"></i>
         </button>
         <button type="button" class="btn btn-danger"
-          onclick="showDeleteModal({{$car->id}})">
+          onclick="showDeleteModal({{$model->id}})">
           <i class="fa fa-trash-o"></i>
         </button>
       </div>
@@ -32,28 +26,28 @@
       <div class="table-responsive">
         <table class="table table-striped">
           <tr>
-            <th>Logo: </th>
+            <th>Model Picture: </th>
               <td>
-                <img src="{{ asset('uploads/cars/' . $car->picture)}}"
+                <img src="{{ asset('uploads/models/' . $model->picture)}}"
                   class="img-rounded" alt="Product image" width="25%"
                   height="auto">
               </td>
           </tr>
           <tr>
-            <th>Name: </th>
-              <td>{{ $car->name }}</td>
+            <th>Model Name: </th>
+              <td>{{ $model->model_name }}</td>
           </tr>
           <tr>
-            <th># models: </th>
-              <td>{{ $car->num_models }}</td>
+            <th>Car Name: </th>
+              <td>{{ $model->car }}</td>
           </tr>
           <tr>
             <th>Date added: </th>
-              <td>{{ $car->date_added }}</td>
+              <td>{{ $model->created_at }}</td>
           </tr>
           <tr>
             <th>Last modified: </th>
-              <td>{{ $car->updated_at }}</td>
+              <td>{{ $model->updated_at }}</td>
           </tr>
         </table>
       </div>
