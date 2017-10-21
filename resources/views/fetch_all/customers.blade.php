@@ -42,7 +42,7 @@
                             </button>
                           @endif
                           <button type="button" class="btn btn-small btn-primary"
-                            onclick="viewCustomer({{ $customer->id }})">
+                            onclick="viewCustomer({{ $customer->id }})" title="More Details">
                             More
                           </button>
                        </div>
@@ -54,7 +54,7 @@
      </div>
   </div>
   <div class="panel-footer">
-    Crafted @ <a href="www.ipfsoftwares.com">iPF SOFTWARES</a>
+    Crafted @ <a href="http://ipfsoftwares.com" target="_blank">iPF SOFTWARES</a>
   </div>
   </div>
   <script>

@@ -197,10 +197,9 @@ function setUpModels(models, id) {
   var mySelect = document.getElementById(id);
   var length = mySelect.options.length;
 
-  //Leave the first two options, start at i = 2
-  for (i = 2; i < length; i++) {
-    mySelect.options[i] = null;
-  }
+  //Leave the first two options, delete the rest
+  $('#' + id).find('option').not(':first, :eq(1)').remove();
+  $('#' + id).val('#');//select first option
 
   for(i = 0; i < models.length; i++) {
      var opt = document.createElement("option");

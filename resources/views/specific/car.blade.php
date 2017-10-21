@@ -58,8 +58,7 @@
         </table>
       </div>
     </div>
-  <div class="panel-footer">Crafted @ <a href="{{'www.ipfsoftwares.com'}}">
-    iPF SOFTWARES
-    </a>
- </div>
+    <div class="panel-footer">
+      Crafted @ <a href="http://ipfsoftwares.com" target="_blank">iPF SOFTWARES</a>
+    </div>
 </div>

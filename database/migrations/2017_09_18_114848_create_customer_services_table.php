@@ -17,7 +17,7 @@ class CreateCustomerServicesTable extends Migration
           $table->increments('id');
           $table->integer('customer_id')->unsigned();
           $table->integer('service_as_product_id')->unsigned();
-          $table->string('status')->default('pending');
+          $table->string('status');
           $table->text('comment')->nullable();
           $table->string('description')->nullable();
           $table->boolean('pick_option');

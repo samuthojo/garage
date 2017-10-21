@@ -21,6 +21,7 @@ use App\CarModel;
 use App\Category;
 use App\Logic\FCM;
 use App\Logic\Push;
+use Carbon\Carbon;
 
 class Cms extends Controller
 {
@@ -279,11 +280,37 @@ class Cms extends Controller
                                                               'car', 'model'));
     }
 
-    public function change_password_form() {
-      return view('change_password_form')->with('status', '');
+    public function updateRequestStatus(Request $request) {
+      $id = $request->input('id');
+      if($request->filled('date')) {
+        $date = $request->input('date');
+        $date = Carbon::parse($date)->format('Y-m-d');
+        $status = $request->input('status');
+        CustomerService::where('id', $id)->update(compact('status', 'date'));
+      } else {
+        CustomerService::where('id', $id)->update($request->only('status'));
+      }
+
+      //To do send notification to customer
+      $this->sendNotification($request->all());
+
+      $service_as_product_id = CustomerService::find($id)->serviceAsProduct()
+                                                         ->first()
+                                                         ->id;
+
+      // For a route with the following URI: requested_services/{service}
+      return redirect()->route('requested_service', ['service' => $service_as_product_id]);
     }
 
-    public function change_password(Request $request) {
+    private function sendNotification($request) {
+      //0: penging, 1: accepted, 2: serviced, 3: reschedule, 4: reject
+    }
+
+    public function changePasswordForm() {
+      return view('change_password');
+    }
+
+    public function changePassword(Request $request) {
       $params = $request->only('old_password', 'new_password',
                                                 'confirm_password');
       extract($params, EXTR_PREFIX_ALL, 'from_post');
@@ -294,12 +321,12 @@ class Cms extends Controller
                         $from_post_confirm_password) == 0) {
           $user->password = Hash::make($from_post_new_password);
           $user->save();
-          $status = "Password changed successfully";
+          $status = 1; //success
         } else {
-          $status = "Passwords do not match";
+          $status = 0; //do not match
         }
       } else {
-        $status = "Please enter the right old password";
+        $status = 2; //Wrong old password
       }
       $feedback = compact('status');
       return response()->json($feedback);
@@ -435,13 +462,38 @@ class Cms extends Controller
 
     public function viewModels(Car $car_make) {
       $models = $car_make->models;
-      $cars = Car::all();
-      return view('specific.models', compact('models', 'car_make', 'cars'));
+      
+      return view('specific.models', compact('models', 'car_make'));
     }
 
     public function modelDetails(CarModel $model) {
       $model->car = $model->car()->first()->name;
       $cars = Car::all();
       return view('specific.model', compact('model', 'cars'));
+    }
+
+    public function newModel(Request $request) {
+      $data = $request->except('picture');
+      $car_id = $request->input('car_id');
+      if($request->hasFile('picture')) {
+        $file = $request->file('picture');
+        $destination = 'uploads/models';
+        $file_name = handleFile($file, $destination);
+        $data = array_add($data, 'picture', $file_name);
+        CarModel::create($data);
+      } else {
+        CarModel::create($data);
+      }
+      return redirect()->route('models_of_make', ['car_make' => $car_id]);
+    }
+
+    private function handleFile($file, $destination) {
+      if($file->isValid()) {
+        $file_name = $file->getClientOriginalName();
+        $file->move($destination, $file_name);
+        return $file_name;
+      } else {
+        return null;
+      }
     }
 }

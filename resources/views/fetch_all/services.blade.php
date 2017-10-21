@@ -14,7 +14,8 @@
   <div class="panel-heading">
     <h3 style="font-weight: bold;" class="panel-title pull-left">
       Services: </h3>
-      <span onclick="showServiceModal('decision_modal')" class="pull-right text-primary">
+      <span onclick="showServiceModal('decision_modal')" class="pull-right text-primary"
+        title="Add Service">
         <i class="fa fa-plus-circle fa-2x" style="cursor: pointer;"></i>
       </span>
      <div class="clearfix"></div>
@@ -46,7 +47,8 @@
                         <div class="btn-group">
                           @if(strcasecmp($service->status,'active') == 0)
                             <button type="button" class="btn btn-small btn-primary"
-                              onclick="viewService({{ $service->id }})">
+                              onclick="viewService({{ $service->id }})"
+                              title="View Details">
                               <span class="glyphicon glyphicon-eye-open"></span>
                             </button>
                             <button type="button" class="btn btn-small btn-primary"
@@ -59,7 +61,7 @@
                             </button>
                           @else
                             <button type="button" class="btn btn-small btn-primary"
-                              onclick="viewService({{ $service->id }})">
+                              onclick="viewService({{ $service->id }})" title="View Details">
                               <span class="glyphicon glyphicon-eye-open"></span>
                             </button>
                             <button type="button" class="btn btn-small btn-primary"
@@ -80,7 +82,7 @@
      </div>
   </div>
   <div class="panel-footer">
-    Crafted @ <a href="www.ipfsoftwares.com">iPF SOFTWARES</a>
+    Crafted @ <a href="http://ipfsoftwares.com" target="_blank">iPF SOFTWARES</a>
   </div>
   </div>
   <script>

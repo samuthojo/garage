@@ -1,13 +1,15 @@
 var model_id = "";
 
-function newModel() {
+function newModel(car_id) {
   closeModal('model_modal');
   var myForm = document.getElementById('model_form');
   var formData = new FormData(myForm);
+  formData.append('car_id', car_id);
   var link = "models/create";
   $.ajax({
       type: 'post',
       url: link,
+      data: formData,
       dataType: 'html',
       cache: false,
       contentType: false,

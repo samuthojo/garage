@@ -17,15 +17,6 @@
             <form name="model_form" id="model_form">
             @include('alerts.alert2', ['alert_id' => 'model_alert'])
           <div class="form-group">
-            <label for="car_id">Car:</label>
-            <select id="car_id" name="car_id">
-              <option value="">Choose Car</option>
-              @foreach($cars as $car)
-                <option value="{{$car->id}}">{{$car->name}}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class="form-group">
             <label for="model_name">Name:</label>
             <input type="text" name="model_name" id="model_name"
               placeholder="Model Name">
@@ -38,7 +29,7 @@
             <button type="button" class="btn btn-default"
               data-dismiss="modal">Cancel</button>
             <button id="btn_add" type="button" class="btn btn-primary"
-              onclick="newModel()">Add</button>
+              onclick="newModel({{$car_make->id}})">Add</button>
           </div>
         </form>
         </div>

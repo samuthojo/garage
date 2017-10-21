@@ -74,7 +74,7 @@ function menu_links(arg) {
      link = "services";
     }
    else if(arg == "change_password"){
-     link = "change_password";
+     link = "change_password_form";
    }
    $.ajax({
      url: link,
@@ -96,4 +96,19 @@ function closeModal(id) {
   $('body').removeClass("modal-open");
   $('body').removeAttr('style');
   $(".modal-backdrop").remove();
+}
+
+function sendRequest(link, formData) {
+  $.ajax({
+    type: 'post',
+    url: link,
+    dataType: 'html',
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function (result) {
+      $("#main_content").html(result);
+    }
+  });
 }

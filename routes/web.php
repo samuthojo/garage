@@ -33,7 +33,7 @@ Route::post('customers/update', 'Cms@updateCustomer');
 Route::get('cars', 'Cms@cars');
 
 Route::post('models/create', 'Cms@newModel');
-Route::get('models/{car_make}', 'Cms@models');
+Route::get('models/{car_make}', 'Cms@models')->name('models_of_make');
 Route::get('models/model/{model}', 'Cms@modelDetails');
 Route::get('models/view/{car_make}', 'Cms@viewModels')->name('models');
 
@@ -51,10 +51,11 @@ Route::post('services/update', 'Cms@updateService');
 Route::post('services/status/update', 'Cms@updateServiceStatus');
 
 Route::get('requested_services', 'Cms@requestedServices');
-Route::get('requested_services/{service}', 'Cms@requestedServiceDetails');
+Route::get('requested_services/{service}', 'Cms@requestedServiceDetails')->name('requested_service');
+Route::post('requested_services/status/update', 'Cms@updateRequestStatus');
 
 
-Route::get('change_password_form', 'Cms@change_password_form');
-Route::post('change_password', 'Cms@change_password');
+Route::get('change_password_form', 'Cms@changePasswordForm');
+Route::post('change_password', 'Cms@changePassword');
 
 Route::get('logout', 'Cms@logout')->name('logout');

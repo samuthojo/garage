@@ -17,15 +17,6 @@
             <form name="edit_model_form" id="edit_model_form">
             @include('alerts.alert2', ['alert_id' => 'model_alert'])
           <div class="form-group">
-            <label for="edit_car_id">Car:</label>
-            <select id="edit_car_id" name="car_id">
-              <option value="">Choose Car</option>
-              @foreach($cars as $car)
-                <option value="{{$car->id}}">{{$car->name}}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class="form-group">
             <label for="edit_model_name">Name:</label>
             <input type="text" name="model_name" id="edit_model_name"
               placeholder="Model Name">

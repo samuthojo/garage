@@ -14,6 +14,8 @@ class CustomerServicesTableSeeder extends Seeder
     {
       $faker = Faker\Factory::create();
 
+      $st = [0, 1, 2, 3, 4];
+      $index = 0;
       for ($i=1; $i < 12; $i++) {
           $customerService = [
               'customer_id' => $i,
@@ -23,12 +25,13 @@ class CustomerServicesTableSeeder extends Seeder
               'latitude' => $faker->latitude(),
               'longitude' => $faker->longitude(),
               'location_name' => $faker->city(),
-              'status' => ($i % 2 == 0) ? 'pending' : 'accepted',
+              'status' => $st[$index],
               'comment' => $faker->realText(120),
               'description' => $faker->realText(120),
               'date' => $faker->date(),
           ];
           CustomerService::create($customerService);
+          ($index <= 3) ? $index++ : $index = 0;
       }
     }
 }

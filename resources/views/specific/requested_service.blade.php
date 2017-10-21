@@ -1,10 +1,11 @@
-<script src="{{ asset('js/orders.js') }}"></script>
-@include('modals.reject_modal', ['text' => 'Order', 'function' => 'rejectOrder()'])
-@include('modals.accept_modal', ['text' => 'Order', 'function' => 'acceptOrder()'])
+<script src="{{ asset('js/requested_services.js') }}"></script>
+@include('modals.reject_modal', ['text' => 'Request', 'function' => 'rejectRequest()'])
+@include('modals.accept_modal', ['text' => 'Request', 'function' => 'updateRequestStatus(1)'])
+@include('modals.reschedule_modal', ['text' => 'Request', 'function' => 'rescheduleRequest()'])
 @include('modals.modal', ['id' => 'modal',
                           'title' => 'Confirmation',
-                          'text' => 'Mark this order as serviced?',
-                          'function' => 'markAsServiced()',])
+                          'text' => 'Mark this request as serviced?',
+                          'function' => 'updateRequestStatus(2)',])
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 style="font-weight: bold;" class="panel-title pull-left">
@@ -40,14 +41,10 @@
                       <td>{{ $detail->status }}</td>
                       <td>
                         <div class="btn-group">
-                          <button type="button" class="btn btn-small btn-primary"
-                            onclick="viewItems({{$detail->id}})" title="View Order Items">
-                            <span class="glyphicon glyphicon-eye-open"></span>
-                          </button>
                           @php
                             $status = $detail->status;
                           @endphp
-                          @if($status == "accepted")
+                          @if(strcasecmp($status,"accepted") == 0)
                             <button type="button" class="btn btn-small btn-primary"
                               disabled>
                               Accept
@@ -64,7 +61,7 @@
                               disabled>
                               Reject
                             </button>
-                          @elseif($status == "rejected")
+                          @elseif(strcasecmp($status,"rejected") == 0)
                             <button type="button" class="btn btn-small btn-primary"
                               disabled>
                               Accept
@@ -81,7 +78,7 @@
                               disabled>
                               Reject
                             </button>
-                          @elseif($status == "serviced")
+                          @elseif(strcasecmp($status,"serviced") == 0)
                             <button type="button" class="btn btn-small btn-primary"
                               disabled>
                               Accept
@@ -92,6 +89,23 @@
                             </button>
                             <button type="button" class="btn btn-small btn-primary"
                              disabled>
+                              Reschedule
+                            </button>
+                            <button type="button" class="btn btn-small btn-primary"
+                              disabled>
+                              Reject
+                            </button>
+                          @elseif(strcasecmp($status,"rescheduled") == 0)
+                            <button type="button" class="btn btn-small btn-primary"
+                              disabled>
+                              Accept
+                            </button>
+                            <button type="button" class="btn btn-small btn-primary"
+                              onclick="openModal({{$detail->id}}, 'modal')">
+                              Serviced
+                            </button>
+                            <button type="button" class="btn btn-small btn-primary"
+                              onclick="openModal({{$detail->id}}, 'reschedule_modal')">
                               Reschedule
                             </button>
                             <button type="button" class="btn btn-small btn-primary"
@@ -125,7 +139,7 @@
      </div>
   </div>
   <div class="panel-footer">
-    Crafted @ <a href="www.ipfsoftwares.com">iPF SOFTWARES</a>
+    Crafted @ <a href="http://ipfsoftwares.com" target="_blank">iPF SOFTWARES</a>
   </div>
   </div>
   <script>

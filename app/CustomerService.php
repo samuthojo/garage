@@ -14,14 +14,6 @@ class CustomerService extends Model
 
     protected $guarded = ['id', ];
 
-    public function getDateAttribute($value) {
-      return Carbon::parse($value)->format('d-m-Y');
-    }
-
-    public function getCreatedAtAttribute($value) {
-      return Carbon::parse($value)->format('d-m-Y');
-    }
-
     public function car() {
       return $this->belongsTo('App\Car');
     }
@@ -32,6 +24,32 @@ class CustomerService extends Model
 
     public function serviceAsProduct() {
       return $this->belongsTo('App\ServiceAsProduct');
+    }
+
+    public function getDateAttribute($value) {
+      return Carbon::parse($value)->format('d-m-Y');
+    }
+
+    public function setDateAttribute($date) {
+      $this->attributes['date'] = Carbon::parse($date)->format('Y-m-d');
+    }
+
+    public function getCreatedAtAttribute($value) {
+      return Carbon::parse($value)->format('d-m-Y');
+    }
+
+    public function getStatusAttribute($status) {
+      $st = "";
+      if($status == 0) {
+        $st =  'Pending';
+      } else if($status == 1) {
+        $st = 'Accepted';
+      } else if($status == 2) {
+        $st = 'Serviced';
+      } else {
+        $st = ($status == 3) ? 'Rescheduled' : 'Rejected';
+      }
+      return $st;
     }
 
 }
