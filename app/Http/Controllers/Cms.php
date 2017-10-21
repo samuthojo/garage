@@ -462,7 +462,7 @@ class Cms extends Controller
 
     public function viewModels(Car $car_make) {
       $models = $car_make->models;
-      
+
       return view('specific.models', compact('models', 'car_make'));
     }
 
@@ -484,7 +484,7 @@ class Cms extends Controller
       } else {
         CarModel::create($data);
       }
-      return redirect()->route('models_of_make', ['car_make' => $car_id]);
+      return redirect()->route('models', ['car_make' => $car_id]);
     }
 
     private function handleFile($file, $destination) {
