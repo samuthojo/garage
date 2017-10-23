@@ -9,14 +9,15 @@
           style="font-weight: bold;">Model Details:</h3>
       <div class="btn-group pull-right">
         <button type="button" class="btn btn-primary"
-          onclick="viewModels({{$model->car_id}})">
+          onclick="viewModels({{$model->car_id}})" title="Back To Models">
           <i class="fa fa-arrow-left"></i>
         </button>
-        <button type="button" class="btn btn-primary" onclick="showEditModel({{$model}})">
+        <button type="button" class="btn btn-primary" onclick="showEditModel({{$model}})"
+          title="Edit Model">
           <i class="fa fa-pencil"></i>
         </button>
         <button type="button" class="btn btn-danger"
-          onclick="showDeleteModal({{$model->id}})">
+          onclick="showDeleteModal({{$model->id}})" title="Delete Model">
           <i class="fa fa-trash-o"></i>
         </button>
       </div>

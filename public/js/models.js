@@ -38,33 +38,15 @@ function editModel() {
   var formData = new FormData(myForm);
   formData.append('id', model_id);
   var link = "models/update";
-  $.ajax({
-      type: 'post',
-      url: link,
-      dataType: 'html',
-      cache: false,
-      contentType: false,
-      processData: false,
-      success: function (result) {
-        $("#main_content").html(result);
-      }
-  });
+  sendRequest(link, formData);
 }
 
 function deleteModel() {
+  closeModal('confirmation_modal');
   var formData = new FormData();
   formData.append('id', model_id);
   var link = "models/delete";
-  $.ajax({
-    url: link,
-    dataType: 'html',
-    cache: false,
-    type: 'delete',
-    data: formData,
-    success: function (result) {
-      $("#main_content").html(result);
-    }
-  });
+  sendRequest(link, formData);
 }
 
 function showModel() {

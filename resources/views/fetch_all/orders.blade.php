@@ -47,7 +47,7 @@
                           @php
                             $status = $order->status;
                           @endphp
-                          @if($status == "accepted")
+                          @if(strcasecmp($status, "accepted") == 0)
                             <button type="button" class="btn btn-small btn-primary"
                               disabled>
                               Accept
@@ -60,7 +60,7 @@
                               disabled>
                               Reject
                             </button>
-                          @elseif($status == "rejected")
+                          @elseif(strcasecmp($status, "rejected") == 0)
                             <button type="button" class="btn btn-small btn-primary"
                               disabled>
                               Accept
@@ -73,7 +73,7 @@
                               disabled>
                               Reject
                             </button>
-                          @elseif($status == "serviced")
+                          @elseif(strcasecmp($status, "serviced") == 0)
                             <button type="button" class="btn btn-small btn-primary"
                               disabled>
                               Accept

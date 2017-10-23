@@ -33,4 +33,18 @@ class Order extends Model
   public function getAmountAttribute($amount) {
     return sprintf('%s', number_format($amount, 0));
   }
+
+  public function getStatusAttribute($status) {
+    $st = "";
+    if($status == 0) {
+      $st =  'Pending';
+    } else if($status == 1) {
+      $st = 'Accepted';
+    } else if($status == 2) {
+      $st = 'Serviced';
+    } else {
+      $st = 'Rejected'; //status == 4 : rejected
+    }
+    return $st;
+  }
 }

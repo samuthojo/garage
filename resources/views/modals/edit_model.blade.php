@@ -22,7 +22,7 @@
               placeholder="Model Name">
           </div>
           <div class="form-group">
-            <label for="edit_model_picture">Model Picture:</label>
+            <label for="edit_model_picture">Replace Picture:</label>
             <input type="file" class="large" id="edit_model_picture" name="picture">
           </div>
           <div class="form-group">

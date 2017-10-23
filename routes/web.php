@@ -34,8 +34,10 @@ Route::get('cars', 'Cms@cars');
 
 Route::post('models/create', 'Cms@newModel');
 Route::get('models/{car_make}', 'Cms@models');
-Route::get('models/model/{model}', 'Cms@modelDetails');
+Route::get('models/model/{model}', 'Cms@modelDetails')->name('model');
 Route::get('models/view/{car_make}', 'Cms@viewModels')->name('models');
+Route::post('models/update', 'Cms@updateModel');
+Route::post('models/delete', 'Cms@deleteModel');
 
 Route::get('categories', 'Cms@categories');
 

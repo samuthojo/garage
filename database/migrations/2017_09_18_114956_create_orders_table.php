@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
           $table->integer('customer_id')->unsigned();
           $table->integer('num_items')->unsigned();
           $table->decimal('amount', 14, 0);
-          $table->string('status')->default('pending');
+          $table->string('status');
           $table->text('comment')->nullable();
           $table->timestamp('date')->nullable();
           $table->timestamp('updated_at')->nullable();

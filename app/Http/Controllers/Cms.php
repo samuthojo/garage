@@ -229,10 +229,17 @@ class Cms extends Controller
 
     public function updateOrder(Request $request) {
       extract($request->all());
-      Order::where('id', $id)->update(['status' => $status,]);
-      if($status == "accepted") {
+      
+      if(strcasecmp($status, 'accepted') == 0) {
+        $st = 1;
+      } else {
+        $st = (strcasecmp($status, 'rejected') == 0) ? 4 : 2;
+      }
+      Order::where('id', $id)->update(['status' => $st,]);
+
+      if(strcasecmp($status, 'accepted') == 0) {
         //To do: Send Push Notification
-      } else if($status == "rejected") {
+      } else if(strcasecmp($status, 'rejected') == 0) {
         //To do: Send Push Notification
       }
       return $this->orders();
@@ -475,16 +482,84 @@ class Cms extends Controller
     public function newModel(Request $request) {
       $data = $request->except('picture');
       $car_id = $request->input('car_id');
+      $car = Car::find($car_id);
+      $num_models = $car->num_models;
+      if($request->hasFile('picture')) {
+        DB::beginTransaction();
+
+        try {
+          $file = $request->file('picture');
+          $destination = 'uploads/models';
+          $file_name = $this->handleFile($file, $destination);
+          $data = array_add($data, 'picture', $file_name);
+          $num_models = $num_models +  1;
+
+          CarModel::create($data);
+          $car->num_models = $num_models;
+          $car->save();
+
+          DB::commit();
+        } catch(Throwable $e) {
+            DB::rollback();
+            return response()->json(['error' => $e->getMessage(), ], 500);
+          }
+      } else {
+        DB::beginTransaction();
+
+        try {
+          $num_models = $num_models +  1;
+
+          CarModel::create($data);
+          $car->num_models = $num_models;
+          $car->save();
+
+          DB::commit();
+        } catch(Throwable $e) {
+            DB::rollback();
+            return response()->json(['error' => $e->getMessage(), ], 500);
+          }
+
+      }
+      return redirect()->route('models', ['car_make' => $car_id]);
+    }
+
+    public function updateModel(Request $request) {
+      $model = $request->input('id');
+      $data = $request->except('id', 'picture');
       if($request->hasFile('picture')) {
         $file = $request->file('picture');
         $destination = 'uploads/models';
-        $file_name = handleFile($file, $destination);
+        $file_name = $this->handleFile($file, $destination);
         $data = array_add($data, 'picture', $file_name);
-        CarModel::create($data);
-      } else {
-        CarModel::create($data);
+        CarModel::where('id', $model)->update($data);
       }
-      return redirect()->route('models', ['car_make' => $car_id]);
+      else {
+        CarModel::where('id', $model)->update($data);
+      }
+      return redirect()->route('model', compact('model'));
+    }
+
+    public function deleteModel(Request $request) {
+      DB::beginTransaction();
+
+      try {
+        $model_id = $request->input('id');
+        $car = CarModel::find($model_id)->car()->first();
+        $num_models = $car->num_models;
+        $num_models = $num_models - 1;
+
+        CarModel::where('id', $model_id)->delete();
+        $car->num_models = $num_models;
+        $car->save();
+
+        DB::commit();
+
+        return redirect()->route('models', ['car_make' => $car->id]);
+      } catch(Throwable $e) {
+        DB::rollback();
+        return response()->json(['error' => $e->getMessage(), ], 500);
+      }
+
     }
 
     private function handleFile($file, $destination) {
@@ -492,8 +567,8 @@ class Cms extends Controller
         $file_name = $file->getClientOriginalName();
         $file->move($destination, $file_name);
         return $file_name;
-      } else {
-        return null;
       }
+
+      return null;
     }
 }

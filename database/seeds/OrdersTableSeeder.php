@@ -21,7 +21,7 @@ class OrdersTableSeeder extends Seeder
               'customer_id' => $i,
               'num_items' => 1,
               'amount' => $faker->numberBetween(100000, 5000000),
-              'status' => ($i % 2 == 0) ? 'pending' : 'accepted',
+              'status' => ($i % 2 == 0) ? 0 : 1,
               'comment' => $faker->realText(120),
           ];
           Order::create($order);
