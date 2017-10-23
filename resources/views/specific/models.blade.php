@@ -58,5 +58,6 @@
   </div>
   </div>
   <script>
-      myDataTable();
+      myDataTable("{{$car_make->name}} Models",
+        "Models Listing for the car: {{$car_make->name}} As Per {{now()->format('Y-m-d')}}");
   </script>

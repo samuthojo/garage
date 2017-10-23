@@ -42,7 +42,14 @@
                       <td>{{ $service->car }}</td>
                       <td>{{ $service->model }}</td>
                       <td>{{ sprintf('%s', number_format($service->price, 0)) }}</td>
-                      <td>{{ $service->status }}</td>
+                      @php
+                        $status = $service->status;
+                        $color = (strcasecmp($status, "active") == 0) ?
+                                            "text-success" : "text-danger";
+                      @endphp
+                      <td>
+                        <span class="{{$color}}">{{ $service->status }}</span>
+                      </td>
                       <td>
                         <div class="btn-group">
                           @if(strcasecmp($service->status,'active') == 0)
@@ -86,5 +93,5 @@
   </div>
   </div>
   <script>
-      myDataTable();
+      myDataTable("Services", "The List Of Services As Per {{now()->format('Y-m-d')}}");
   </script>

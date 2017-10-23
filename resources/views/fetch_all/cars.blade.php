@@ -59,5 +59,5 @@
   </div>
   </div>
   <script>
-      myDataTable();
+      myDataTable("Cars", "Car List As Per {{now()->format('Y-m-d')}}");
   </script>

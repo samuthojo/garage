@@ -41,5 +41,5 @@
   </div>
   </div>
   <script>
-    myDataTable();
+    myDataTable("Order_No: {{ '# ' . $order->id}}}}", "The List Of Items In This Order");
   </script>

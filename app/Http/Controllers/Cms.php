@@ -229,7 +229,7 @@ class Cms extends Controller
 
     public function updateOrder(Request $request) {
       extract($request->all());
-      
+
       if(strcasecmp($status, 'accepted') == 0) {
         $st = 1;
       } else {
@@ -289,17 +289,19 @@ class Cms extends Controller
 
     public function updateRequestStatus(Request $request) {
       $id = $request->input('id');
+      $status = $request->input('status');
       if($request->filled('date')) {
         $date = $request->input('date');
         $date = Carbon::parse($date)->format('Y-m-d');
-        $status = $request->input('status');
         CustomerService::where('id', $id)->update(compact('status', 'date'));
       } else {
-        CustomerService::where('id', $id)->update($request->only('status'));
+        CustomerService::where('id', $id)->update(compact('status'));
       }
 
       //To do send notification to customer
-      $this->sendNotification($request->all());
+      if($status == 1 || $status == 3 || $status == 4) {
+        $this->sendNotification($request->all());
+      }
 
       $service_as_product_id = CustomerService::find($id)->serviceAsProduct()
                                                          ->first()
@@ -310,7 +312,50 @@ class Cms extends Controller
     }
 
     private function sendNotification($request) {
-      //0: penging, 1: accepted, 2: serviced, 3: reschedule, 4: reject
+      extract($request);
+      $fcm = new FCM();
+      $push = new Push();
+
+      $requested_service = CustomerService::find($id);
+      //$customer = $requested_service->customer()->first();
+      $customer = Customer::find(12);
+      $tokens = $customer->devices()
+                         ->get(['token'])
+                         ->map( function($t) {
+                             return $token = $t->token;
+                         });
+
+      $data = $this->setUpContent($request, $requested_service);
+
+      $push->setTitle("Mechmaster");
+      $push->setIsBackground(FALSE);
+      $push->setData($data);
+
+      // sending push message to multiple users by fcm registration ids
+      $fcm->sendMultiple($tokens, $push->getPush());
+    }
+
+    private function setUpContent($request, $requested_service) {
+      extract($request, EXTR_PREFIX_ALL, 'posted');
+
+      $data = array();
+      $data['type'] = 4;
+      $data['date'] = $requested_service->updated_at; //Date we are sending notification
+      $data['data'] = json_encode($requested_service);
+
+      if($posted_status == 1) {//accepted
+        $data['message'] = "Your request has been accepted!";
+      }
+      else if ($posted_status == 3) {//rescheduled
+        $data['message'] = "Your request has been rescheduled to " . $posted_date . "!";
+        $data['reason'] = $posted_reason;
+      }
+      else if ($posted_status == 4) {//rejected
+        $data['message'] = "Your request has been rejected!";
+        $data['reason'] = $posted_reason;
+      }
+
+      return $data;
     }
 
     public function changePasswordForm() {
@@ -347,10 +392,7 @@ class Cms extends Controller
     }
 
     public function store(Request $request, $type) {
-      if($type == 'service') {
-        Service::create(request()->all());
-        return $this->services();
-      } else if($type == 'category') {
+      if($type == 'category') {
         Category::firstOrCreate(request()->all());
         return $this->categories();
       } else if($type == 'product') {
@@ -362,6 +404,8 @@ class Cms extends Controller
             $picture->move('uploads/products', $image);
             Product::create(array_add($data, 'image', $image));
           }
+        } else {
+          Product::create($data);
         }
         return $this->products();
       } else if($type == 'car') {
@@ -376,6 +420,9 @@ class Cms extends Controller
             $data = array_add($data, 'picture', $picture);
             Car::create(array_add($data, 'num_models', $num_models));
           }
+        } else {
+          $data = array_add($data, 'num_models', $num_models);
+          Car::create($data);
         }
         return $this->cars();
       }

@@ -38,12 +38,29 @@
                       <td>{{ $detail->customer }}</td>
                       <td>{{ $detail->phonenumber }}</td>
                       <td>{{ sprintf('%s', number_format($detail->price)) }}</td>
-                      <td>{{ $detail->status }}</td>
+                      @php
+                        $status = $detail->status;
+                        if(strcasecmp($status, "pending") == 0) {
+                          $color = "text-warning";
+                        }
+                        else if(strcasecmp($status, "accepted") == 0) {
+                          $color = "text-success";
+                        }
+                        else if(strcasecmp($status, "serviced") == 0) {
+                          $color = "text-primary";
+                        }
+                        else if(strcasecmp($status, "rescheduled") == 0) {
+                          $color = "text-info";
+                        }
+                        else if(strcasecmp($status, "rejected") == 0) {
+                          $color = "text-danger";
+                        }
+                      @endphp
+                      <td>
+                        <span class="{{$color}}">{{ $detail->status }}</span>
+                      </td>
                       <td>
                         <div class="btn-group">
-                          @php
-                            $status = $detail->status;
-                          @endphp
                           @if(strcasecmp($status,"accepted") == 0)
                             <button type="button" class="btn btn-small btn-primary"
                               disabled>
@@ -143,5 +160,6 @@
   </div>
   </div>
   <script>
-    myDataTable();
+    myDataTable("Service: {{$serv}} | Car: {{$car}} | Model: {{$model}}",
+          "The List Of Customers Requesting This Service As Per {{now()->format('Y-m-d')}}");
   </script>

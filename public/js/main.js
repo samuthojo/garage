@@ -29,25 +29,37 @@ function setActive(e) {
 
 }
 
-function myDataTable() {
+function myDataTable(file_name, export_title) {
   $.fn.dataTable.moment('DD-MM-YYYY'); //Sort the date column if present
   $('#myTable').dataTable({
-          iDisplayLength: 8,
-          oLanguage: {
-              sSearch: 'search:',
-              sZeroRecords: 'No  results found ',
-              oPaginate: {
-                  sNext: '<i class="fa fa-arrow-right"></i>',
-                  sPrevious: '<i class="fa fa-arrow-left"></i>'
+          dom: 'Bfrtip',
+          buttons: [
+              {
+                extend: 'print',
+                exportOptions: {
+                  columns: ":not(:last-child)"
+                },
+                title: file_name,
+                messageTop: export_title
+              },
+               {
+                 extend: 'excel',
+                 exportOptions: {
+                   columns: ":not(:last-child)"
+                 },
+                 title: file_name,
+                 messageTop: export_title
+              },
+               {
+                 extend: 'pdf',
+                 exportOptions: {
+                   columns: ":not(:last-child)"
+                 },
+                 title: file_name,
+                 messageTop: export_title
               }
-          },
-          bLengthChange: false,
-          sDom: "<'row-fluid' <'span4'l> <'span8'f> > rt <'row-fluid' <'span12'p> >"
-      });
-  $('#exampleDT_length select').select2({
-      minimumResultsForSearch: 6,
-      width: "off"
-  });
+          ]
+    })
 }
 
 function menu_links(arg) {
@@ -78,8 +90,8 @@ function menu_links(arg) {
    }
    $.ajax({
      url: link,
-     dataType:'html',
-     success:function(result){
+     dataType: 'html',
+     success: function(result) {
          $("#main_content").html(result);
      }
    });

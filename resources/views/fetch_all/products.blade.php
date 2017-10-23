@@ -5,7 +5,8 @@
   <div class="panel-heading">
     <h3 style="font-weight: bold;" class="panel-title pull-left">
       Products: </h3>
-       <span onclick="showProductModal()" class="pull-right text-primary">
+       <span onclick="showProductModal()" class="pull-right text-primary"
+        title="Add New Product">
          <i class="fa fa-plus-circle fa-2x" style="cursor: pointer;"></i>
        </span>
        <div class="clearfix"></div>
@@ -35,7 +36,8 @@
                       <td>{{ $product->stock }}</td>
                       <td>
 												<button id="btn_eye_open" type="button" class="btn btn-primary"
-													onclick="viewProduct({{ $product->id }})">
+													onclick="viewProduct({{ $product->id }})"
+                          title="Product Details">
 	          							<span class="glyphicon glyphicon-eye-open"></span>
 	        							</button>
 											</td>
@@ -50,5 +52,5 @@
   </div>
   </div>
   <script>
-      myDataTable();
+      myDataTable("Products", "Products List As Per {{now()->format('Y-m-d')}}");
   </script>

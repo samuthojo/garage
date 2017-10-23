@@ -37,16 +37,31 @@
                       <td>{{ $order->contact }}</td>
                       <td>{{ $order->num_items }}</td>
                       <td>{{ $order->amount }}</td>
-                      <td>{{ $order->status }}</td>
+                      @php
+                        $status = $order->status;
+                        $color = "";
+                        if(strcasecmp($status, "pending") == 0) {
+                          $color = "text-warning";
+                        }
+                        else if(strcasecmp($status, "accepted") == 0) {
+                          $color = "text-success";
+                        }
+                        else if(strcasecmp($status, "serviced") == 0) {
+                          $color = "text-info";
+                        }
+                        else if(strcasecmp($status, "rejected") == 0) {
+                          $color = "text-danger";
+                        }
+                      @endphp
+                      <td>
+                        <span class="{{$color}}">{{ $order->status }}</span>
+                      </td>
                       <td>
                         <div class="btn-group">
                           <button type="button" class="btn btn-small btn-primary"
                             onclick="viewItems({{$order->id}})" title="View Order Items">
                             <span class="glyphicon glyphicon-eye-open"></span>
                           </button>
-                          @php
-                            $status = $order->status;
-                          @endphp
                           @if(strcasecmp($status, "accepted") == 0)
                             <button type="button" class="btn btn-small btn-primary"
                               disabled>
@@ -113,5 +128,5 @@
   </div>
   </div>
   <script>
-    myDataTable();
+    myDataTable("Orders", "Orders List As Per {{now()->format('Y-m-d')}}")
   </script>

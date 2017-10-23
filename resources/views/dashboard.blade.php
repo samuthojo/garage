@@ -9,8 +9,8 @@
    <div class="panel panel-default">
      <div class="panel-heading">
        <h3 style="font-weight: bold;" class="panel-title pull-left">
-         Categories: </h3>
-        <span onclick="showCategoryModal()" class="pull-right">
+         Product Categories: </h3>
+        <span onclick="showCategoryModal()" class="pull-right" title="Add New Category">
           <i class="fa fa-plus-circle fa-2x text-primary" style="cursor: pointer;"></i></span>
         <div class="clearfix"></div>
      </div>
@@ -32,11 +32,13 @@
                          <td>
                            <div class="btn-group">
                              <button type="button" class="btn btn-primary"
-                              onclick="showEditModal({{ $category }})">
+                              onclick="showEditModal({{ $category }})"
+                              title="Edit Category">
                                <span class="glyphicon glyphicon-pencil"></span>
                              </button>
                              <button type="button" class="btn btn-danger"
-                              onclick="showConfirmation({{ $category->id }})">
+                              onclick="showConfirmation({{ $category->id }})"
+                              title="Delete Category">
                                <span class="glyphicon glyphicon-trash"></span>
                              </button>
                            </div>
@@ -51,7 +53,7 @@
        Crafted @ <a href="http://ipfsoftwares.com" target="_blank">iPF SOFTWARES</a>
      </div>
      <script>
-         myDataTable();
+         myDataTable("Product Categories", "Product Category List As Per {{now()->format('Y-m-d')}}");
      </script>
    </div>
 @endsection

@@ -15,16 +15,17 @@
           style="font-weight: bold;">Product Details:</h3>
         <div class="btn-group pull-right">
           <button type="button" class="btn btn-primary"
-            onclick="menu_links('products')">
+            onclick="menu_links('products')" title="Back">
             <i class="fa fa-arrow-left"></i>
           </button>
           <button type="button" class="btn btn-primary"
             onclick=
-            "showEditProductModal({{$category}}, {{$product}}, {{$car}}, {{$car_model}})">
+            "showEditProductModal({{$category}}, {{$product}}, {{$car}}, {{$car_model}})"
+            title="Edit Product">
             <i class="fa fa-pencil"></i>
           </button>
           <button type="button" class="btn btn-danger"
-            onclick="showDeleteModal({{$product->id}})">
+            onclick="showDeleteModal({{$product->id}})" title="Delete Product">
             <i class="fa fa-trash-o"></i>
           </button>
         </div>

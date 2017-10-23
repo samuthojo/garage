@@ -14,7 +14,7 @@
 Route::get('', 'Cms@index'); //fetch login form
 Route::get('admin', 'Cms@index')->name('login'); //fetch login form
 Route::post('login', 'Cms@authenticate'); //authenticate the user
-Route::get('dashboard', 'Cms@adminstart'); //route to main page
+Route::get('dashboard', 'Cms@adminstart')->name('dashboard'); //route to main page
 
 Route::get('products', 'Cms@products');
 

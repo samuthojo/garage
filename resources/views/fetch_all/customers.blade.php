@@ -27,7 +27,14 @@
                       <td>{{ $customer->name }}</td>
                       <td>{{ $customer->phonenumber }}</td>
                       <td>{{ $customer->email }}</td>
-                      <td>{{ $customer->verified }}</td>
+                      @php
+                        $status = $customer->verified;
+                        $color = (strcasecmp($status, "yes") == 0) ?
+                                              "text-success" : "text-danger";
+                      @endphp
+                      <td>
+                        <span class="{{$color}}">{{ $customer->verified }}</span>
+                      </td>
                       <td>
                         <div class="btn-group">
                           @if(strcasecmp($customer->verified, "yes") == 0)
@@ -58,5 +65,5 @@
   </div>
   </div>
   <script>
-      myDataTable();
+      myDataTable("Customers", "The List Of Customers As Per {{now->format('Y-m-d')}}");
   </script>
