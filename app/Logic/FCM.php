@@ -18,6 +18,15 @@ class FCM {
         return $this->sendPushNotification($fields);
     }
 
+    // Sending message to a topic by topic id
+    public function sendToTopic($to, $message) {
+        $fields = array(
+            'to' => '/topics/' . $to,
+            'data' => $message,
+        );
+        return $this->sendPushNotification($fields);
+    }
+
     // sending push message to multiple users by fcm registration ids
     public function sendMultiple($registration_ids, $message) {
         $fields = array(

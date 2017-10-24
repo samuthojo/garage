@@ -21,20 +21,20 @@ class Purchase extends Model
       return $this->belongsTo('App\Order');
     }
 
-    public function getPriceAttribute($price) {
-      return sprintf('%s', number_format($price, 0));
-    }
+    // public function getPriceAttribute($price) {
+    //   return sprintf('%s', number_format($price, 0));
+    // }
 
-    public function getTotalPriceAttribute($price) {
-      return sprintf('%s', number_format($price, 0));
-    }
-
-    public function getIncludePriceAttribute($price) {
-      return (!is_null($price)) ? sprintf('%s', number_format($price, 0)) : "-";
-    }
-
-    public function getIncludesAttribute($includes) {
-      return (!is_null($includes)) ? $includes : "-";
-    }
+    // public function getTotalPriceAttribute($price) {
+    //   return sprintf('%s', number_format($price, 0));
+    // }
+    //
+    // public function getIncludePriceAttribute($price) {
+    //   return (!is_null($price)) ? sprintf('%s', number_format($price, 0)) : "-";
+    // }
+    //
+    // public function getIncludesAttribute($includes) {
+    //   return (!is_null($includes)) ? $includes : "-";
+    // }
 
 }

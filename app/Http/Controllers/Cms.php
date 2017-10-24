@@ -230,6 +230,7 @@ class Cms extends Controller
     public function updateOrder(Request $request) {
       extract($request->all());
 
+      $st = "";
       if(strcasecmp($status, 'accepted') == 0) {
         $st = 1;
       } else {
@@ -237,12 +238,94 @@ class Cms extends Controller
       }
       Order::where('id', $id)->update(['status' => $st,]);
 
-      if(strcasecmp($status, 'accepted') == 0) {
+      if($st == 1 || $st == 4) {
         //To do: Send Push Notification
-      } else if(strcasecmp($status, 'rejected') == 0) {
-        //To do: Send Push Notification
+        $this->sendOrderNotification($request->all());
       }
+
       return $this->orders();
+    }
+
+    private function sendOrderNotification($request) {
+      extract($request, EXTR_PREFIX_ALL, 'posted');
+      $order_id = $posted_id;
+      $order = Order::find($order_id);
+      $customer = $order->customer()->first();
+      $tokens = $this->getTokens($customer);
+
+      $fcm = new FCM();
+      $push = new Push();
+
+      $date = $order->updated_at;
+      $data = $this->setUpNotification($request, $date);
+
+      // sending push message to multiple users by fcm registration ids
+      $fcm->sendMultiple($tokens, $data);
+    }
+
+    private function setUpNotification($request, $date) {
+      extract($request, EXTR_PREFIX_ALL, 'posted');
+
+      $order_id = $posted_id;
+
+      $data = array();
+      $data['type'] = 3;
+      $data['date'] = $date;
+      $data['data'] = $order_id;
+
+      if(strcasecmp($posted_status, 'accepted') == 0) {
+        $data['title'] = "Order Accepted!";
+        $data['message'] = "Your order has been accepted!";
+      }
+      else if(strcasecmp($posted_status, 'rejected') == 0) {
+        $data['title'] = "Order Cancelled!";
+        $data['message'] = "Your order has been cancelled!";
+        $data['reason'] = $posted_reason;
+      }
+
+      return $data;
+    }
+
+    private function getTokens($customer) {
+      $tokens = $customer->devices()
+                         ->get(['token'])
+                         ->map( function($t) {
+                             return $token = $t->token;
+                         });
+      return $tokens;
+    }
+
+    public function sendAppWideNotification(Request $request) {
+      $type = $request->input('type');
+      $title = $message = "";
+      if($type == 0) {
+        $title = "Application Update";
+        $message = "Some new features, please update your application!";
+      }
+      else if($type == 1) {
+        $title = "Products Update";
+        $message = "New products have been added please update to see them!";
+      }
+      else if($type == 2) {
+        $title = "Services Update";
+        $message = "More products have been added please update to see them!";
+      }
+      $this->updateNotification($type, $title, $message);
+    }
+
+    private function updateNotification($type, $title, $message) {
+      $fcm = new FCM();
+      $push = new Push();
+
+      $data = array();
+      $data["type"] = $type;
+      $data["date"] = (now()->format('Y-m-d'));
+      $data["title"] = $title;
+      $data["message"] = $message;
+      $data["data"] = null;
+
+      //sending push message to users who subscribed to the topic 'all'
+      $fcm->sendToTopic('all', $data);
     }
 
     public function requestedServices() {
@@ -300,7 +383,7 @@ class Cms extends Controller
 
       //To do send notification to customer
       if($status == 1 || $status == 3 || $status == 4) {
-        $this->sendNotification($request->all());
+        $this->sendRequestNotification($request->all());
       }
 
       $service_as_product_id = CustomerService::find($id)->serviceAsProduct()
@@ -311,28 +394,28 @@ class Cms extends Controller
       return redirect()->route('requested_service', ['service' => $service_as_product_id]);
     }
 
-    private function sendNotification($request) {
+    private function sendRequestNotification($request) {
       extract($request);
       $fcm = new FCM();
       $push = new Push();
 
       $requested_service = CustomerService::find($id);
-      //$customer = $requested_service->customer()->first();
-      $customer = Customer::find(12);
-      $tokens = $customer->devices()
-                         ->get(['token'])
-                         ->map( function($t) {
-                             return $token = $t->token;
-                         });
+
+      $service_as_product = $requested_service->serviceAsProduct()->first();
+      $model = $service_as_product->car_model()->first();
+      $service = $service_as_product->service()->first();
+
+      $requested_service->service_name = $service->name;
+      $requested_service->car_model = $model->model_name;
+
+      $customer = $requested_service->customer()->first();
+      //$customer = Customer::find(12);
+      $tokens = $this->getTokens($customer);
 
       $data = $this->setUpContent($request, $requested_service);
 
-      $push->setTitle("Mechmaster");
-      $push->setIsBackground(FALSE);
-      $push->setData($data);
-
       // sending push message to multiple users by fcm registration ids
-      $fcm->sendMultiple($tokens, $push->getPush());
+      $fcm->sendMultiple($tokens, $data);
     }
 
     private function setUpContent($request, $requested_service) {
@@ -341,12 +424,14 @@ class Cms extends Controller
       $data = array();
       $data['type'] = 4;
       $data['date'] = $requested_service->updated_at; //Date we are sending notification
-      $data['data'] = json_encode($requested_service);
+      $data['data'] = $requested_service;
 
       if($posted_status == 1) {//accepted
+        $data['title'] = "Request accepted";
         $data['message'] = "Your request has been accepted!";
       }
       else if ($posted_status == 3) {//rescheduled
+        $data['title'] = "Request Rescheduled";
         $data['message'] = "Your request has been rescheduled to " . $posted_date . "!";
         $data['reason'] = $posted_reason;
       }
@@ -356,6 +441,27 @@ class Cms extends Controller
       }
 
       return $data;
+    }
+
+    public function reports() {
+
+    }
+
+    public function orderReports(Request $request) {
+      $startDate = $request->input('start_date');
+      $endDate = $request->input('end_date');
+
+      $conditions = [
+          ['updated_at', '>=', $startDate],
+          ['updated_at', '<=', $endDate],
+       ];
+      $orders = Order::where($conditions)->get();
+
+      return $orders;
+    }
+
+    public function notifications() {
+      return view('notifications');
     }
 
     public function changePasswordForm() {

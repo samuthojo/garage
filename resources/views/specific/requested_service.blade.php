@@ -161,5 +161,5 @@
   </div>
   <script>
     myDataTable("Service: {{$serv}} | Car: {{$car}} | Model: {{$model}}",
-          "The List Of Customers Requesting This Service As Per {{now()->format('Y-m-d')}}");
+          "The List Of Customers Requesting This Service As Per {{now()->format('d-m-Y')}}");
   </script>

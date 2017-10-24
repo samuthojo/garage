@@ -56,6 +56,12 @@ Route::get('requested_services', 'Cms@requestedServices');
 Route::get('requested_services/{service}', 'Cms@requestedServiceDetails')->name('requested_service');
 Route::post('requested_services/status/update', 'Cms@updateRequestStatus');
 
+Route::get('reports', 'Cms@reports')->name('reports');
+Route::get('reports/orders', 'Cms@orderReports')->name('order_reports');
+Route::get('reports/requested_services', 'Cms@requestedServiceReports')->name('requested_service_reports');
+
+Route::get('notifications', 'Cms@notifications');
+Route::post('notifications/send', 'Cms@sendAppWideNotification');
 
 Route::get('change_password_form', 'Cms@changePasswordForm');
 Route::post('change_password', 'Cms@changePassword');

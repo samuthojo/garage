@@ -93,5 +93,5 @@
   </div>
   </div>
   <script>
-      myDataTable("Services", "The List Of Services As Per {{now()->format('Y-m-d')}}");
+      myDataTable("Services", "The List Of Services As Per {{now()->format('d-m-Y')}}");
   </script>

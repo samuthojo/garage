@@ -53,7 +53,7 @@
        Crafted @ <a href="http://ipfsoftwares.com" target="_blank">iPF SOFTWARES</a>
      </div>
      <script>
-         myDataTable("Product Categories", "Product Category List As Per {{now()->format('Y-m-d')}}");
+         myDataTable("Product Categories", "Product Category List As Per {{now()->format('d-m-Y')}}");
      </script>
    </div>
 @endsection

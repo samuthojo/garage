@@ -59,7 +59,7 @@ function myDataTable(file_name, export_title) {
                  messageTop: export_title
               }
           ]
-    })
+    });
 }
 
 function menu_links(arg) {
@@ -87,6 +87,12 @@ function menu_links(arg) {
     }
    else if(arg == "change_password"){
      link = "change_password_form";
+   }
+   else if(arg == "reports"){
+     link = "reports";
+   }
+   else if(arg == "notifications"){
+     link = "notifications";
    }
    $.ajax({
      url: link,

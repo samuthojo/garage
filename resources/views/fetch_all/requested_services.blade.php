@@ -45,5 +45,5 @@
   </div>
   </div>
   <script>
-      myDataTable("Requested Services", "Services With Requests As Per {{now()->format('Y-m-d')}}");
+      myDataTable("Requested Services", "Services With Requests As Per {{now()->format('d-m-Y')}}");
   </script>

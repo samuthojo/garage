@@ -215,4 +215,21 @@ class MechMaster extends Controller
      return response()->json($feedback, 200);
    }
 
+   public function orderItems(Order $order) {
+     $items = $order->purchases()
+                   ->get()
+                   ->map( function($purchase) {
+                     $item = $purchase;
+                     $product = $purchase->product()->first();
+                     $item->name = $product->name;
+                     $item->picture = $product->image;
+                     $item->category_name = $product->category()->first()->name;
+
+                     return $item;
+                   });
+
+     $feedback = compact('items');
+     return response()->json($feedback, 200);
+   }
+
 }

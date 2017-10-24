@@ -59,5 +59,5 @@
   </div>
   <script>
       myDataTable("{{$car_make->name}} Models",
-        "Models Listing for the car: {{$car_make->name}} As Per {{now()->format('Y-m-d')}}");
+        "Models Listing for the car: {{$car_make->name}} As Per {{now()->format('d-m-Y')}}");
   </script>

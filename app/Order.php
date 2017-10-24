@@ -34,6 +34,10 @@ class Order extends Model
     return sprintf('%s', number_format($amount, 0));
   }
 
+  public function getUpdatedAtAttribute($value) {
+    return Carbon::parse($value)->format('d-m-Y');
+  }
+
   public function getStatusAttribute($status) {
     $st = "";
     if($status == 0) {

@@ -38,6 +38,10 @@ class CustomerService extends Model
       return Carbon::parse($value)->format('d-m-Y');
     }
 
+    public function getUpdatedAtAttribute($value) {
+      return Carbon::parse($value)->format('d-m-Y');
+    }
+
     public function getStatusAttribute($status) {
       $st = "";
       if($status == 0) {

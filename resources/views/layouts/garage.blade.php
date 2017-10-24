@@ -69,6 +69,16 @@
         Requested Services
         <span style="font-size:16px;"></span></a>
       </li>
+      <!-- <li class="link" id="reports">
+        <a href="javascript:menu_links('reports');">
+        Reports
+        <span style="font-size:16px;"></span></a>
+      </li> -->
+      <li class="link" id="notifications">
+        <a href="javascript:menu_links('notifications');">
+        Notifications
+        <span style="font-size:16px;"></span></a>
+      </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
