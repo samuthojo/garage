@@ -239,10 +239,11 @@ class Cms extends Controller
 
       if($st == 1 || $st == 4) {
         //To do: Send Push Notification
-        $this->sendOrderNotification($request->all());
+        return $this->sendOrderNotification($request->all());
       }
 
-      return $this->orders();
+      return 1;
+      //return $this->orders();
     }
 
     private function sendOrderNotification($request) {
@@ -259,7 +260,7 @@ class Cms extends Controller
       $data = $this->setUpNotification($request, $date);
 
       // sending push message to multiple users by fcm registration ids
-      $fcm->sendMultiple($tokens, $data);
+      return $fcm->sendMultiple($tokens, $data);
     }
 
     private function setUpNotification($request, $date) {
@@ -309,7 +310,7 @@ class Cms extends Controller
         $title = "Services Update";
         $message = "More products have been added please update to see them!";
       }
-      $this->updateNotification($type, $title, $message);
+      return $this->updateNotification($type, $title, $message);
     }
 
     private function updateNotification($type, $title, $message) {
@@ -324,7 +325,7 @@ class Cms extends Controller
       $data["data"] = null;
 
       //sending push message to users who subscribed to the topic 'all'
-      $fcm->sendToTopic('all', $data);
+      return $fcm->sendToTopic('all', $data);
     }
 
     public function requestedServices() {
@@ -382,15 +383,16 @@ class Cms extends Controller
 
       //To do send notification to customer
       if($status == 1 || $status == 3 || $status == 4) {
-        $this->sendRequestNotification($request->all());
+        return $this->sendRequestNotification($request->all());
       }
 
       $service_as_product_id = CustomerService::find($id)->serviceAsProduct()
                                                          ->first()
                                                          ->id;
 
+      return 1;
       // For a route with the following URI: requested_services/{service}
-      return redirect()->route('requested_service', ['service' => $service_as_product_id]);
+      //return redirect()->route('requested_service', ['service' => $service_as_product_id]);
     }
 
     private function sendRequestNotification($request) {
@@ -408,13 +410,13 @@ class Cms extends Controller
       $requested_service->car_model = $model->model_name;
 
       $customer = $requested_service->customer()->first();
-      
+
       $tokens = $this->getTokens($customer);
 
       $data = $this->setUpContent($request, $requested_service);
 
       // sending push message to multiple users by fcm registration ids
-      $fcm->sendMultiple($tokens, $data);
+      return $fcm->sendMultiple($tokens, $data);
     }
 
     private function setUpContent($request, $requested_service) {
@@ -431,7 +433,7 @@ class Cms extends Controller
       }
       else if ($posted_status == 3) {//rescheduled
         $data['title'] = "Request Rescheduled";
-        $data['message'] = "Your request has been rescheduled to " . $posted_date . "!";
+        $data['message'] = "Your request has been rescheduled to " . $posted_date;
         $data['reason'] = $posted_reason;
       }
       else if ($posted_status == 4) {//rejected
@@ -443,7 +445,7 @@ class Cms extends Controller
     }
 
     public function reports() {
-
+      return view('reports.reports');
     }
 
     public function orderReports(Request $request) {

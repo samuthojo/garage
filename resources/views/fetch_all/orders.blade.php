@@ -5,6 +5,17 @@
                           'title' => 'Confirmation',
                           'text' => 'Mark this order as serviced?',
                           'function' => 'markAsServiced()',])
+
+@include('modals.loader')
+@include('modals.status_alert', [ 'text_class' => 'text-success',
+                                  'modal_id' => 'notification_sent',
+                                  'text' => 'Notification sent successfully!'])
+@include('modals.status_alert', [ 'text_class' => 'text-warning',
+                                  'modal_id' => 'notification_failure',
+                                  'text' => 'Sending failed, network error!'])
+@include('modals.status_alert', [ 'text_class' => 'text-success',
+                                  'modal_id' => 'order_alert',
+                                  'text' => 'Order Marked as serviced!'])
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 style="font-weight: bold;" class="panel-title pull-left">
@@ -54,7 +65,7 @@
                         }
                       @endphp
                       <td>
-                        <span class="{{$color}}">{{ $order->status }}</span>
+                        <span class="{{$color}}" id="status{{$order->id}}">{{ $order->status }}</span>
                       </td>
                       <td>
                         <div class="btn-group">
@@ -64,54 +75,58 @@
                           </button>
                           @if(strcasecmp($status, "accepted") == 0)
                             <button type="button" class="btn btn-small btn-primary"
-                              disabled>
+                              id="accept{{$order->id}}" disabled>
                               Accept
                             </button>
                             <button type="button" class="btn btn-small btn-primary"
-                              onclick="openModal({{$order->id}}, 'modal')">
+                              onclick="openModal({{$order->id}}, 'modal')"
+                              id="service{{$order->id}}">
                               Serviced
                             </button>
                             <button type="button" class="btn btn-small btn-primary"
-                              disabled>
+                              id="reject{{$order->id}}" disabled>
                               Reject
                             </button>
                           @elseif(strcasecmp($status, "rejected") == 0)
                             <button type="button" class="btn btn-small btn-primary"
-                              disabled>
+                              id="accept{{$order->id}}" disabled>
                               Accept
                             </button>
                             <button type="button" class="btn btn-small btn-primary"
-                              disabled>
+                              id="service{{$order->id}}" disabled>
                               Serviced
                             </button>
                             <button type="button" class="btn btn-small btn-primary"
-                              disabled>
+                              id="reject{{$order->id}}" disabled>
                               Reject
                             </button>
                           @elseif(strcasecmp($status, "serviced") == 0)
                             <button type="button" class="btn btn-small btn-primary"
-                              disabled>
+                              id="accept{{$order->id}}" disabled>
                               Accept
                             </button>
                             <button type="button" class="btn btn-small btn-primary"
-                              disabled>
+                              id="service{{$order->id}}" disabled>
                               Serviced
                             </button>
                             <button type="button" class="btn btn-small btn-primary"
-                              disabled>
+                              id="reject{{$order->id}}" disabled>
                               Reject
                             </button>
                           @else
                             <button type="button" class="btn btn-small btn-primary"
-                              onclick="openModal({{$order->id}}, 'accept_modal')">
+                              onclick="openModal({{$order->id}}, 'accept_modal')"
+                              id="accept{{$order->id}}">
                               Accept
                             </button>
                             <button type="button" class="btn btn-small btn-primary"
-                              onclick="openModal({{$order->id}}, 'modal')">
+                              onclick="openModal({{$order->id}}, 'modal')"
+                              id="service{{$order->id}}">
                               Serviced
                             </button>
                             <button type="button" class="btn btn-small btn-primary"
-                              onclick="openModal({{$order->id}}, 'reject_modal')">
+                              onclick="openModal({{$order->id}}, 'reject_modal')"
+                              id="reject{{$order->id}}">
                               Reject
                             </button>
                           @endif

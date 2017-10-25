@@ -20,6 +20,24 @@ function openModal(id, modal_id) {
   });
 }
 
+function showMyModal(modal_id) {
+  $('#' + modal_id).modal({
+    show: true
+  });
+}
+
+function openLoader() {
+  $('#modal_loader').modal({
+    backdrop: 'static',
+    keyboard: false,
+    show: true
+  });
+}
+
+function closeLoader() {
+  closeModal('modal_loader');
+}
+
 function updateRequestStatus(status) {
   modal_id = getModalId(status);
   var formData = new FormData();
@@ -27,7 +45,7 @@ function updateRequestStatus(status) {
   formData.append('status', status);
   closeModal(modal_id);
   var link = 'requested_services/status/update';
-  sendRequest(link, formData);
+  sendMyRequest(link, formData, status);
 }
 
 function rescheduleRequest() {
@@ -43,7 +61,7 @@ function rescheduleRequest() {
     formData.append('date', date);
     formData.append('reason', reason);
     var link = 'requested_services/status/update';
-    sendRequest(link, formData);
+    sendMyRequest(link, formData, 3);
   }
 }
 
@@ -58,7 +76,72 @@ function rejectRequest() {
     closeModal('reject_modal');
     formData.append('reason', reason);
     var link = 'requested_services/status/update';
-    sendRequest(link, formData);
+    sendMyRequest(link, formData, 4);
+  }
+}
+
+function sendMyRequest(link, formData, type) {
+  //$(".loader").fadeIn(0);
+  openLoader();
+  $.ajax({
+    type: 'post',
+    url: link,
+    dataType: 'json',
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function (result) {
+      //$(".loader").fadeOut(0);
+      closeLoader();
+      notifyAdmin(result, type);
+    }
+  });
+}
+
+function notifyAdmin(result, type) {
+  if(type == 1 || type == 3 || type == 4) {
+    if(result) {
+      showMyModal("notification_sent");
+      makeUpdates(type);
+    } else {
+      showMyModal("notification_failure");
+    }
+  }
+  else if(type == 2 && result == 1) {
+    makeUpdates(type);
+  }
+}
+
+function makeUpdates(type) {
+  if(type == 1) {
+    $("#status"+requested_service_id).text("Accepted");
+    $("#status"+requested_service_id).attr("class", "text-success");
+    $("#accept"+requested_service_id).attr("disabled", "disabled");
+    $("#reject"+requested_service_id).attr("disabled", "disabled");
+  }
+  else if(type == 2) {
+    $("#status"+requested_service_id).text("Serviced");
+    $("#status"+requested_service_id).attr("class", "text-primary");
+    $("#accept"+requested_service_id).attr("disabled", "disabled");
+    $("#service"+requested_service_id).attr("disabled", "disabled");
+    $("#reschedule"+requested_service_id).attr("disabled", "disabled");
+    $("#reject"+requested_service_id).attr("disabled", "disabled");
+    showMyModal('requested_service_alert');
+  }
+  else if(type == 3) {
+    $("#status"+requested_service_id).text("Rescheduled");
+    $("#status"+requested_service_id).attr("class", "text-info");
+    $("#accept"+requested_service_id).attr("disabled", "disabled");
+    $("#reject"+requested_service_id).attr("disabled", "disabled");
+  }
+  else if(type == 4) {
+    $("#status"+requested_service_id).text("Rejected");
+    $("#status"+requested_service_id).attr("class", "text-danger");
+    $("#accept"+requested_service_id).attr("disabled", "disabled");
+    $("#service"+requested_service_id).attr("disabled", "disabled");
+    $("#reschedule"+requested_service_id).attr("disabled", "disabled");
+    $("#reject"+requested_service_id).attr("disabled", "disabled");
   }
 }
 

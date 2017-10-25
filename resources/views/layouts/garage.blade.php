@@ -20,6 +20,20 @@
     .region {
       padding-top: 70px;
     }
+
+    .loader {
+        /*position: fixed;
+        top: 0;
+        left: 0;*/
+        /*width: 100%;*/
+        /*padding-top: 1.5%;*/
+        /*height: 40px;*/
+        z-index: 9999;
+        text-align: center;
+        align-content: center;
+        padding-bottom: 10px;
+        display: none;
+    }
   </style>
 </head>
 

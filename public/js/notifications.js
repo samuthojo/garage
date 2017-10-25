@@ -12,6 +12,7 @@ function verifyInput() {
 }
 
 function sendNotificationRequest(link, formData) {
+  $(".loader").fadeIn(0);
   $.ajax({
     type: 'post',
     url: link,
@@ -21,14 +22,15 @@ function sendNotificationRequest(link, formData) {
     contentType: false,
     processData:false,
     success: function(status) {
+      $(".loader").fadeOut(0);
       showAlert(status);
+      console.log(status);
     }
   });
 }
 
 function showAlert(status) {
-  st = status.status;
-  if(st) {
+  if(status) {
     showHideAlert('notification_sent');
   } else {
     showHideAlert('notification_failure');

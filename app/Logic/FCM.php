@@ -65,12 +65,13 @@ class FCM {
         // Execute post
         $result = curl_exec($ch);
         if ($result === FALSE) {
-            die('Curl failed: ' . curl_error($ch));
+            //die('Curl failed: ' . curl_error($ch));
+            return 0;
         }
 
         // Close connection
         curl_close($ch);
 
-        return $result;
+        return 1;
     }
 }

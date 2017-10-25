@@ -27,3 +27,13 @@ Route::prefix('v1')->group(function() {
   Route::post('purchase', 'MechMaster@purchase');
   Route::post('book_service', 'MechMaster@book_service');
 });
+
+Route::prefix('admin/v1')->group(function() {
+  Route::post('login', 'MechAdmin@login');
+  Route::get('orders', 'MechAdmin@orders');
+  Route::get('booked_services', 'MechAdmin@bookedServices');
+  Route::get('order_items/{order}', 'MechAdmin@orderItems');
+  Route::post('orders/{order_id}/{status}', 'MechAdmin@updateOrderStatus');
+  Route::post('requested_services/{id}/{status}', 'MechAdmin@updateRequestStatus');
+  Route::post('reschedule/{requested_service}', 'MechAdmin@rescheduleRequest');
+});

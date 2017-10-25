@@ -181,6 +181,7 @@ class MechMaster extends Controller
           ],
         ];
         return response()->json($feedback, 201);
+
       } catch(Throwable $e) {
         DB::rollback();
         return response()->json(['error' => $e->getMessage(), ], 500);

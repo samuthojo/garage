@@ -28,8 +28,8 @@
                       <td>{{ $purchase->price }}</td>
                       <td>{{ $purchase->quantity }}</td>
                       <td>{{ $purchase->includes }}</td>
-                      <td>{{ $purchase->include_price }}</td>
-                      <td>{{ $purchase->total_price }}</td>
+                      <td>{{ sprintf("%s", number_format($purchase->include_price)) }}</td>
+                      <td>{{ sprintf("%s", number_format($purchase->total_price)) }}</td>
                     </tr>
            @endforeach
          </tbody>
