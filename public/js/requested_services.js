@@ -12,9 +12,7 @@ function viewCustomers(id) {
 }
 
 function openModal(id, modal_id) {
-  console.log(id);
   requested_service_id = id; //set requested_service_id variable
-  console.log(requested_service_id);
   $('#' + modal_id).modal({
     backdrop: 'static',
     keyboard: false,

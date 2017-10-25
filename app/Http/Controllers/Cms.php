@@ -41,7 +41,6 @@ class Cms extends Controller
         $request->session()->regenerate();
         $feedback = ['success' => 'success', ];
       } else {
-        return $request->all();
         $feedback = ['success' => 'failure', ];
       }
       return response()->json($feedback);
@@ -409,7 +408,7 @@ class Cms extends Controller
       $requested_service->car_model = $model->model_name;
 
       $customer = $requested_service->customer()->first();
-      //$customer = Customer::find(12);
+      
       $tokens = $this->getTokens($customer);
 
       $data = $this->setUpContent($request, $requested_service);
