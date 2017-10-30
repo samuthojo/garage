@@ -63,6 +63,8 @@ Route::post('reports/requested_services', 'Reports@requestedServiceReports')->na
 Route::get('notifications', 'Cms@notifications');
 Route::post('notifications/send', 'Cms@sendAppWideNotification');
 
+Route::get('promo_messages', 'PromoMessages@index')->name('promos.index');
+
 Route::get('change_password_form', 'Cms@changePasswordForm');
 Route::post('change_password', 'Cms@changePassword');
 
