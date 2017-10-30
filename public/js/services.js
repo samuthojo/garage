@@ -41,9 +41,9 @@ function updateServiceStatus(status) {
 
 function showEditModal(service) {
   showServiceModal('edit_service_modal');
-  $('#sel1').val(service.service_id);
-  $('#sel2').val(service.car_id);
-  $('#sel3').val(service.car_model_id);
+  $('#sel6').val(service.service_id);
+  $('#sel7').val(service.car_id);
+  $('#sel8').val(service.car_model_id);
   $('#service_price').val(service.price);
   $('#service_description').val(service.description);
 
@@ -184,7 +184,7 @@ function fetchModel(id) {
      if(id == 'sel1') {
        next_id =  'sel2';
      } else {
-       next_id = (id == 'sel2') ? 'sel3' : 'sel5';
+       next_id = (id == 'sel4') ? 'sel5' : 'sel8';
       }
      setUpModels(data, next_id);
    })
@@ -194,6 +194,7 @@ function fetchModel(id) {
 }
 
 function setUpModels(models, id) {
+  console.log('set' + id);
   var mySelect = document.getElementById(id);
   var length = mySelect.options.length;
 

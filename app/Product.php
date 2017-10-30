@@ -35,13 +35,13 @@ class Product extends Model
 
   public function car() {
     return $this->belongsTo('App\Car')->withDefault([
-        'name' => 'all',
+        'name' => 'All',
     ]);
   }
 
   public function car_model() {
     return $this->belongsTo('App\CarModel')->withDefault([
-        'model_name' => 'all',
+        'model_name' => 'All',
     ]);
   }
 

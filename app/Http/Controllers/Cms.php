@@ -60,8 +60,10 @@ class Cms extends Controller
                   ->get()->map(function($serv) {
                     $service = $serv;
                     $service->service = $serv->service()->first()->name;
-                    $service->car = $serv->car()->first()->name;
-                    $service->model = $serv->car_model()->first()->model_name;
+                    $car = $serv->car;
+                    $service->car = $car->name;
+                    $model = $serv->car_model;
+                    $service->model = $model->model_name;
 
                     return $service;
                   });
@@ -73,13 +75,20 @@ class Cms extends Controller
       $services = Service::all();
 
       $service->service = $service->service()->first()->name;
-      $service->car = $service->car()->first()->name;
-      $service->model = $service->car_model()->first()->model_name;
+      $car = $service->car;
+      $service->car = $car->name;
+      $model = $service->car_model;
+      $service->model = $model->model_name;
       $service->description = $service->service()->first()->description;
       $service->picture = $service->service()->first()->picture;
 
       $cars = Car::all();
-      $models = $service->car()->first()->models;
+      $models = "";
+      if(($service->car()->first()) instanceof Car) {
+         $models = $service->car()->first()->models;
+       } else {
+         $models = null;
+       }
 
       return view('specific.service', compact('service', 'services', 'cars', 'models'));
     }
@@ -599,7 +608,11 @@ class Cms extends Controller
         $product = Product::find($id);
         $category = $product->category; //the category it belongs to
         $car = $product->car; //the make it belongs to
-        $models = $car->models; //all the models of this make
+        if(($product->car()->first()) instanceof Car) {
+          $models = $car->models; //all the models of this make
+        } else {
+          $models = null;
+        }
         $cars = Car::all();
         $car_model = $product->car_model; //the car_model it belongs to
         $categories = Category::all();

@@ -17,8 +17,8 @@
           <div class="container">
             <form name="edit_service_form" id="edit_service_form">
             <div class="form-group">
-              <label for="sel1">Service:</label>
-               <select name='service_id' id="sel1" onchange="">
+              <label for="sel6">Service:</label>
+               <select name='service_id' id="sel6" onchange="">
                  <option disabled selected value="#">Choose service</option>
                  @foreach($services as $service)
                     <option value="{{$service->id}}">{{$service->name}}</option>
@@ -26,8 +26,8 @@
                </select>
             </div>
           <div class="form-group">
-            <label for="sel2">Car:</label>
-             <select name='car_id' id="sel2" onchange="fetchModel('sel2')">
+            <label for="sel7">Car:</label>
+             <select name='car_id' id="sel7" onchange="fetchModel('sel7')">
                <option disabled selected value="#">Choose car</option>
                <option value="">all</option>
                @foreach($cars as $car)
@@ -36,13 +36,15 @@
              </select>
           </div>
           <div class="form-group">
-            <label for="sel3">Model:</label>
-             <select name='car_model_id' id="sel3">
+            <label for="sel8">Model:</label>
+             <select name='car_model_id' id="sel8">
                <option disabled selected value="#">Choose model</option>
                <option value="">all</option>
-               @foreach($models as $model)
-                <option value="{{$model->id}}">{{$model->model_name}}</<option>
-               @endforeach
+               @if(!is_null($models))
+                 @foreach($models as $model)
+                  <option value="{{$model->id}}">{{$model->model_name}}</<option>
+                 @endforeach
+               @endif
              </select>
          </div>
           <div class="form-group">

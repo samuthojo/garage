@@ -41,9 +41,11 @@
              <select id="sel7" name="car_model_id">
                <option disabled selected value="#">Choose model</option>
                <option value="">all</option>
-               @foreach($models as $model)
-                  <option value="{{$model->id}}">{{$model->model_name}}</option>
-               @endforeach
+               @if(!is_null($models))
+                 @foreach($models as $model)
+                    <option value="{{$model->id}}">{{$model->model_name}}</option>
+                 @endforeach
+               @endif
              </select>
         </div>
           <div class="form-group">

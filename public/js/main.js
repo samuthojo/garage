@@ -94,6 +94,9 @@ function menu_links(arg) {
    else if(arg == "notifications"){
      link = "notifications";
    }
+   else if(arg == "promo_messages") {
+     link = "promo_messages";
+   }
    $.ajax({
      url: link,
      dataType: 'html',

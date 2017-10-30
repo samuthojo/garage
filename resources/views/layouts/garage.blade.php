@@ -93,6 +93,11 @@
         Notifications
         <span style="font-size:16px;"></span></a>
       </li>
+      <li class="link" id="promo_messages">
+        <a href="javascript:menu_links('promo_messages');">
+        PromoMessages
+        <span style="font-size:16px;"></span></a>
+      </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">

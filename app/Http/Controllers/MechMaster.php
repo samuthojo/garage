@@ -72,7 +72,8 @@ class MechMaster extends Controller
       $categories = Category::all();
       $products = Product::all()->map(function($prod) {
         $product = $prod;
-        $product->car_model_name = $prod->car_model()->first()->model_name;
+        $car_model = $prod->car_model;
+        $product->car_model_name = $car_model->model_name;
         $product->category_name = $prod->category()->first()->name;
 
         return $product;
@@ -90,7 +91,8 @@ class MechMaster extends Controller
               ->get($columns)->map(function($serv) {
                 $service = $serv;
                 $service->service_name = $serv->service()->first()->name;
-                $service->car_model_name = $serv->car_model()->first()->model_name;
+                $model = $serv->car_model;
+                $service->car_model_name = $model->model_name;
                 $service->description = $serv->service()->first()->description;
                 $service->service_picture = $serv->service()->first()->picture;
                 return $service;
