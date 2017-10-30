@@ -1,0 +1,94 @@
+var category_id = "";
+var category = "";
+
+function showCategoryModal() {
+  $('#category_modal').modal({
+    backdrop: 'static',
+    keyboard: false,
+    show: true
+  });
+}
+
+function newCategory() {
+    var name = $('#category_name').val();
+    var category = {
+      'name': name
+    }
+    if(name == '') {
+      showHideAlert('category_alert');
+    } else {
+      closeModal("category_modal");
+      link = "create/" + "category";
+      $.ajax({
+        type: 'post',
+        dataType: 'html',
+        url: link,
+        cache: false,
+        data: category,
+        success: function(result) {
+          $("#main_content").html(result);
+        }
+      });
+    }
+}
+
+function showEditModal(cat) {
+  category = cat;
+  $('#edit_category_modal').modal({
+    backdrop: 'static',
+    keyboard: false,
+    show: true
+  });
+  $("#new_name").val(category.name);
+}
+
+function editCategory() {
+    var id = category.id;
+    var name = $("#new_name").val();
+    var datas = {
+      'id': id,
+      'name': name
+    }
+    if(name == '') {
+      showHideAlert('edit_category_alert');
+    } else {
+      closeModal('edit_category_modal');
+      link = "update/" + "category";
+      $.ajax({
+        type: 'post',
+        dataType: 'html',
+        url: link,
+        cache: false,
+        data: datas,
+        success: function(result) {
+          $("#main_content").html(result);
+        }
+      });
+    }
+}
+
+function showConfirmation(id) {
+    category_id = id;
+    $('#confirmation_modal').modal({
+      backdrop: 'static',
+      keyboard: false,
+      show: true
+    });
+}
+
+function deleteCategory() {
+    closeModal('confirmation_modal');
+    var datas = {
+      'id': category_id
+    }
+    $.ajax({
+            type: 'delete',
+            dataType: 'html',
+            url: 'delete/category',
+            cache: false,
+            data: datas,
+            success: function (result) {
+                $("#main_content").html(result);
+            }
+    });
+}
