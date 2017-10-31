@@ -6,38 +6,49 @@ function showCarModal() {
     keyboard: false,
     show: true
   });
+  clearErrors();
 }
 
 function newCar() {
-  var someDataIsMissing = false;
-  var myForm = document.getElementById('car_form');
-  var formData = new FormData(myForm);
-  for (var key in formData) {
-    if(formData.key == "") {
-      someDataIsMissing = true;
-      break;
-    }
-  }
-  if(someDataIsMissing) {
-    showHideAlert('car_alert');
-  } else {
-    closeModal('car_modal');
-    var link = 'create/car';
+    clearErrors();
+    var link = 'cars/create';
+    var myForm = document.getElementById("car_form");
+    var formData = new FormData(myForm);
     $.ajax({
             type: 'post',
-            dataType: 'html',
             url: link,
             data: formData,
             cache: false,
             contentType: false,
             processData: false,
             success: function (result) {
+                closeModal('car_modal');
                 $("#main_content").html(result);
+            },
+            error: function (data) {
+              data = JSON.parse(data.responseText);
+              displayErrors(data.errors);
             }
     });
-  }
 }
 
+function clearErrors() {
+  $("#car_name_error").text("");
+  $("#num_models_error").text("");
+  $("#image_error").text("");
+}
+
+function displayErrors(data) {
+  if(data.name != null) {
+    $("#car_name_error").text(data.name[0]);
+  }
+  if(data.num_models != null) {
+    $("#num_models_error").text(data.num_models[0]);
+  }
+  if(data.picture != null) {
+    $("#image_error").text(data.picture[0]);
+  }
+}
 
 function viewCar(id) {
   var link = "view/car/" + id;
@@ -58,38 +69,50 @@ function showEditCarModal(car) {
     keyboard: false,
     show: true
   });
+  clearErrors2();
   $('#edit_car_name').val(car.name);
   $('#edit_car_models').val(car.num_models);
 }
 
 function editCar() {
-  var someDataIsMissing = false;
+  clearErrors2();
   var myForm = document.getElementById('edit_car_form');
   var formData = new FormData(myForm);
   formData.append('id', car_id);
-  for (var key in formData) {
-    if(formData.key == "") {
-      someDataIsMissing = true;
-      break;
-    }
-  }
-  if(someDataIsMissing) {
-    showHideAlert('edit_car_alert');
-  } else {
-    closeModal('edit_car_modal');
-    var link = 'update/car';
+    var link = 'cars/update';
     $.ajax({
             type: 'post',
-            dataType: 'html',
             url: link,
             data: formData,
             cache: false,
             contentType: false,
             processData: false,
             success: function (result) {
-                $("#main_content").html(result);
+              closeModal('edit_car_modal');
+              $("#main_content").html(result);
+            },
+            error: function (data) {
+              data = JSON.parse(data.responseText);
+              displayErrors2(data.errors);
             }
     });
+}
+
+function clearErrors2() {
+  $("#car_name_error2").text("");
+  $("#num_models_error2").text("");
+  $("#image_error2").text("");
+}
+
+function displayErrors2(data) {
+  if(data.name != null) {
+    $("#car_name_error2").text(data.name[0]);
+  }
+  if(data.num_models != null) {
+    $("#num_models_error2").text(data.num_models[0]);
+  }
+  if(data.picture != null) {
+    $("#image_error2").text(data.picture[0]);
   }
 }
 

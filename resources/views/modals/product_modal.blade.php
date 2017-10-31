@@ -11,7 +11,6 @@
       <div class="modal-body">
         <div class="container">
         <form name="product_modal" id="product_form" class="form-horizontal col-sm-10">
-            @include('alerts.alert2', ['alert_id' => 'product_alert'])
           <div class="form-group">
               <label class="control-label col-sm-2" for="sel2">Category:</label>
                <select id="sel1" class="form-control" name="category_id">
@@ -84,7 +83,7 @@
           <div class="form-group">
             <label class="control-label col-sm-2" for="product_includes">Includes:</label>
             <input type="text" name="includes" id="product_includes"
-              placeholder="Includes" class="form-control">
+              placeholder="eg. oil, petrol" class="form-control">
             <span class="text-danger col-sm-offset-2" id="includes_error"></span>
           </div>
           <div class="form-group">

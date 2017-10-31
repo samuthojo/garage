@@ -26,6 +26,8 @@ use App\Feedback;
 use App\OrderPromoMessage;
 use App\ServicePromoMessage;
 use App\Http\Requests\CreateProduct;
+use App\Http\Requests\CreateCar;
+use App\Http\Requests\CreateModel;
 
 class Cms extends Controller
 {
@@ -523,6 +525,25 @@ class Cms extends Controller
       return $this->products();
     }
 
+    public function createCar(CreateCar $request) {
+      $data = $request->except('picture', 'num_models');
+      $num_models = request('num_models');
+      $num_models = is_null($num_models) ? 1 : $num_models;
+      if($request->hasFile('picture')) {
+        $logo = $request->file('picture');
+        if($logo->isValid()) {
+          $picture = $logo->getClientOriginalName();
+          $logo->move('uploads/cars', $picture);
+          $data = array_add($data, 'picture', $picture);
+          Car::create(array_add($data, 'num_models', $num_models));
+        }
+      } else {
+        $data = array_add($data, 'num_models', $num_models);
+        Car::create($data);
+      }
+      return $this->cars();
+    }
+
     public function store(Request $request, $type) {
       if($type == 'category') {
         Category::firstOrCreate(request()->all());
@@ -530,23 +551,45 @@ class Cms extends Controller
       } else if($type == 'product') {
 
       } else if($type == 'car') {
-        $data = $request->except('picture', 'num_models');
-        $num_models = request('num_models');
-        $num_models = is_null($num_models) ? 1 : $num_models;
-        if($request->hasFile('picture')) {
-          $logo = $request->file('picture');
-          if($logo->isValid()) {
-            $picture = $logo->getClientOriginalName();
-            $logo->move('uploads/cars', $picture);
-            $data = array_add($data, 'picture', $picture);
-            Car::create(array_add($data, 'num_models', $num_models));
-          }
-        } else {
-          $data = array_add($data, 'num_models', $num_models);
-          Car::create($data);
-        }
-        return $this->cars();
+
       }
+    }
+
+    public function updateProduct(CreateProduct $request) {
+      $id = $request->input('id');
+      $data = $request->except('id', 'image');
+      if($request->hasFile('image')) {
+        $picture = $request->file('image');
+        if($picture->isValid()) {
+          $image = $picture->getClientOriginalName();
+          $picture->move('uploads/products', $image);
+          Product::where('id', $id)->update(array_add($data, 'image', $image));
+        }
+      } else {
+        Product::where('id', $id)->update($data);
+      }
+      return $this->products();
+    }
+
+    public function updateCar(CreateCar $request) {
+      $id = $request->input('id');
+      $data = $request->except('picture', 'num_models');
+      $num_models = request('num_models');
+      $num_models = is_null($num_models) ? 1 : $num_models;
+      if($request->hasFile('picture')) {
+        $logo = $request->file('picture');
+        if($logo->isValid()) {
+          $picture = $logo->getClientOriginalName();
+          $logo->move('uploads/cars', $picture);
+          $data = array_add($data, 'picture', $picture);
+          $data = array_add($data, 'num_models', $num_models);
+          Car::where('id', $id)->update($data);
+        }
+      } else {
+        Car::where('id', $id)->update(array_add($data, 'num_models',
+                                                                $num_models));
+      }
+      return $this->cars();
     }
 
     public function update(Request $request, $type) {
@@ -555,36 +598,9 @@ class Cms extends Controller
         Category::where('id', $id)->update(request()->except('id'));
         return $this->categories();
       } else if($type == 'product') {
-        $data = $request->except('id', 'image');
-        if($request->hasFile('image')) {
-          $picture = $request->file('image');
-          if($picture->isValid()) {
-            $image = $picture->getClientOriginalName();
-            $picture->move('uploads/products', $image);
-            Product::where('id', $id)->update(array_add($data, 'image', $image));
-          }
-        } else {
-          Product::where('id', $id)->update($data);
-        }
-        return $this->products();
+
       } else if($type == 'car') {
-        $data = $request->except('picture', 'num_models');
-        $num_models = request('num_models');
-        $num_models = is_null($num_models) ? 1 : $num_models;
-        if($request->hasFile('picture')) {
-          $logo = $request->file('picture');
-          if($logo->isValid()) {
-            $picture = $logo->getClientOriginalName();
-            $logo->move('uploads/cars', $picture);
-            $data = array_add($data, 'picture', $picture);
-            $data = array_add($data, 'num_models', $num_models);
-            Car::where('id', $id)->update($data);
-          }
-        } else {
-          Car::where('id', $id)->update(array_add($data, 'num_models',
-                                                                  $num_models));
-        }
-        return $this->cars();
+
       }
     }
 
@@ -651,7 +667,7 @@ class Cms extends Controller
       return view('specific.model', compact('model', 'cars'));
     }
 
-    public function newModel(Request $request) {
+    public function newModel(CreateModel $request) {
       $data = $request->except('picture');
       $car_id = $request->input('car_id');
       $car = Car::find($car_id);
@@ -695,7 +711,7 @@ class Cms extends Controller
       return redirect()->route('models', ['car_make' => $car_id]);
     }
 
-    public function updateModel(Request $request) {
+    public function updateModel(CreateModel $request) {
       $model = $request->input('id');
       $data = $request->except('id', 'picture');
       if($request->hasFile('picture')) {

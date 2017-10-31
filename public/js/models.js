@@ -1,7 +1,7 @@
 var model_id = "";
 
 function newModel(car_id) {
-  closeModal('model_modal');
+  clearErrors();
   var myForm = document.getElementById('model_form');
   var formData = new FormData(myForm);
   formData.append('car_id', car_id);
@@ -10,14 +10,32 @@ function newModel(car_id) {
       type: 'post',
       url: link,
       data: formData,
-      dataType: 'html',
       cache: false,
       contentType: false,
       processData: false,
       success: function (result) {
+        closeModal('model_modal');
         $("#main_content").html(result);
+      },
+      error: function (data) {
+        data = JSON.parse(data.responseText);
+        displayErrors(data.errors);
       }
   });
+}
+
+function clearErrors() {
+  $("#name_error").text("");
+  $("#picture_error").text("");
+}
+
+function displayErrors(data) {
+  if(data.model_name != null) {
+    $("#name_error").text(data.model_name[0]);
+  }
+  if(data.picture != null) {
+    $("#picture_error").text(data.picture[0]);
+  }
 }
 
 function showEditModel(model) {
@@ -30,15 +48,45 @@ function showEditModel(model) {
   });
   $('#edit_car_id').val(model.car_id);
   $('#edit_model_name').val(model.model_name);
+  clearErrors2();
 }
 
 function editModel() {
-  closeModal('edit_model');
+  clearErrors2();
   var myForm = document.getElementById('edit_model_form');
   var formData = new FormData(myForm);
   formData.append('id', model_id);
   var link = "models/update";
-  sendRequest(link, formData);
+  $.ajax({
+    type: 'post',
+    url: link,
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function (result) {
+      closeModal('edit_model');
+      $("#main_content").html(result);
+    },
+    error: function (error) {
+      data = JSON.parse(error.responseText);
+      displayErrors2(data.errors);
+    }
+  });
+}
+
+function clearErrors2() {
+  $("#name_error2").text("");
+  $("#picture_error2").text("");
+}
+
+function displayErrors2(data) {
+  if(data.model_name != null) {
+    $("#name_error2").text(data.model_name[0]);
+  }
+  if(data.picture != null) {
+    $("#picture_error2").text(data.picture[0]);
+  }
 }
 
 function deleteModel() {
@@ -55,6 +103,7 @@ function showModel() {
     keyboard: false,
     show: true
   });
+  clearErrors();
 }
 
 function viewModel(id) {

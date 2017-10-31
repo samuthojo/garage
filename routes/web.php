@@ -18,6 +18,7 @@ Route::get('dashboard', 'Cms@adminstart')->name('dashboard'); //route to main pa
 
 Route::get('products', 'Cms@products');
 Route::post('products/create', 'Cms@createProduct');
+Route::post('products/update', 'Cms@updateProduct');
 
 Route::get('view/{type}/{id}', 'Cms@view');
 
@@ -32,6 +33,8 @@ Route::get('customers/{customer}', 'Cms@customer');
 Route::post('customers/update', 'Cms@updateCustomer');
 
 Route::get('cars', 'Cms@cars');
+Route::post('cars/create', 'Cms@createCar');
+Route::post('cars/update', 'Cms@updateCar');
 
 Route::post('models/create', 'Cms@newModel');
 Route::get('models/{car_make}', 'Cms@models');

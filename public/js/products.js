@@ -6,6 +6,7 @@ function showProductModal() {
     keyboard: false,
     show: true
   });
+  clearErrors();
 }
 
 function newProduct() {
@@ -104,6 +105,7 @@ function showEditProductModal(category, product, car, car_model) {
     keyboard: false,
     show: true
   });
+  clearErrors2();
   $("#sel5").val(category.id);
   $("#edit_product_name").val(product.name);
   $("#sel6").val(car.id);
@@ -121,49 +123,83 @@ function showEditProductModal(category, product, car, car_model) {
 }
 
 function editProduct() {
-    var someDataIsMissing = false;
-    var product = {
-      'id': product_id,
-      'category_id' : $('#sel5').val(),
-      'name' : $('#edit_product_name').val(),
-      'car_id': $("#sel6").val(),
-      'car_model_id': $("#sel7").val(),
-      'unit' : $('#edit_product_unit').val(),
-      'price' : $('#edit_product_price').val(),
-      'stock' : $('#edit_product_stock').val(),
-      'has_includes' : $('#sel8').val(),
-      'includes' : $('#edit_product_includes').val(),
-      'include_price' : $('#edit_include_price').val(),
-      'warranty' : $('#edit_product_warranty').val(),
-      'image' : $('#edit_product_file').val()
-    };
-    for (var key in product) {
-      if(product.key == "") {
-        someDataIsMissing = true;
-        break;
-      }
-    }
-    if(someDataIsMissing) {
-      showHideAlert('edit_product_alert');
-    } else {
-      closeModal('edit_product_modal');
-      var link = 'update/product';
+      clearErrors2();
+      var link = 'products/update';
       var myForm = document.getElementById('edit_product_form');
       var formData = new FormData(myForm);
       formData.append('id', product_id);
       $.ajax({
               type: 'post',
-              dataType: 'html',
               url: link,
               data: formData,
               cache: false,
               contentType: false,
               processData: false,
               success: function (result) {
+                  closeModal('edit_product_modal');
                   $("#main_content").html(result);
+              },
+              error: function (error) {
+                data = JSON.parse(error.responseText);
+                $("#error_notifier2").text("Please solve above errors");
+                displayErrors2(data.errors);
               }
       });
-    }
+}
+
+function clearErrors2() {
+  $("#error_notifier2").text("");
+  $("#category_error2").text("");
+  $("#name_error2").text("");
+  $("#car_error2").text("");
+  $("#model_error2").text("");
+  $("#unit_error2").text("");
+  $("#stock_error2").text("");
+  $("#price_error2").text("");
+  $("#warranty_error2").text("");
+  $("#has_includes_error2").text("");
+  $("#includes_error2").text("");
+  $("#include_price_error2").text("");
+  $("#image_error2").text("");
+}
+
+function displayErrors2(data) {
+  if(data.category_id != null) {
+    $("#category_error2").text(data.category_id[0]);
+  }
+  if(data.name != null) {
+    $("#name_error2").text(data.name[0]);
+  }
+  if(data.car_id != null) {
+    $("#car_error2").text(data.car_id[0]);
+  }
+  if(data.car_model_id != null) {
+    $("#model_error2").text(data.car_model_id[0]);
+  }
+  if(data.unit != null) {
+    $("#unit_error2").text(data.unit[0]);
+  }
+  if(data.stock != null) {
+    $("#stock_error2").text(data.stock[0]);
+  }
+  if(data.price != null) {
+    $("#price_error2").text(data.price[0]);
+  }
+  if(data.warranty != null) {
+    $("#warranty_error2").text(data.warranty[0]);
+  }
+  if(data.has_includes != null) {
+    $("#has_includes_error2").text(data.has_includes[0]);
+  }
+  if(data.includes != null) {
+    $("#includes_error2").text(data.includes[0]);
+  }
+  if(data.include_price != null) {
+    $("#include_price_error2").text(data.include_price[0]);
+  }
+  if(data.image != null) {
+    $("#image_error2").text(data.image[0]);
+  }
 }
 
 function showDeleteModal(id) {

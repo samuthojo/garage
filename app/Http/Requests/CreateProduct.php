@@ -35,7 +35,7 @@ public function rules()
       'includes' => 'nullable|required_if:has_includes,==,1',
       'include_price' => 'nullable|required_if:has_includes,==,1|integer',
       'warranty' => 'nullable',
-      'image' => 'nullable|file|image',
+      'image' => 'nullable|file|image|max:2048',
   ];
 }
 
@@ -62,8 +62,9 @@ public function messages()
       'includes.required_if' => 'Please enter the includes',
       'include_price.required_if' => 'Please enter the include_price',
       'include_price.integer' => 'Include-price must be a valid integer',
-      'image.file' => 'Errors during file upload, please try again',
+      'image.file' => 'Errors during image upload, please try again',
       'image.image' => 'Image extensions allowed are: jpeg, jpg, png',
+      'image.max' => 'Image exceeds maximum size of 2MB',
   ];
 }
 
