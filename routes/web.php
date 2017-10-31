@@ -64,6 +64,15 @@ Route::get('notifications', 'Cms@notifications');
 Route::post('notifications/send', 'Cms@sendAppWideNotification');
 
 Route::get('promo_messages', 'PromoMessages@index')->name('promos.index');
+Route::get('order_promo', 'PromoMessages@orderPromo')->name('promos.orderPromo');
+Route::get('service_promo', 'PromoMessages@servicePromo')->name('promos.servicePromo');
+Route::post('order_promo/{orderPromo}', 'PromoMessages@updateOrderPromo');
+Route::post('service_promos/{servicePromo}', 'PromoMessages@updateServicePromo');
+Route::post('order_promos/{orderPromo}', 'PromoMessages@updateOrderPromo');
+
+Route::get('feedbacks', 'Feedbacks@index')->name('feedbacks.index');
+Route::get('feedback/{feedback}', 'Feedbacks@read')->name('feedbacks.read');
+Route::post('feedback/delete', 'Feedbacks@delete');
 
 Route::get('change_password_form', 'Cms@changePasswordForm');
 Route::post('change_password', 'Cms@changePassword');

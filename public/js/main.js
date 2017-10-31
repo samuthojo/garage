@@ -87,15 +87,22 @@ function menu_links(arg) {
     }
    else if(arg == "change_password"){
      link = "change_password_form";
+     removeClassActive();
    }
    else if(arg == "reports"){
      link = "reports";
    }
    else if(arg == "notifications"){
      link = "notifications";
+     removeClassActive();
    }
    else if(arg == "promo_messages") {
      link = "promo_messages";
+     removeClassActive();
+   }
+   else if(arg == "feedbacks") {
+     link = "feedbacks";
+     removeClassActive();
    }
    $.ajax({
      url: link,
@@ -104,6 +111,13 @@ function menu_links(arg) {
          $("#main_content").html(result);
      }
    });
+}
+
+function removeClassActive() {
+  var cols = document.querySelectorAll('#link_section .link');
+    [].forEach.call(cols, function (col) {
+    col.classList.remove('active');
+  });
 }
 
 function showHideAlert(id) {

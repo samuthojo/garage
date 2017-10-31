@@ -88,15 +88,36 @@
         Reports
         <span style="font-size:16px;"></span></a>
       </li>
-      <li class="link" id="notifications">
+      <!-- <li class="link" id="notifications">
         <a href="javascript:menu_links('notifications');">
         Notifications
         <span style="font-size:16px;"></span></a>
-      </li>
-      <li class="link" id="promo_messages">
+      </li> -->
+      <!-- <li class="link" id="promo_messages">
         <a href="javascript:menu_links('promo_messages');">
         PromoMessages
         <span style="font-size:16px;"></span></a>
+      </li> -->
+    </ul>
+    <ul class="nav navbar-nav">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <span class=""></span> More
+          <span class="caret"></span>
+          <ul class="dropdown-menu">
+            <li class="link" id="notifications">
+              <a href="javascript:menu_links('notifications');">
+              Notifications
+              <span style="font-size:16px;"></span></a>
+            </li>
+            <li class="divider"></li>
+            <li><a href="javascript:menu_links('promo_messages');">PromoMessages</a></li>
+            <li class="divider"></li>
+            <li><a href="javascript:menu_links('feedbacks');">
+              Feedback
+            </a></li>
+          </ul>
+        </a>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">

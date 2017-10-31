@@ -24,7 +24,14 @@ class CreatePromoMessage extends FormRequest
     public function rules()
     {
         return [
-            //
+            'message' => 'required|max:200',
+        ];
+    }
+
+    public function messages() {
+        return [
+          'message.required' => 'A description is required',
+          'message.max'  => 'Please write not more than 200 words',
         ];
     }
 }

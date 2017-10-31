@@ -55,7 +55,9 @@ class Reports extends Controller {
                       return $myOrder;
                     });
 
-     return view('reports.orders_report', compact('orders'));
+      $total_amount = DB::table('orders')->where($conditions)->sum('amount');
+
+      return view('reports.orders_report', compact('orders', 'total_amount'));
   }
 
   private function orderReportWithStartDate($status, $startDate) {
@@ -74,7 +76,9 @@ class Reports extends Controller {
                       return $myOrder;
                     });
 
-     return view('reports.orders_report', compact('orders'));
+      $total_amount = DB::table('orders')->where($conditions)->sum('amount');
+
+      return view('reports.orders_report', compact('orders', 'total_amount'));
   }
 
   private function simpleOrderReport($status) {
@@ -93,7 +97,7 @@ class Reports extends Controller {
              return $myOrder;
            });
 
-    $total_amount = DB::table('orders')->sum('amount');
+    $total_amount = DB::table('orders')->where($conditions)->sum('amount');
 
     return view('reports.orders_report', compact('orders', 'total_amount'));
   }
