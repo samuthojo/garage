@@ -9,46 +9,81 @@ function showProductModal() {
 }
 
 function newProduct() {
-  var someDataIsMissing = false;
-  var product = {
-    'category_id' : $('#sel1').val(),
-    'name': $("#product_name").val(),
-    'car_id' : $('#sel2').val(),
-    'car_model_id' : $('#sel3').val(),
-    'unit': $("#product_unit").val(),
-    'price': $("#product_price").val(),
-    'stock': $("#product_stock").val(),
-    'warranty': $('#product_warranty').val(),
-    'has_includes': $("#sel4").val(),
-    'includes': $("#product_includes").val(),
-    'include_price': $("#include_price").val(),
-    'image': $("#product_file").val()
-  };
-  for (var key in product) {
-    if(product.key == "") {
-      someDataIsMissing = true;
-      break;
-    }
-  }
-  if(someDataIsMissing) {
-    showHideAlert('product_alert');
-  } else {
-    closeModal('product_modal');
-    var link = 'create/product';
+    clearErrors();
+    var link = 'products/create';
     var myForm = document.getElementById('product_form');
     var formData = new FormData(myForm);
     $.ajax({
             type: 'post',
-            dataType: 'html',
             url: link,
             data: formData,
             cache: false,
             contentType: false,
             processData: false,
             success: function (result) {
-                $("#main_content").html(result);
+              closeModal('product_modal');
+              $("#main_content").html(result);
+            },
+            error: function (error) {
+              data = JSON.parse(error.responseText);
+              $("#error_notifier").text("Please solve above errors");
+              displayErrors(data.errors);
             }
     });
+}
+
+function clearErrors() {
+  $("#error_notifier").text("");
+  $("#category_error").text("");
+  $("#name_error").text("");
+  $("#car_error").text("");
+  $("#model_error").text("");
+  $("#unit_error").text("");
+  $("#stock_error").text("");
+  $("#price_error").text("");
+  $("#warranty_error").text("");
+  $("#has_includes_error").text("");
+  $("#includes_error").text("");
+  $("#include_price_error").text("");
+  $("#image_error").text("");
+}
+
+function displayErrors(data) {
+  if(data.category_id != null) {
+    $("#category_error").text(data.category_id[0]);
+  }
+  if(data.name != null) {
+    $("#name_error").text(data.name[0]);
+  }
+  if(data.car_id != null) {
+    $("#car_error").text(data.car_id[0]);
+  }
+  if(data.car_model_id != null) {
+    $("#model_error").text(data.car_model_id[0]);
+  }
+  if(data.unit != null) {
+    $("#unit_error").text(data.unit[0]);
+  }
+  if(data.stock != null) {
+    $("#stock_error").text(data.stock[0]);
+  }
+  if(data.price != null) {
+    $("#price_error").text(data.price[0]);
+  }
+  if(data.warranty != null) {
+    $("#warranty_error").text(data.warranty[0]);
+  }
+  if(data.has_includes != null) {
+    $("#has_includes_error").text(data.has_includes[0]);
+  }
+  if(data.includes != null) {
+    $("#includes_error").text(data.includes[0]);
+  }
+  if(data.include_price != null) {
+    $("#include_price_error").text(data.include_price[0]);
+  }
+  if(data.image != null) {
+    $("#image_error").text(data.image[0]);
   }
 }
 

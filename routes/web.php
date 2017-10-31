@@ -17,6 +17,7 @@ Route::post('login', 'Cms@authenticate'); //authenticate the user
 Route::get('dashboard', 'Cms@adminstart')->name('dashboard'); //route to main page
 
 Route::get('products', 'Cms@products');
+Route::post('products/create', 'Cms@createProduct');
 
 Route::get('view/{type}/{id}', 'Cms@view');
 

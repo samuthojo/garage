@@ -20,11 +20,13 @@
                     <option value="{{$category->id}}">{{$category->name}}</option>
                  @endforeach
                </select>
+               <span class="text-danger col-sm-offset-2" id="category_error"></span>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="product_name">Name:</label>
             <input type="text" name="name" id="product_name"
               placeholder="Product Name" class="form-control">
+              <span class="text-danger col-sm-offset-2" id="name_error"></span>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="sel2">Car:</label>
@@ -36,6 +38,7 @@
                   <option value="{{$car->id}}">{{$car->name}}</option>
                @endforeach
              </select>
+             <span class="text-danger col-sm-offset-2" id="car_error"></span>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="sel3">Model:</label>
@@ -43,26 +46,31 @@
                <option disabled selected value="#">Choose model</option>
                <option value="">all</option>
              </select>
+             <span class="text-danger col-sm-offset-2" id="model_error"></span>
         </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="product_unit">Unit:</label>
             <input type="text" name="unit" id="product_unit" class="form-control"
               placeholder="Unit">
+            <span class="text-danger col-sm-offset-2" id="unit_error"></span>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="product_stock">Stock:</label>
             <input type="text" name="stock" id="product_stock" class="form-control"
               placeholder="Stock">
+            <span class="text-danger col-sm-offset-2" id="stock_error"></span>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="product_price">Price:</label>
             <input type="text" name="price" id="product_price" class="form-control"
               placeholder="Price">
+            <span class="text-danger col-sm-offset-2" id="price_error"></span>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="product_warranty">Warranty:</label>
             <input type="text" name="warranty" id="product_warranty" class="form-control"
               placeholder="Warranty">
+            <span class="text-danger col-sm-offset-2" id="warranty_error"></span>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="sel4">Has includes:</label>
@@ -71,27 +79,32 @@
                   <option value="{{1}}">Yes</option>
                   <option value="{{0}}">No</option>
              </select>
+             <span class="text-danger col-sm-offset-2" id="has_includes_error"></span>
         </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="product_includes">Includes:</label>
             <input type="text" name="includes" id="product_includes"
               placeholder="Includes" class="form-control">
+            <span class="text-danger col-sm-offset-2" id="includes_error"></span>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="include_price">Include Price:</label>
             <input type="text" name="include_price" id="include_price"
               placeholder="Includes price" class="form-control">
+            <span class="text-danger col-sm-offset-2" id="include_price_error"></span>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="product_file">Product Picture:</label>
             <input type="file" class="large" id="product_file" name="image"
               class="form-control">
+            <span class="text-danger col-sm-offset-2" id="image_error"></span>
           </div>
           <div class="form-group">
             <button type="button" class="btn btn-default col-sm-offset-2"
               data-dismiss="modal">Cancel</button>
             <button id="btn_add" type="button" class="btn btn-primary"
               onclick="newProduct()">Add</button>
+            <span class="text-danger" id="error_notifier"></span>
           </div>
           </form>
         </div>

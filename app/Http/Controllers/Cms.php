@@ -25,6 +25,7 @@ use Carbon\Carbon;
 use App\Feedback;
 use App\OrderPromoMessage;
 use App\ServicePromoMessage;
+use App\Http\Requests\CreateProduct;
 
 class Cms extends Controller
 {
@@ -507,23 +508,27 @@ class Cms extends Controller
       return redirect()->route('login');
     }
 
+    public function createProduct(CreateProduct $request) {
+      $data = $request->except('image');
+      if($request->hasFile('image')) {
+        $picture = $request->file('image');
+        if($picture->isValid()) {
+          $image = $picture->getClientOriginalName();
+          $picture->move('uploads/products', $image);
+          Product::create(array_add($data, 'image', $image));
+        }
+      } else {
+        Product::create($data);
+      }
+      return $this->products();
+    }
+
     public function store(Request $request, $type) {
       if($type == 'category') {
         Category::firstOrCreate(request()->all());
         return $this->categories();
       } else if($type == 'product') {
-        $data = $request->except('image');
-        if($request->hasFile('image')) {
-          $picture = $request->file('image');
-          if($picture->isValid()) {
-            $image = $picture->getClientOriginalName();
-            $picture->move('uploads/products', $image);
-            Product::create(array_add($data, 'image', $image));
-          }
-        } else {
-          Product::create($data);
-        }
-        return $this->products();
+
       } else if($type == 'car') {
         $data = $request->except('picture', 'num_models');
         $num_models = request('num_models');
