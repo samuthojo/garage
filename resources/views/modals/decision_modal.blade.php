@@ -17,6 +17,7 @@
             <div class="radio">
               <label><input type="radio" name="optradio" value='2'>From Existing Service</label>
             </div>
+            <span class="text-danger" id="choice_error"></span>
           </div>
         </form>
       </div>

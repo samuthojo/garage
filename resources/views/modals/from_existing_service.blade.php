@@ -5,7 +5,7 @@
 </style>
 <!-- New Service modal -->
 <div id="from_existing_service" class="modal fade" role="dialog">
-<div class="modal-dialog modal-sm">
+<div class="modal-dialog">
   <!-- Modal content-->
   <div class="modal-content">
     <div class="modal-header">
@@ -15,40 +15,47 @@
       </div>
       <div class="modal-body">
           <div class="container">
-            <form name="new_service_form" id="form_from_existing">
+            <form name="new_service_form" id="form_from_existing"
+              class="form-horizontal">
             <div class="form-group">
-              <label for="sel3">Service:</label>
-               <select name='service_id' id="sel3" onchange="">
+              <label for="sel3" class="control-label col-sm-2">Service:</label>
+               <select name='service_id' id="sel3" onchange=""
+                class="form-control">
                  <option disabled selected value="#">Choose service</option>
                  @foreach($services as $service)
                     <option value="{{$service->service_id}}">{{$service->service}}</option>
                  @endforeach
                </select>
+               <span class="text-danger col-sm-offset-2" id="service_error"></span>
             </div>
           <div class="form-group">
-            <label for="sel4">Car:</label>
-             <select name='car_id' id="sel4" onchange="fetchModel('sel4')">
+            <label for="sel4" class="control-label col-sm-2">Car:</label>
+             <select name='car_id' id="sel4" onchange="fetchModel('sel4')"
+              class="form-control">
                <option disabled selected value="#">Choose car</option>
                <option value="">all</option>
                @foreach($cars as $car)
                   <option value="{{$car->id}}">{{$car->name}}</option>
                @endforeach
              </select>
+             <span class="text-danger col-sm-offset-2" id="car_error2"></span>
           </div>
           <div class="form-group">
-            <label for="sel5">Model:</label>
-             <select name='car_model_id' id="sel5">
+            <label for="sel5" class="control-label col-sm-2">Model:</label>
+             <select name='car_model_id' id="sel5" class="form-control">
                <option disabled selected value="#">Choose model</option>
                <option value="">all</option>
              </select>
+             <span  class="text-danger col-sm-offset-2" id="model_error2"></span>
          </div>
           <div class="form-group">
-            <label for="service_price2">Price:</label>
+            <label for="service_price2" class="control-label col-sm-2">Price:</label>
             <input type="text" name="price" id="service_price2"
-              placeholder="Price">
+              placeholder="Price" class="form-control">
+            <span  class="text-danger col-sm-offset-2" id="price_error2"></span>
           </div>
           <div class="form-group">
-            <button type="button" class="btn btn-default"
+            <button type="button" class="btn btn-default col-sm-offset-2"
               data-dismiss="modal">Cancel</button>
             <button id="btn_add2" type="button" class="btn btn-primary"
               onclick="newService2()">Add</button>

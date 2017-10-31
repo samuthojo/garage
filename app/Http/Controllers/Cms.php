@@ -28,6 +28,9 @@ use App\ServicePromoMessage;
 use App\Http\Requests\CreateProduct;
 use App\Http\Requests\CreateCar;
 use App\Http\Requests\CreateModel;
+use App\Http\Requests\CreateNewService;
+use App\Http\Requests\CreateServiceFromExisting;
+use App\Http\Requests\EditService;
 
 class Cms extends Controller
 {
@@ -96,7 +99,7 @@ class Cms extends Controller
       return view('specific.service', compact('service', 'services', 'cars', 'models'));
     }
 
-    public function newService(Request $request) {
+    public function newService(CreateNewService $request) {
        //This is a completely new service
        DB::beginTransaction();
        try {
@@ -125,13 +128,13 @@ class Cms extends Controller
        }
     }
 
-    public function newService2(Request $request) {
+    public function newService2(CreateServiceFromExisting $request) {
       $data = $request->only('service_id', 'car_id', 'car_model_id', 'price');
       $service = ServiceAsProduct::create($data);
       return $this->services();
     }
 
-    public function updateService(Request $request) {
+    public function updateService(EditService $request) {
       $data1 = $request->only('service_id', 'car_id', 'car_model_id');
       $description = $request->input('description');
       $data2 = compact('description');

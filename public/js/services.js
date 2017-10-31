@@ -6,6 +6,15 @@ function showServiceModal(id) {
     keyboard: false,
     show: true
   });
+  if(id == 'new_service') {
+    clearErrors();
+  }
+  else if(id == 'from_existing_service') {
+    clearErrors2();
+  }
+  else if (id == 'decision_modal') {
+    $("#choice_error").text("");
+  }
 }
 
 function showActivateModal(id) {
@@ -49,32 +58,113 @@ function showEditModal(service) {
 
   //set the service_id global
   service_id = service.id; //This is the Service_as_product_id
+  clearErrors3();
+}
+
+function clearErrors() {
+  $("#name_error").text("");
+  $("#car_error").text("");
+  $("#model_error").text("");
+  $("#price_error").text("");
+  $("#description_error").text("");
+  $("#picture_error").text("");
+}
+
+function clearErrors2() {
+  $("#service_error").text("");
+  $("#car_error2").text("");
+  $("#model_error2").text("");
+  $("#price_error2").text("");
+}
+
+function clearErrors3() {
+  $("#service_error3").text("");
+  $("#car_error3").text("");
+  $("#model_error3").text("");
+  $("#price_error3").text("");
+  $("#description_error3").text("");
+  $("#picture_error3").text("");
+}
+
+function displayErrors(data) {
+  if(data.name != null) {
+    $("#name_error").text(data.name[0]);
+  }
+  if(data.car_id != null) {
+    $("#car_error").text(data.car_id[0]);
+  }
+  if(data.car_model_id != null) {
+    $("#model_error").text(data.car_model_id[0]);
+  }
+  if(data.price != null) {
+    $("#price_error").text(data.price[0]);
+  }
+  if(data.description != null) {
+    $("#description_error").text(data.description[0]);
+  }
+  if(data.picture != null) {
+    $("#picture_error").text(data.picture[0]);
+  }
+}
+
+function displayErrors2(data) {
+  if(data.service_id != null) {
+    $("#service_error").text(data.service_id[0]);
+  }
+  if(data.car_id != null) {
+    $("#car_error2").text(data.car_id[0]);
+  }
+  if(data.car_model_id != null) {
+    $("#model_error2").text(data.car_model_id[0]);
+  }
+  if(data.price != null) {
+    $("#price_error2").text(data.price[0]);
+  }
+}
+
+function displayErrors3(data) {
+  if(data.service_id != null) {
+    $("#service_error3").text(data.service_id[0]);
+  }
+  if(data.car_id != null) {
+    $("#car_error3").text(data.car_id[0]);
+  }
+  if(data.car_model_id != null) {
+    $("#model_error3").text(data.car_model_id[0]);
+  }
+  if(data.price != null) {
+    $("#price_error3").text(data.price[0]);
+  }
+  if(data.description != null) {
+    $("#description_error3").text(data.description[0]);
+  }
+  if(data.picture != null) {
+    $("#picture_error3").text(data.picture[0]);
+  }
 }
 
 function editService() {
+  clearErrors3();
   var myForm = document.getElementById('edit_service_form');
   var formData = new FormData(myForm);
   formData.append('id', service_id); //Service_as_product_id
-  //To do: ensure no field is empty
-  var someDataIsMissing = false;
-  if(someDataIsMissing) {
-    showHideAlert('service_alert');
-  } else {
-    closeModal('edit_service_modal');
     var link = 'services/update';
     $.ajax({
       type: 'post',
       url: link,
-      dataType: 'html',
       data: formData,
       cache: false,
       contentType: false,
       processData: false,
       success: function(result) {
+        closeModal('edit_service_modal');
         $('#main_content').html(result);
+      },
+      error: function (error) {
+        data = JSON.parse(error.responseText);
+        displayErrors3(data.errors);
       }
     });
-  }
 }
 
 function showDeleteModal(id) {
@@ -101,65 +191,63 @@ function deleteService() {
 }
 
 function makeDecision() {
+  $("#choice_error").text("");
   var option = $('input[name=optradio]:checked', '#modal_form').val();
-
-  closeModal('decision_modal');
-
   if(option == 1) {
+    closeModal('decision_modal');
     showServiceModal('new_service');
-  } else {
+  } else if(option == 2) {
+    closeModal('decision_modal');
     showServiceModal('from_existing_service');
+  } else {
+    $("#choice_error").text("Please select an option");
   }
 }
 
 function newService1() {
+  clearErrors();
   var myForm = document.getElementById('new_service_form');
   var formData = new FormData(myForm);
-  //To do: ensure no field is empty
-  var someDataIsMissing = false;
-  if(someDataIsMissing) {
-    showHideAlert('service_alert');
-  } else {
-    closeModal('new_service');
     var link = 'services/create';
     $.ajax({
       type: 'post',
       url: link,
-      dataType: 'html',
       data: formData,
       cache: false,
       contentType: false,
       processData: false,
       success: function(result) {
+        closeModal('new_service');
         $('#main_content').html(result);
+      },
+      error: function(error) {
+        data = JSON.parse(error.responseText);
+        displayErrors(data.errors);
       }
     });
-  }
 }
 
 function newService2() {
+  clearErrors2();
   var myForm = document.getElementById('form_from_existing');
   var formData = new FormData(myForm);
-  //To do: ensure no field is empty
-  var someDataIsMissing = false;
-  if(someDataIsMissing) {
-    showHideAlert('service_alert');
-  } else {
-    closeModal('from_existing_service');
     var link = 'services/from_existing';
     $.ajax({
       type: 'post',
       url: link,
-      dataType: 'html',
       data: formData,
       cache: false,
       contentType: false,
       processData: false,
       success: function(result) {
+        closeModal('from_existing_service');
         $('#main_content').html(result);
+      },
+      error: function(error) {
+        data = JSON.parse(error.responseText);
+        displayErrors2(data.errors);
       }
     });
-  }
 }
 
 function viewService(id) {
