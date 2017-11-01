@@ -30,6 +30,7 @@ function newCategory() {
           $(".my_loader").fadeOut(0);
           $("#btn_add").prop("disabled", false);
           closeModal("category_modal");
+          showHideAlert('add_success');
           $("#main_content").html(result);
         }
       });
@@ -69,6 +70,7 @@ function editCategory() {
           $("#btn_save").prop("disabled", false);
           $(".my_loader").fadeOut(0);
           closeModal('edit_category_modal');
+          showHideAlert('edit_success');
           $("#main_content").html(result);
         }
       });
@@ -100,6 +102,7 @@ function deleteCategory() {
                 $(".my_loader").fadeOut(0);
                 $("#btn_delete").prop("disabled", false);
                 closeModal('confirmation_modal');
+                showHideAlert('delete_success');
                 $("#main_content").html(result);
             }
     });
