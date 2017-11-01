@@ -20,7 +20,7 @@ Route::get('products', 'Cms@products');
 Route::post('products/create', 'Cms@createProduct');
 Route::post('products/update', 'Cms@updateProduct');
 
-Route::get('view/{type}/{id}', 'Cms@view');
+Route::get('view/{type}/{id}', 'Cms@view')->name('view');
 
 Route::post('create/{type}', 'Cms@store');
 

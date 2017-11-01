@@ -595,7 +595,7 @@ class Cms extends Controller
       } else {
         Product::where('id', $id)->update($data);
       }
-      return $this->products();
+      return redirect()->route('view', ['type' => 'product', 'id' => $id]);
     }
 
     public function updateCar(CreateCar $request) {
@@ -641,7 +641,10 @@ class Cms extends Controller
         return $this->categories();
       } else if($type == 'product') {
         Product::where('id', $id)->delete();
-        return $this->products();
+        return redirect()->route('view', [
+          'type' => 'product',
+          'id' => $id,
+        ]);
       } else if($type == 'car') {
         Car::where('id', $id)->delete();
         return $this->cars();
