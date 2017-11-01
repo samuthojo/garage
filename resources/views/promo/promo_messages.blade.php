@@ -1,3 +1,16 @@
+<style>
+a {
+    color: #555;
+    text-decoration: none;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #337ab7;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+</style>
 <script src="{{asset('js/promo_messages.js')}}"></script>
 @include('modals.promo_edit', [
   'id' => 'order_promo_modal',
