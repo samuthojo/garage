@@ -1,6 +1,11 @@
 <script src="{{ asset('js/products.js') }}"></script>
 <script src="{{ asset('js/jquery.validate.js') }}"></script>
 @include('modals.product_modal')
+@include('modals.status_alert', [
+ 'modal_id' => 'product_success',
+ 'text_class' => 'text-success',
+ 'text' => 'Product created successfully',
+])
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 style="font-weight: bold;" class="panel-title pull-left">

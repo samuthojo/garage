@@ -122,6 +122,12 @@ function removeClassActive() {
   });
 }
 
+function showMyModal(modal_id) {
+  $('#' + modal_id).modal({
+    show: true
+  });
+}
+
 function showHideAlert(id) {
   $("#" + id).fadeTo(2000, 500).slideUp(500, function(){
     $("#" + id).slideUp(500);

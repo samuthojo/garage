@@ -11,6 +11,8 @@ function showProductModal() {
 
 function newProduct() {
     clearErrors();
+    $("#btn_add").prop("disabled", true);
+    $(".my_loader").fadeIn(0);
     var link = 'products/create';
     var myForm = document.getElementById('product_form');
     var formData = new FormData(myForm);
@@ -22,10 +24,14 @@ function newProduct() {
             contentType: false,
             processData: false,
             success: function (result) {
+              $(".my_loader").fadeOut(0);
               closeModal('product_modal');
               $("#main_content").html(result);
+              showMyModal('product_success');
             },
             error: function (error) {
+              $("#btn_add").prop("disabled", false);
+              $(".my_loader").fadeOut(0);
               data = JSON.parse(error.responseText);
               $("#error_notifier").text("Please solve above errors");
               displayErrors(data.errors);
@@ -89,11 +95,13 @@ function displayErrors(data) {
 }
 
 function viewProduct(id) {
+  $(".loader").fadeIn(0);
   var link = "view/product/" + id;
   $.ajax({
     url: link,
     dataType:'html',
     success:function(result){
+        $(".loader").fadeOut(0);
         $("#main_content").html(result);
     }
   });

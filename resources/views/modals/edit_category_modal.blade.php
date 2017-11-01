@@ -22,6 +22,7 @@
 								data-dismiss="modal">Cancel</button>
 							<button id="btn_save" type="button"
                 onclick="editCategory()" class="btn btn-primary">Save</button>
+							@include('small_loader')
 						</div>
 					</div>
         </form>

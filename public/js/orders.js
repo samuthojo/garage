@@ -20,12 +20,6 @@ function openModal(id, modal_id) {
   });
 }
 
-function showMyModal(modal_id) {
-  $('#' + modal_id).modal({
-    show: true
-  });
-}
-
 function openLoader() {
   $('#modal_loader').modal({
     backdrop: 'static',

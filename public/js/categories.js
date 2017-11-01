@@ -30,8 +30,8 @@ function newCategory() {
           $(".my_loader").fadeOut(0);
           $("#btn_add").prop("disabled", false);
           closeModal("category_modal");
-          showHideAlert('add_success');
           $("#main_content").html(result);
+          showMyModal('add_success');
         }
       });
     }
@@ -68,10 +68,10 @@ function editCategory() {
         data: datas,
         success: function(result) {
           $("#btn_save").prop("disabled", false);
-          $(".my_loader").fadeOut(0);
+          $(".my_loader").fadeIn(0);
           closeModal('edit_category_modal');
-          showHideAlert('edit_success');
           $("#main_content").html(result);
+          showMyModal('edit_success');
         }
       });
     }
@@ -102,8 +102,8 @@ function deleteCategory() {
                 $(".my_loader").fadeOut(0);
                 $("#btn_delete").prop("disabled", false);
                 closeModal('confirmation_modal');
-                showHideAlert('delete_success');
                 $("#main_content").html(result);
+                showMyModal('delete_success');
             }
     });
 }

@@ -103,6 +103,7 @@
               data-dismiss="modal">Cancel</button>
             <button id="btn_add" type="button" class="btn btn-primary"
               onclick="newProduct()">Add</button>
+            @include('small_loader')
             <span class="text-danger" id="error_notifier"></span>
           </div>
           </form>
