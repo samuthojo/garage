@@ -641,10 +641,7 @@ class Cms extends Controller
         return $this->categories();
       } else if($type == 'product') {
         Product::where('id', $id)->delete();
-        return redirect()->route('view', [
-          'type' => 'product',
-          'id' => $id,
-        ]);
+        return $this->products();
       } else if($type == 'car') {
         Car::where('id', $id)->delete();
         return $this->cars();

@@ -6,6 +6,11 @@
  'text_class' => 'text-success',
  'text' => 'Product created successfully',
 ])
+@include('modals.status_alert', [
+ 'modal_id' => 'product_delete_success',
+ 'text_class' => 'text-success',
+ 'text' => 'Product deleted successfully',
+])
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 style="font-weight: bold;" class="panel-title pull-left">

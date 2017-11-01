@@ -14,11 +14,6 @@
  'text_class' => 'text-success',
  'text' => 'Product edited successfully',
 ])
-@include('modals.status_alert', [
- 'modal_id' => 'product_delete_success',
- 'text_class' => 'text-success',
- 'text' => 'Product deleted successfully',
-])
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title pull-left"
@@ -42,11 +37,6 @@
         <div class="clearfix"></div>
     </div>
     <div class="panel-body">
-      @if(is_null($product))
-        <div class="container">
-          <h4>This product has been deleted</h4>
-        </div>
-      @else
       <div class="table-responsive">
         <table class="table table-striped">
           <tr>
@@ -115,7 +105,6 @@
           </tr>
         </table>
       </div>
-      @endif
     </div>
     <div class="panel-footer">
       Crafted @ <a href="http://ipfsoftwares.com" target="_blank">iPF SOFTWARES</a>
