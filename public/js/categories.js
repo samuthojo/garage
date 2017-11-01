@@ -56,7 +56,8 @@ function editCategory() {
     if(name == '') {
       showHideAlert('edit_category_alert');
     } else {
-      closeModal('edit_category_modal');
+      $("#btn_save").prop("disabled", true);
+      $(".my_loader").fadeIn(0);
       link = "update/" + "category";
       $.ajax({
         type: 'post',
@@ -65,6 +66,9 @@ function editCategory() {
         cache: false,
         data: datas,
         success: function(result) {
+          $("#btn_save").prop("disabled", false);
+          $(".my_loader").fadeOut(0);
+          closeModal('edit_category_modal');
           $("#main_content").html(result);
         }
       });
@@ -81,7 +85,8 @@ function showConfirmation(id) {
 }
 
 function deleteCategory() {
-    closeModal('confirmation_modal');
+    $("#btn_delete").prop("disabled", true);
+    $(".my_loader").fadeIn(0);
     var datas = {
       'id': category_id
     }
@@ -92,6 +97,9 @@ function deleteCategory() {
             cache: false,
             data: datas,
             success: function (result) {
+                $(".my_loader").fadeOut(0);
+                $("#btn_delete").prop("disabled", false);
+                closeModal('confirmation_modal');
                 $("#main_content").html(result);
             }
     });
