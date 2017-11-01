@@ -253,7 +253,12 @@ class Cms extends Controller
       } else {
         $st = (strcasecmp($status, 'rejected') == 0) ? 4 : 2;
       }
-      Order::where('id', $id)->update(['status' => $st,]);
+
+      if($request->filled('reason')) {
+        Order::where('id', $id)->update(['status' => $st, 'comment' => $reason,]);
+      } else {
+        Order::where('id', $id)->update(['status' => $st,]);
+      }
 
       if($st == 1 || $st == 4) {//accepted or rejected respectively
         //To do: Send Push Notification
@@ -372,8 +377,10 @@ class Cms extends Controller
                             ->map( function($serv) {
                               $service = $serv;
                               $service->service = $serv->service()->first()->name;
-                              $service->car = $serv->car()->first()->name;
-                              $service->model = $serv->car_model()->first()->model_name;
+                              $car = $serv->car;
+                              $model = $serv->car_model;
+                              $service->car = $car->name;
+                              $service->model = $model->model_name;
                               $service->customers = $serv->customerServices()->count();
                               return $service;
                             });
@@ -382,8 +389,10 @@ class Cms extends Controller
 
     public function requestedServiceDetails(ServiceAsProduct $service) {
       $serv = $service->service()->first()->name;
-      $car = $service->car()->first()->name;
-      $model = $service->car_model()->first()->model_name;
+      $my_car = $service->car;
+      $car = $my_car->name;
+      $my_model = $service->car_model;
+      $model = $my_model->model_name;
 
       $details = $service->customerServices()
                          ->get()
@@ -404,7 +413,13 @@ class Cms extends Controller
     public function updateRequestStatus(Request $request) {
       $id = $request->input('id');
       $status = $request->input('status');
-      if($request->filled('date')) {
+      if($request->filled(['date', 'reason'])) {
+        $date = $request->input('date');
+        $date = Carbon::parse($date)->format('Y-m-d');
+        $comment = $request->input('reason');
+        CustomerService::where('id', $id)->update(compact('status', 'date', 'comment'));
+      }
+      else if($request->filled('date')) {
         $date = $request->input('date');
         $date = Carbon::parse($date)->format('Y-m-d');
         CustomerService::where('id', $id)->update(compact('status', 'date'));
@@ -434,7 +449,7 @@ class Cms extends Controller
       $requested_service = CustomerService::find($id);
 
       $service_as_product = $requested_service->serviceAsProduct()->first();
-      $model = $service_as_product->car_model()->first();
+      $model = $service_as_product->car_model;
       $service = $service_as_product->service()->first();
 
       $requested_service->service_name = $service->name;
@@ -632,6 +647,7 @@ class Cms extends Controller
         $product = Product::find($id);
         $category = $product->category; //the category it belongs to
         $car = $product->car; //the make it belongs to
+        $models = "";
         if(($product->car()->first()) instanceof Car) {
           $models = $car->models; //all the models of this make
         } else {
@@ -665,7 +681,8 @@ class Cms extends Controller
     }
 
     public function modelDetails(CarModel $model) {
-      $model->car = $model->car()->first()->name;
+      $car = $model->car;
+      $model->car = $car->name;
       $cars = Car::all();
       return view('specific.model', compact('model', 'cars'));
     }
@@ -735,7 +752,7 @@ class Cms extends Controller
 
       try {
         $model_id = $request->input('id');
-        $car = CarModel::find($model_id)->car()->first();
+        $car = CarModel::find($model_id)->car;
         $num_models = $car->num_models;
         $num_models = $num_models - 1;
 
