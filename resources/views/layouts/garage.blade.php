@@ -140,8 +140,8 @@
 </nav>
 
 <div class="container-fluid region">
+ @include('loader')
  <div class"container-fluid" id="main_content">
-   @include('loader')
    @yield('panel')
  </div>
 </div>
