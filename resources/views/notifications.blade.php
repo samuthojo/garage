@@ -12,11 +12,11 @@
 }
 </style>
 
-  <div class="loader">
+  <!-- <div class="loader">
     <span>
       <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
     </span>
-  </div>
+  </div> -->
 
    <div class="panel panel-default">
      <div class="panel-heading">
