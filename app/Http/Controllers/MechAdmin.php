@@ -67,7 +67,7 @@ class MechAdmin extends Controller
 
   public function bookedServices() {
     $customer_services =
-      CustomerService::where('status', 0)
+      CustomerService::where('status', 1)
                      ->get()
                      ->map( function($customer_service){
                           $myService = [];
@@ -75,8 +75,8 @@ class MechAdmin extends Controller
                                                                  ->first();
                           $service = $service_as_product->service()
                                                         ->first();
-                          $car = $service_as_product->car()->first();
-                          $model = $service_as_product->car_model()->first();
+                          $car = $service_as_product->car;
+                          $model = $service_as_product->car_model;
                           $customer = $customer_service->customer()->first();
 
                           $myService['customer_service_id'] = $customer_service->id;
@@ -107,8 +107,8 @@ class MechAdmin extends Controller
                   ->map( function($purchase) {
                     $item = $purchase;
                     $product = $purchase->product()->first();
-                    $car = $product->car()->first();
-                    $model = $product->car_model()->first();
+                    $car = $product->car;
+                    $model = $product->car_model;
                     $item->name = $product->name;
                     $item->picture = $product->image;
                     $item->category_name = $product->category()->first()->name;
@@ -182,7 +182,7 @@ class MechAdmin extends Controller
     $customer_service = CustomerService::find($id);
     $service_as_product = $customer_service->serviceAsProduct()->first();
     $service = $service_as_product->service()->first();
-    $model = $service_as_product->car_model()->first();
+    $model = $service_as_product->car_model;
 
     $customer_service->car_model = $model->model_name;
     $customer_service->service_name = $service->name;
@@ -195,7 +195,7 @@ class MechAdmin extends Controller
     $data = array();
     $data['type'] = 4;
     $data['date'] = $customer_service->updated_at;
-    $data['data'] = $customer_service; 
+    $data['data'] = $customer_service;
     if($status == 1) {
       $data['title'] = "Request Accepted!";
       if(!is_null($comment)) {
@@ -234,7 +234,7 @@ class MechAdmin extends Controller
     $customer_service = CustomerService::find($id);
     $service_as_product = $customer_service->serviceAsProduct()->first();
     $service = $service_as_product->service()->first();
-    $model = $service_as_product->car_model()->first();
+    $model = $service_as_product->car_model;
 
     $customer_service->car_model = $model->model_name;
     $customer_service->service_name = $service->name;

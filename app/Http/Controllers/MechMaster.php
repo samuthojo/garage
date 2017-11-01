@@ -202,10 +202,22 @@ class MechMaster extends Controller
         $id = request('id'); //the service_as_product_id
         $customer_id = request('customer_id');
         $service_as_product = ServiceAsProduct::find($id);
-        $car_id = $service_as_product->car()->first()->id;
-        $car_model_id = $service_as_product->car_model()->first()->id;
+        $car_id = "";
+        if(($service_as_product->car()->first()) instanceof Car) {
+          $car_id = $service_as_product->car()->first()->id;
+        } else {
+          $car_id = null;
+        }
+        $car_model_id = "";
+        if(($service_as_product->car_model()->first()) instanceof CarModel) {
+          $car_model_id = $service_as_product->car_model()->first()->id;
+        } else {
+          $car_model_id = null;
+        }
 
-        CustomerCar::firstOrCreate(compact('customer_id', 'car_id', 'car_model_id'));
+        if($car_id != null && $car_model_id != null) {
+          CustomerCar::firstOrCreate(compact('customer_id', 'car_id', 'car_model_id'));
+        }
 
         $data = request()->except('id');
 
@@ -251,8 +263,8 @@ class MechMaster extends Controller
                            ->get()->map(function ($s) {
                              $service = $s;
                              $serv = $s->serviceAsProduct()->first();
-                             $car = $serv->car()->first();
-                             $model = $serv->car_model()->first();
+                             $car = $serv->car;
+                             $model = $serv->car_model;
                              $service->price = $serv->price;
                              $service->car_id = $serv->car_id;
                              $service->car_name = $car->name;
