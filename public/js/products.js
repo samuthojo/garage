@@ -24,6 +24,7 @@ function newProduct() {
             contentType: false,
             processData: false,
             success: function (result) {
+              $("#btn_add").prop("disabled", false);
               $(".my_loader").fadeOut(0);
               closeModal('product_modal');
               $("#main_content").html(result);
@@ -132,6 +133,8 @@ function showEditProductModal(category, product, car, car_model) {
 
 function editProduct() {
       clearErrors2();
+      $("#btn_save").prop("disabled", true);
+      $(".my_loader").fadeIn(0);
       var link = 'products/update';
       var myForm = document.getElementById('edit_product_form');
       var formData = new FormData(myForm);
@@ -144,10 +147,15 @@ function editProduct() {
               contentType: false,
               processData: false,
               success: function (result) {
+                  $("#btn_save").prop("disabled", false);
+                  $(".my_loader").fadeOut(0);
                   closeModal('edit_product_modal');
                   $("#main_content").html(result);
+                  showMyModal("product_edit_success")
               },
               error: function (error) {
+                $("#btn_save").prop("disabled", false);
+                $(".my_loader").fadeOut(0);
                 data = JSON.parse(error.responseText);
                 $("#error_notifier2").text("Please solve above errors");
                 displayErrors2(data.errors);
@@ -221,7 +229,8 @@ function showDeleteModal(id) {
 }
 
 function deleteProduct() {
-    closeModal('confirmation_modal');
+    $("#btn_delete").prop("disabled", true);
+    $(".my_loader").fadeIn(0);
     var id = {
       'id' : product_id
     };
@@ -233,7 +242,11 @@ function deleteProduct() {
         cache: false,
         data: id,
         success: function (result) {
+            $("#btn_delete").prop("disabled", false);
+            $(".my_loader").fadeOut(0);
+            closeModal('confirmation_modal');
             $("#main_content").html(result);
+            showMyModal("product_delete_success");
         }
     });
 }

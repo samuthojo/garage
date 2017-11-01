@@ -110,6 +110,7 @@
               onclick="editProduct()">
               Save
             </button>
+            @include('small_loader')
             <span class="text-danger" id="error_notifier2"></span>
           </div>
         </div>

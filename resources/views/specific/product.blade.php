@@ -9,6 +9,16 @@
                                        'function' => 'deleteProduct()'])
 
 @include('modals.edit_product_modal')
+@include('modals.status_alert', [
+ 'modal_id' => 'product_edit_success',
+ 'text_class' => 'text-success',
+ 'text' => 'Product edited successfully',
+])
+@include('modals.status_alert', [
+ 'modal_id' => 'product_delete_success',
+ 'text_class' => 'text-success',
+ 'text' => 'Product deleted successfully',
+])
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title pull-left"
