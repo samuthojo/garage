@@ -48,6 +48,7 @@ Route::get('categories', 'Cms@categories');
 Route::get('orders', 'Cms@orders');
 Route::get('orders/{order}', 'Cms@order');
 Route::post('orders/update', 'Cms@updateOrder');
+Route::get('order_comment/{order}', 'Cms@getOrderComment');
 
 Route::get('services', 'Cms@services');
 Route::get('services/{service}', 'Cms@service');

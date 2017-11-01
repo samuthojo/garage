@@ -322,6 +322,11 @@ class Cms extends Controller
       return $data;
     }
 
+    public function getOrderComment(Order $order) {
+      $comment = $order->comment;
+      return response()->json(compact('comment'));
+    }
+
     private function getTokens($customer) {
       $tokens = $customer->devices()
                          ->get(['token'])

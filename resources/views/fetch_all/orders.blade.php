@@ -1,4 +1,6 @@
+<link rel="stylesheet" type="text/css" href="{{ asset('css/expand_rows.css') }}">
 <script src="{{ asset('js/orders.js') }}"></script>
+<script src="{{ asset('js/order_expand_rows.js') }}"></script>
 @include('modals.reject_modal', ['text' => 'Order', 'function' => 'rejectOrder()'])
 @include('modals.accept_modal', ['text' => 'Order', 'function' => 'acceptOrder()'])
 @include('modals.modal', ['id' => 'modal',
@@ -27,6 +29,7 @@
       <table id="myTable" class="table table-striped display">
           <thead>
             <tr>
+              <th></th>
               <th>Date Ordered</th>
               <th>Order No.</th>
               <th>Customer</th>
@@ -40,6 +43,7 @@
           <tbody>
             @foreach($orders as $order)
                     <tr>
+                      <td class="details-control"></td>
                       <td>{{ $order->date }}</td>
                       <td>{{ $order->id }}</td>
                       <td>
@@ -143,5 +147,5 @@
   </div>
   </div>
   <script>
-    myDataTable("Orders", "Orders List As Per {{now()->format('d-m-Y')}}")
+    myDataTable("Orders", "Orders List As Per {{now()->format('d-m-Y')}}");
   </script>
