@@ -34,6 +34,7 @@
               data-dismiss="modal">Cancel</button>
             <button id="btn_add" type="button" class="btn btn-primary"
               onclick="newCar()">Add</button>
+            @include('small_loader')
           </div>
         </div>
         </form>

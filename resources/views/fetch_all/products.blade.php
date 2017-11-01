@@ -4,7 +4,7 @@
 @include('modals.status_alert', [
  'modal_id' => 'product_success',
  'text_class' => 'text-success',
- 'text' => 'Product created successfully',
+ 'text' => 'Product added successfully',
 ])
 @include('modals.status_alert', [
  'modal_id' => 'product_delete_success',

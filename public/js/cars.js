@@ -11,6 +11,8 @@ function showCarModal() {
 
 function newCar() {
     clearErrors();
+    $("#btn_add").prop("disabled", true);
+    $(".my_loader").fadeIn(0);
     var link = 'cars/create';
     var myForm = document.getElementById("car_form");
     var formData = new FormData(myForm);
@@ -22,10 +24,15 @@ function newCar() {
             contentType: false,
             processData: false,
             success: function (result) {
+                $("#btn_add").prop("disabled", false);
+                $(".my_loader").fadeOut(0);
                 closeModal('car_modal');
                 $("#main_content").html(result);
+                showMyModal('car_create_success');
             },
             error: function (data) {
+              $("#btn_add").prop("disabled", false);
+              $(".my_loader").fadeOut(0);
               data = JSON.parse(data.responseText);
               displayErrors(data.errors);
             }

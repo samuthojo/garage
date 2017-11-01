@@ -2,6 +2,11 @@
 @include('modals.car')
 @include('modals.confirmation_modal', ['text' => 'car',
                                        'function' => 'deleteCar()'])
+@include('modals.status_alert', [
+'modal_id' => 'car_create_success',
+'text_class' => 'text-success',
+'text' => 'Car added successfully',
+])
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 style="font-weight: bold;" class="panel-title pull-left">
