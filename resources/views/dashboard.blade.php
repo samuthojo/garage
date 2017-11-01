@@ -6,17 +6,17 @@
 @include('modals.edit_category_modal')
 @include('modals.confirmation_modal', ['text' => 'category',
                                        'function' => 'deleteCategory()'])
-@include(alerts.alert, [
+@include('alerts.alert', [
   'alert_class' => 'alert-success',
   'alert_id' => 'add_success',
   'text' => "Category created successfully"
 ])
-@include(alerts.alert, [
+@include('alerts.alert', [
   'alert_class' => 'alert-success',
   'alert_id' => 'edit_success',
   'text' => "Category edited successfully"
 ])
-@include(alerts.alert, [
+@include('alerts.alert', [
   'alert_class' => 'alert-success',
   'alert_id' => 'delete_success',
   'text' => "Category deleted successfully"
