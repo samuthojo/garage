@@ -147,5 +147,5 @@
   </div>
   </div>
   <script>
-    myDataTable("Orders", "Orders List As Per {{now()->format('d-m-Y')}}");
+    myOrderDataTable("Orders", "Orders List As Per {{now()->format('d-m-Y')}}");
   </script>

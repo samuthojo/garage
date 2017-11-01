@@ -1,4 +1,4 @@
-function myOrderDataTable(file_name, export_title) {
+function myRequestsDataTable(file_name, export_title) {
   $.fn.dataTable.moment('DD-MM-YYYY'); //Sort the date column if present
   var table = $('#myTable').DataTable({
           dom: 'Bfrtip',
@@ -45,11 +45,14 @@ function myOrderDataTable(file_name, export_title) {
         }
         else {
             // Open this row
-            //row.data()[2] returns order no. which is the order_id
-            var link = "order_comment/" + row.data()[2];
+            //row.data()[1] returns request_id
+            console.log(row.data());
+            console.log(row.data()[1]);
+            var link = "request_details/" + row.data()[1];
             $.getJSON(link)
              .done( function (data) {
-               row.child(format(data)).show();
+               console.log(data.service);
+               row.child(format(data.service)).show();
                tr.addClass('shown');
              })
              .fail( function (error) {
@@ -60,16 +63,44 @@ function myOrderDataTable(file_name, export_title) {
 }
 
 function format(obj) {
-  var my_comment = "";
-  if(obj.comment == null) {
-    my_comment = "Order has no comment";
-  } else {
-    my_comment = obj.comment;
-  }
+  if(obj.pick_option == 0) {
   return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<tr>'+
-            '<td>Comment:</td>'+
-            '<td>'+ my_comment +'</td>'+
+            '<th>Description:</th>'+
+            '<td>'+ obj.description +'</td>'+
         '</tr>'+
+        '<tr>'+
+            '<th>Pick-Option:</th>'+
+            '<td>'+ pickOptionString(obj.pick_option) +'</td>'+
+        '</tr>' +
     '</table>';
+  }
+  else if(obj.pick_option == 1){
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+          '<tr>'+
+              '<th>Description:</th>'+
+              '<td>'+ obj.description +'</td>'+
+          '</tr>'+
+          '<tr>'+
+              '<th>Pick-Option:</th>'+
+              '<td>'+ pickOptionString(obj.pick_option) +'</td>'+
+          '</tr>'+ '<tr>'+
+               '<th>Latitude:</th>'+
+               '<td>'+ obj.latitude +'</td>'+
+               '<th>Longitude:</th>'+
+               '<td>'+ obj.longitude +'</td>'+
+               '<th>Location Name:</th>'+
+               '<td>'+ obj.location_name +'</td>'+
+             '</tr>' +
+      '</table>';
+  }
+}
+
+function pickOptionString(value) {
+  if(value == 0) {
+    return "I will bring it."
+  }
+  else if(value == 1) {
+    return "Come to take it."
+  }
 }

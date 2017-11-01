@@ -1,4 +1,6 @@
+<link rel="stylesheet" type="text/css" href="{{ asset('css/expand_rows.css') }}">
 <script src="{{ asset('js/requested_services.js') }}"></script>
+<script src="{{ asset('js/requested_services_expand_rows.js') }}"></script>
 @include('modals.reject_modal', ['text' => 'Request', 'function' => 'rejectRequest()'])
 @include('modals.accept_modal', ['text' => 'Request', 'function' => 'updateRequestStatus(1)'])
 @include('modals.reschedule_modal', ['text' => 'Request', 'function' => 'rescheduleRequest()'])
@@ -31,6 +33,8 @@
       <table id="myTable" class="table table-striped">
           <thead>
             <tr>
+              <th></th>
+              <th style="display: none;"></th>
               <th>Date Requested</th>
               <th>Date Due</th>
               <th>Customer</th>
@@ -43,6 +47,8 @@
           <tbody>
             @foreach($details as $detail)
                     <tr>
+                      <td class="details-control"></td>
+                      <td style="display: none;">{{$detail->id}}</td>
                       <td>{{ $detail->created_at }}</td>
                       <td>{{ $detail->date }}</td>
                       <td>{{ $detail->customer }}</td>
@@ -178,6 +184,6 @@
   </div>
   </div>
   <script>
-    myDataTable("Service: {{$serv}} | Car: {{$car}} | Model: {{$model}}",
+    myRequestsDataTable("Service: {{$serv}} | Car: {{$car}} | Model: {{$model}}",
           "The List Of Customers Requesting This Service As Per {{now()->format('d-m-Y')}}");
   </script>

@@ -496,6 +496,10 @@ class Cms extends Controller
       return $data;
     }
 
+    public function requestDetails(CustomerService $service) {
+      return response()->json(compact('service'));
+    }
+
     public function notifications() {
       return view('notifications');
     }

@@ -60,6 +60,7 @@ Route::post('services/status/update', 'Cms@updateServiceStatus');
 Route::get('requested_services', 'Cms@requestedServices');
 Route::get('requested_services/{service}', 'Cms@requestedServiceDetails')->name('requested_service');
 Route::post('requested_services/status/update', 'Cms@updateRequestStatus');
+Route::get('request_details/{service}', 'Cms@requestDetails');
 
 Route::get('reports', 'Reports@reports')->name('reports');
 Route::post('reports/orders', 'Reports@orderReports')->name('order_reports');
