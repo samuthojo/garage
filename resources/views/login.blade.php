@@ -46,18 +46,33 @@
         text-align: center;
       }
 
+      .loader {
+          /*position: fixed;
+          top: 0;
+          left: 0;*/
+          /*width: 100%;*/
+          /*padding-top: 1.5%;*/
+          /*height: 40px;*/
+          z-index: 9999;
+          text-align: center;
+          align-content: center;
+          padding-bottom: 10px;
+          display: none;
+      }
   </style>
 
 <script language="javascript" type="text/javascript">
 
 function loginReq() {
+  $(".loader").fadeIn(0);
   var username = $("#username").val();
   var password = $("#password").val();
   // Checking for blank fields.
   if( username =='' || password ==''){
+    $(".loader").fadeOut(0);
     $('input[type="text"],input[type="password"]').css("border","2px solid red");
     $('input[type="text"],input[type="password"]').css("box-shadow","0 0 3px red");
-    //$('#login_alert').show()
+
     $("#login_alert").fadeTo(2000, 500).slideUp(500, function(){
       $("#login_alert").slideUp(500);
     });
@@ -80,9 +95,10 @@ function loginReq() {
                 var obj = jQuery.parseJSON(result);
                 var status = obj['success'];
                 if(status == 'success'){
-                    window.location.href = "{{ url('dashboard') }}";
+                  $(".loader").fadeOut(0);
+                  window.location.href = "{{ url('dashboard') }}";
                 }else{
-                    //$("#login_alert2" ).show();
+                    $(".loader").fadeOut(0);
                     $("#login_alert2").fadeTo(2000, 500).slideUp(500, function(){
                       $("#login_alert2").slideUp(500);
                     });
@@ -97,9 +113,9 @@ function loginReq() {
 </head>
 
 <div class="container">
-
     <div class="row">
         <div class="col-md-offset-5 col-md-3">
+          @include('loader')
             <div class="alert alert-danger" id="login_alert" style="display:none;">
               Please fill all fields!
             </div>
