@@ -76,11 +76,11 @@
             <th>Warranty: </th>
               <td>{{ $product->warranty }}</td>
           </tr>
+          <tr>
+            <th>Has Includes: </th>
+              <td>{{ ($product->has_includes) ? 'Yes' : 'No' }}</td>
+          </tr>
           @if($product->has_includes)
-            <tr>
-              <th>Has Includes: </th>
-                <td>{{ ($product->has_includes) ? 'Yes' : 'No' }}</td>
-            </tr>
             <tr>
               <th>Includes: </th>
                 <td>{{ $product->includes }}</td>
