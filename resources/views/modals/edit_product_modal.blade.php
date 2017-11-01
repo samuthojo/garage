@@ -80,8 +80,8 @@
             <label class="control-label col-sm-2" for="sel8">Has includes:</label>
              <select id="sel8" name="has_includes" class="form-control">
                <option disabled selected value="">specify</option>
-                  <option value="1">Yes</option>
-                  <option value="0">No</option>
+                  <option value="{{1}}">Yes</option>
+                  <option value="{{0}}">No</option>
              </select>
              <span class="text-danger col-sm-offset-2" id="has_includes_error2"></span>
         </div>

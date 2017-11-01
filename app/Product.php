@@ -57,6 +57,9 @@ class Product extends Model
     return Carbon::parse($value)->format("j M \\'y");
   }
 
+  public function getHasIncludesAttribute($value) {
+    return $has_includes = ($value) ? 1 : 0;
+  }
   // public function setHasIncludesAttribute($value) {
   //   $this->attributes['has_includes'] =
   //     (strcasecmp($value, 'yes')) ? true : false;
