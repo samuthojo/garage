@@ -63,6 +63,7 @@ function myDataTable(file_name, export_title) {
 }
 
 function menu_links(arg) {
+    $(".loader").fadeIn(0);
     var link = "";
     if(arg == "categories") {
       link = "categories";
@@ -108,6 +109,7 @@ function menu_links(arg) {
      url: link,
      dataType: 'html',
      success: function(result) {
+         $(".loader").fadeOut(0);
          $("#main_content").html(result);
      }
    });
