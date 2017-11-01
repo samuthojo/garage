@@ -24,6 +24,7 @@
                 onclick="newCategory()">
                 Create
               </button>
+							@include('small_loader')
 						</div>
 					</div>
         </form>

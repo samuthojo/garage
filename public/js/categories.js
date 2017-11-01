@@ -17,7 +17,8 @@ function newCategory() {
     if(name == '') {
       showHideAlert('category_alert');
     } else {
-      closeModal("category_modal");
+      $("#btn_add").prop("disabled", true);
+      $(".my_loader").fadeIn(0);
       link = "create/" + "category";
       $.ajax({
         type: 'post',
@@ -26,6 +27,9 @@ function newCategory() {
         cache: false,
         data: category,
         success: function(result) {
+          $(".my_loader").fadeOut(0);
+          $("#btn_add").prop("disabled", false);
+          closeModal("category_modal");
           $("#main_content").html(result);
         }
       });
