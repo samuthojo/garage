@@ -115,6 +115,7 @@ function showEditProductModal(category, product, car, car_model) {
     show: true
   });
   clearErrors2();
+  console.log(product.has_includes);
   $("#sel5").val(category.id);
   $("#edit_product_name").val(product.name);
   $("#sel6").val(car.id);
