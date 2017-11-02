@@ -1,7 +1,11 @@
 <script src="{{ asset('js/customers.js')}}"></script>
 @include('modals.verification', ['text' => 'Customer',
                                        'function' => 'verifyCustomer()'])
-
+@include('modals.status_alert', [
+'modal_id' => 'verification_success',
+'text_class' => 'text-success',
+'text' => 'Customer verified successfully',
+])
 <div class="panel panel-default">
     <div class="panel-heading">
         <input type="hidden" id="my_id" value="{{$customer->id}}">
@@ -18,7 +22,7 @@
               </button>
             @else
               <button class="btn btn-primary"
-                onclick="showVerificationModal({{$customer->id}})">
+                onclick="showVerificationModal({{$customer->id}})" id="verify{{$customer->id}}">
                 <span style="font-weight: bold;">Verify</span>
               </button>
             @endif
@@ -42,7 +46,16 @@
           </tr>
           <tr>
             <th>Verified: </th>
-              <td>{{ $customer->verified }}</td>
+            @php
+              $status = $customer->verified;
+              $color = (strcasecmp($status, "yes") == 0) ?
+                                    "text-success" : "text-danger";
+            @endphp
+            <td>
+              <span class="{{$color}}" id="status{{$customer->id}}">
+                {{ $customer->verified }}
+              </span>
+            </td>
           </tr>
           <tr>
             <th>Date Joined: </th>

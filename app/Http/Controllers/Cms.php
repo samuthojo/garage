@@ -211,7 +211,7 @@ class Cms extends Controller
     public function updateCustomer(Request $request) {
       $id = $request->only('id');
       Customer::where('id', $id)->update(['verified' => true,]);
-      return $this->customers();
+      return 1;
     }
 
     public function cars() {
