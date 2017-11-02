@@ -15,7 +15,7 @@
 						<div class="form-group">
 							<label for="new_name">Name:</label></br>
 							<input type="text" name="name" id="new_name"
-								placeholder="New category name">
+								placeholder="New category name" class="form-control">
 						</div>
 						<div class="form-group">
 							<button type="button" class="btn btn-default"

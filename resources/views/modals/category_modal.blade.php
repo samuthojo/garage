@@ -15,7 +15,7 @@
 						<div class="form-group">
 							<label for="category_name">Name:</label></br>
 							<input type="text" name="name" id="category_name"
-								placeholder="Category name">
+								placeholder="Category name" class="form-control">
 						</div>
 						<div class="form-group">
 							<button type="button" class="btn btn-default"

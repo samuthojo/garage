@@ -123,7 +123,7 @@ function loginReq() {
               Wrong username or password
             </div>
             <div class="form-login">
-            <h4>Mechmaster Garage</h4>
+            <h4>Mechmasters</h4>
             <form id="login_form">
               <div class="form-group">
                 <input type="text" id="username"
