@@ -42,7 +42,7 @@
           </div>
           <div class="form-group">
             <label for="sel8" class="control-label col-sm-2">Model:</label>
-            <span style="display: inline;">
+            <div class="input-group">
              <select name='car_model_id' id="sel8" class="form-control">
                <option disabled selected value="#">Choose model</option>
                <option value="">all</option>
@@ -52,9 +52,11 @@
                  @endforeach
                @endif
              </select>
-             <i class="fa fa-spinner fa-spin fa-2x fa-fw select_loader"
-              style="display: none;"></i></span>
-             <span  class="text-danger col-sm-offset-2" id="model_error3"></span>
+             <span class="input-group-addon select_loader" style="display: none;">
+               <i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>
+             </span>
+           </div>
+           <span  class="text-danger col-sm-offset-2" id="model_error3"></span>
          </div>
           <div class="form-group">
             <label for="service_price2" class="control-label col-sm-2">Price:</label>
