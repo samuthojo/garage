@@ -44,10 +44,18 @@ function updateServiceStatus(status) {
     contentType: false,
     processData: false,
     success: function (result) {
-      $("#btn_modal").prop("disabled", false);
-      $(".my_loader").fadeOut(0);
-      closeModal(modal_id);
-      makeTheUpdate(status);
+      if(result == 1) {
+        $("#btn_modal").prop("disabled", false);
+        $(".my_loader").fadeOut(0);
+        closeModal(modal_id);
+        makeTheUpdate(status);
+        if(status == "Active") {
+          showMyModal('service_activate_success');
+        }
+        else {
+          showMyModal('service_deactivate_success');
+        }
+      }
     }
   });
 }
@@ -63,13 +71,6 @@ function makeTheUpdate(status) {
   else {
     $("#button" + service_id).prop("disabled", true);
     $("#button2" + service_id).prop("disabled", false);
-  }
-
-  if(status == "Active") {
-    showMyModal('service_activate_success');
-  }
-  else {
-    showMyModal('service_deactivate_success');
   }
 }
 
