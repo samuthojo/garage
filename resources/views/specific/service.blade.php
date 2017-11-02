@@ -27,6 +27,16 @@
  'text_class' => 'text-success',
  'text' => 'Service edited successfully',
 ])
+@include('modals.status_alert', [
+ 'modal_id' => 'service_activate_success',
+ 'text_class' => 'text-success',
+ 'text' => 'Service activated successfully',
+])
+@include('modals.status_alert', [
+ 'modal_id' => 'service_deactivate_success',
+ 'text_class' => 'text-success',
+ 'text' => 'Service deactivated',
+])
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title pull-left"
@@ -42,20 +52,23 @@
            </button>
            @if(strcasecmp($service->status,'active') == 0)
              <button type="button" class="btn btn-small btn-primary"
-               onclick="showActivateModal({{$service->id}})" disabled>
+               onclick="showActivateModal({{$service->id}})" disabled
+               id="button2{{$service->id}}">
                Activate
              </button>
              <button type="button" class="btn btn-small btn-primary"
-               onclick="showDeactivateModal({{$service->id}})">
+               onclick="showDeactivateModal({{$service->id}})"
+               id="button{{$service->id}}">
                Deactivate
              </button>
            @else
              <button type="button" class="btn btn-small btn-primary"
-               onclick="showActivateModal({{$service->id}})">
+               onclick="showActivateModal({{$service->id}})" id="button{{$service->id}}">
                Activate
              </button>
              <button type="button" class="btn btn-small btn-primary"
-               onclick="showDeactivateModal({{$service->id}})" disabled>
+               onclick="showDeactivateModal({{$service->id}})" disabled
+               id="button2{{$service->id}}">
                Deactivate
              </button>
            @endif
@@ -108,7 +121,7 @@
                                   "text-success" : "text-danger";
             @endphp
             <td>
-              <span class="{{$color}}">{{ $service->status }}</span>
+              <span class="{{$color}}" id="status{{$service->id}}">{{ $service->status }}</span>
             </td>
           </tr>
         </table>

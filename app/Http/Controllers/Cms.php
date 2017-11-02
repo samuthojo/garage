@@ -163,7 +163,7 @@ class Cms extends Controller
             ServiceAsProduct::where('id', $id)->update($data1);
 
             DB::commit();
-            
+
             return redirect()->route('my_service', ['service' => $id]);
           } catch(Throwable $e) {
             DB::rollback();
@@ -191,7 +191,7 @@ class Cms extends Controller
       $status = $request->input('status');
       $status = (strcasecmp($status, 'Active') == 0) ? true : false;
       ServiceAsProduct::where('id', $id)->update(['status' => $status]);
-      return $this->services();
+      return 1;
     }
 
     public function products() {

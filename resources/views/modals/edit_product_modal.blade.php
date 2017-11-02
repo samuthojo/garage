@@ -60,7 +60,7 @@
           <div class="form-group">
             <label class="control-label col-sm-2" for="edit_product_unit">Unit:</label>
             <input type="text" name="unit" id="edit_product_unit"
-              placeholder="Unit" class="form-control">
+              placeholder="Unit eg. 5 litres" class="form-control">
             <span class="text-danger col-sm-offset-2" id="unit_error2"></span>
           </div>
           <div class="form-group">

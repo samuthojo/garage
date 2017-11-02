@@ -20,6 +20,7 @@
         <button id="btn_modal" onclick="{{$function}}" type="button" class="btn btn-primary">
           Confirm
         </button>
+        @include('small_loader')
       </div>
     </div>
   </div>

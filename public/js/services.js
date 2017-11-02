@@ -28,8 +28,9 @@ function showDeactivateModal(id) {
 }
 
 function updateServiceStatus(status) {
+  $("#btn_modal").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
   var modal_id = (status == 'Active') ? 'activate_modal' : 'deactivate_modal';
-  closeModal(modal_id);
   var formData = new FormData();
   formData.append('id', service_id);
   formData.append('status', status);
@@ -37,15 +38,39 @@ function updateServiceStatus(status) {
   $.ajax({
     type: 'post',
     url: link,
-    dataType: 'html',
+    dataType: 'json',
     data: formData,
     cache: false,
     contentType: false,
     processData: false,
     success: function (result) {
-      $("#main_content").html(result);
+      $("#btn_modal").prop("disabled", false);
+      $(".my_loader").fadeOut(0);
+      closeModal(modal_id);
+      makeTheUpdate(status);
     }
   });
+}
+
+function makeTheUpdate(status) {
+  var color = (status == "Active") ? "text-success" : "text-danger";
+  $("#status" + service_id).text(status);
+  $("#status" + service_id).attr("class", color);
+   if( $("#button" + service_id).prop('disabled') ) {
+     $("#button" + service_id).prop("disabled", false);
+     $("#button2" + service_id).prop("disabled", true);
+   }
+  else {
+    $("#button" + service_id).prop("disabled", true);
+    $("#button2" + service_id).prop("disabled", false);
+  }
+
+  if(status == "Active") {
+    showMyModal('service_activate_success');
+  }
+  else {
+    showMyModal('service_deactivate_success');
+  }
 }
 
 function showEditModal(service) {

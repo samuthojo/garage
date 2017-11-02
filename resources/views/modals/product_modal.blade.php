@@ -55,7 +55,7 @@
           <div class="form-group">
             <label class="control-label col-sm-2" for="product_unit">Unit:</label>
             <input type="text" name="unit" id="product_unit" class="form-control"
-              placeholder="Unit">
+              placeholder="Unit eg. 5 litres">
             <span class="text-danger col-sm-offset-2" id="unit_error"></span>
           </div>
           <div class="form-group">
