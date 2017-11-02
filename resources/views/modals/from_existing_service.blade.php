@@ -19,6 +19,7 @@
               class="form-horizontal">
             <div class="form-group">
               <label for="sel3" class="control-label col-sm-2">Service:</label>
+              <div style="position:relative; display: block;">
                <select name='service_id' id="sel3" onchange=""
                 class="form-control">
                  <option disabled selected value="#">Choose service</option>
@@ -26,6 +27,9 @@
                     <option value="{{$service->service_id}}">{{$service->service}}</option>
                  @endforeach
                </select>
+               <i class="fa fa-spinner fa-spin fa-2x fa-fw select_loader text-primary" 
+                style="display: none;"></i>
+              </div>
                <span class="text-danger col-sm-offset-2" id="service_error"></span>
             </div>
           <div class="form-group">
@@ -59,6 +63,7 @@
               data-dismiss="modal">Cancel</button>
             <button id="btn_add2" type="button" class="btn btn-primary"
               onclick="newService2()">Add</button>
+            @include('small_loader')
           </div>
           </form>
         </div>

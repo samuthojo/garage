@@ -58,7 +58,8 @@
                  @endforeach
                @endif
              </select>
-             <i class="fa fa-spinner fa-spin fa-2x fa-fw select_loader" style="display: none;"></i>
+             <i class="fa fa-spinner fa-spin fa-2x fa-fw select_loader text-primary"
+              style="display: none;"></i>
            </div>
            <span  class="text-danger col-sm-offset-2" id="model_error3"></span>
          </div>
@@ -83,8 +84,9 @@
           <div class="form-group">
             <button type="button" class="btn btn-default col-sm-offset-2"
               data-dismiss="modal">Cancel</button>
-            <button id="btn_add2" type="button" class="btn btn-primary"
+            <button id="btn_edit" type="button" class="btn btn-primary"
               onclick="editService()">Save</button>
+            @include('small_loader')
           </div>
           </form>
         </div>

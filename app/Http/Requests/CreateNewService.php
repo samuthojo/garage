@@ -26,7 +26,7 @@ class CreateNewService extends FormRequest
         return [
             'name' => 'required',
             'car_id' => 'nullable|integer',
-            'car_model_id' => 'nullable|integer',
+            'car_model_id' => 'nullable|integer|required_with:car_id',
             'price' => 'required|integer',
             'description' => 'nullable|min:9',
             'picture' => 'nullable|file|image|max:2048',
@@ -37,6 +37,9 @@ class CreateNewService extends FormRequest
     {
       return [
         'name.required' => 'Please enter the service name',
+        'car_id.integer' => 'Please select a car',
+        'car_model_id.integer' => 'Please select a model',
+        'car_model_id.required_with' => 'A specific model selected without selecting a specific car',
         'price.required' => 'Please enter the service price',
         'price.integer' => 'The price must be a valid integer',
         'description.min' => 'The description must have atleast 3 words',

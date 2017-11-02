@@ -145,6 +145,8 @@ function displayErrors3(data) {
 
 function editService() {
   clearErrors3();
+  $("#btn_edit").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
   var myForm = document.getElementById('edit_service_form');
   var formData = new FormData(myForm);
   formData.append('id', service_id); //Service_as_product_id
@@ -157,10 +159,15 @@ function editService() {
       contentType: false,
       processData: false,
       success: function(result) {
+        $("#btn_edit").prop("disabled", false);
+        $(".my_loader").fadeOut(0);
         closeModal('edit_service_modal');
         $('#main_content').html(result);
+        showMyModal('service_edit_success');
       },
       error: function (error) {
+        $("#btn_edit").prop("disabled", false);
+        $(".my_loader").fadeOut(0);
         data = JSON.parse(error.responseText);
         displayErrors3(data.errors);
       }
@@ -206,6 +213,8 @@ function makeDecision() {
 
 function newService1() {
   clearErrors();
+  $("#btn_add").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
   var myForm = document.getElementById('new_service_form');
   var formData = new FormData(myForm);
     var link = 'services/create';
@@ -217,10 +226,15 @@ function newService1() {
       contentType: false,
       processData: false,
       success: function(result) {
+        $("#btn_add2").prop("disabled", false);
+        $(".my_loader").fadeOut(0);
         closeModal('new_service');
         $('#main_content').html(result);
+        showMyModal('service_add_success');
       },
       error: function(error) {
+        $("#btn_add").prop("disabled", false);
+        $(".my_loader").fadeOut(0);
         data = JSON.parse(error.responseText);
         displayErrors(data.errors);
       }
@@ -229,6 +243,8 @@ function newService1() {
 
 function newService2() {
   clearErrors2();
+  $("#btn_add2").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
   var myForm = document.getElementById('form_from_existing');
   var formData = new FormData(myForm);
     var link = 'services/from_existing';
@@ -240,10 +256,15 @@ function newService2() {
       contentType: false,
       processData: false,
       success: function(result) {
+        $("#btn_add2").prop("disabled", false);
+        $(".my_loader").fadeOut(0);
         closeModal('from_existing_service');
         $('#main_content').html(result);
+        showMyModal("service_add_success");
       },
       error: function(error) {
+        $("#btn_add2").prop("disabled", false);
+        $(".my_loader").fadeOut(0);
         data = JSON.parse(error.responseText);
         displayErrors2(data.errors);
       }

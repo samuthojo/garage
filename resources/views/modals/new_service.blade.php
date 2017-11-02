@@ -37,10 +37,14 @@
           </div>
           <div class="form-group">
             <label for="sel2" class="control-label col-sm-2">Model:</label>
+            <div style="position:relative; display: block;">
              <select name='car_model_id' id="sel2" class="form-control">
                <option disabled selected value="#">Choose model</option>
                <option value="">all</option>
              </select>
+             <i class="fa fa-spinner fa-spin fa-2x fa-fw select_loader text-primary" 
+              style="display: none;"></i>
+            </div>
              <span class="text-danger col-sm-offset-2" id="model_error"></span>
          </div>
           <div class="form-group">
@@ -66,6 +70,7 @@
               data-dismiss="modal">Cancel</button>
             <button id="btn_add" type="button" class="btn btn-primary"
               onclick="newService1()">Add</button>
+            @include('small_loader')
           </div>
           </form>
         </div>

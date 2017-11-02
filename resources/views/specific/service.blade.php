@@ -11,7 +11,11 @@
                           'title' => 'Confirmation',
                           'text' => 'You are no longer supporting this service?',
                           'function' => "updateServiceStatus('Inactive')",])
-
+@include('modals.status_alert', [
+ 'modal_id' => 'service_edit_success',
+ 'text_class' => 'text-success',
+ 'text' => 'Service edited successfully',
+])
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title pull-left"

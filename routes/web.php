@@ -51,7 +51,7 @@ Route::post('orders/update', 'Cms@updateOrder');
 Route::get('order_comment/{order}', 'Cms@getOrderComment');
 
 Route::get('services', 'Cms@services');
-Route::get('services/{service}', 'Cms@service');
+Route::get('services/{service}', 'Cms@service')->name('my_service');
 Route::post('services/create', 'Cms@newService');
 Route::post('services/from_existing', 'Cms@newService2');
 Route::post('services/update', 'Cms@updateService');

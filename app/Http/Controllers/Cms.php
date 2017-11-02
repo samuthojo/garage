@@ -135,7 +135,13 @@ class Cms extends Controller
     }
 
     public function updateService(EditService $request) {
-      $data1 = $request->only('service_id', 'car_id', 'car_model_id');
+      $data1 = "";
+      if($request->exists('car_model_id')) {
+        $data1 = $request->only('service_id', 'car_id', 'car_model_id');
+      } else {
+        $data1 = $request->only('service_id', 'car_id');
+        $data1 = array_add($data1, 'car_model_id', null);
+      }
       $description = $request->input('description');
       $data2 = compact('description');
       $id = $request->input('id'); //Service_as_product_id
@@ -157,8 +163,8 @@ class Cms extends Controller
             ServiceAsProduct::where('id', $id)->update($data1);
 
             DB::commit();
-
-            return $this->services();
+            
+            return redirect()->route('my_service', ['service' => $id]);
           } catch(Throwable $e) {
             DB::rollback();
           }
