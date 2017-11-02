@@ -49,12 +49,16 @@ function myOrderDataTable(file_name, export_title) {
             var link = "order_comment/" + row.data()[2];
             $.getJSON(link)
              .done( function (data) {
+               row.child.hide();
+               tr.removeClass('shown');
                row.child(format(data)).show();
                tr.addClass('shown');
              })
              .fail( function (error) {
                console.log(error);
              });
+             row.child(format2()).show();
+             tr.addClass('shown');
         }
     });
 }
@@ -70,6 +74,17 @@ function format(obj) {
         '<tr>'+
             '<td>Comment:</td>'+
             '<td>'+ my_comment +'</td>'+
+        '</tr>'+
+    '</table>';
+}
+
+function format2() {
+  return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Comment:</td>'+
+            '<td>'+ '<span>' +
+              '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>' +
+            '</span>' +'</td>'+
         '</tr>'+
     '</table>';
 }
