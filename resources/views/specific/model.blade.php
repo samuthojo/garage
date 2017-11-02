@@ -6,7 +6,7 @@
 @include('modals.status_alert', [
 'modal_id' => 'model_edit_success',
 'text_class' => 'text-success',
-'text' => 'Model added successfully',
+'text' => 'Model edited successfully',
 ])
 @include('modals.status_alert', [
 'modal_id' => 'model_delete_success',
