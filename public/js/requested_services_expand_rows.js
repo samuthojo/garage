@@ -46,18 +46,19 @@ function myRequestsDataTable(file_name, export_title) {
         else {
             // Open this row
             //row.data()[1] returns request_id
-            console.log(row.data());
-            console.log(row.data()[1]);
             var link = "request_details/" + row.data()[1];
             $.getJSON(link)
              .done( function (data) {
-               console.log(data.service);
+               row.child.hide();
+               tr.removeClass('shown');
                row.child(format(data.service)).show();
                tr.addClass('shown');
              })
              .fail( function (error) {
                console.log(error);
              });
+             row.child(format2()).show();
+             tr.addClass('shown');
         }
     });
 }
@@ -70,6 +71,10 @@ function format(obj) {
             '<td>'+ obj.description +'</td>'+
         '</tr>'+
         '<tr>'+
+          '<th>Comment:</th>'+
+          '<td>' + obj.comment +'</td>'+
+        '</tr>'+
+        '<tr>'+
             '<th>Pick-Option:</th>'+
             '<td>'+ pickOptionString(obj.pick_option) +'</td>'+
         '</tr>' +
@@ -80,6 +85,10 @@ function format(obj) {
           '<tr>'+
               '<th>Description:</th>'+
               '<td>'+ obj.description +'</td>'+
+          '</tr>'+
+          '<tr>'+
+            '<th>Comment:</th>'+
+            '<td>' + obj.comment +'</td>'+
           '</tr>'+
           '<tr>'+
               '<th>Pick-Option:</th>'+
@@ -103,4 +112,15 @@ function pickOptionString(value) {
   else if(value == 1) {
     return "Come to take it."
   }
+}
+
+function format2() {
+  return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>'+ '<span>' +
+            'Fetching...' +
+            '</span>' + '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>' +
+            '</td>'+
+        '</tr>'+
+    '</table>';
 }

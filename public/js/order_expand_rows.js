@@ -72,7 +72,7 @@ function format(obj) {
   }
   return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<tr>'+
-            '<td>Comment:</td>'+
+            '<th>Comment:</th>'+
             '<td>'+ my_comment +'</td>'+
         '</tr>'+
     '</table>';
@@ -81,7 +81,7 @@ function format(obj) {
 function format2() {
   return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<tr>'+
-            '<td>Comment:</td>'+
+            '<th>Comment:</th>'+
             '<td>'+ '<span>' +
               '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>' +
             '</span>' +'</td>'+
