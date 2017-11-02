@@ -1,3 +1,14 @@
+<style>
+.input-group .form-control {
+  position: relative;
+  z-index: 2;
+  float: left;
+  margin-bottom: 0;
+}
+.input-group .form-control {
+  width: auto;
+}
+</style>
 <script src="{{ asset('js/products.js') }}"></script>
 <script src="{{ asset('js/jquery.validate.js') }}"></script>
 @include('modals.product_modal')

@@ -1,9 +1,14 @@
 <style>
-  .action {
-    margin-right: 10px;
-  }
+.input-group .form-control {
+  position: relative;
+  z-index: 2;
+  float: left;
+  margin-bottom: 0;
+}
+.input-group .form-control {
+  width: auto;
+}
 </style>
-
 <script src="{{ asset('js/products.js')}}"></script>
 @include('modals.confirmation_modal', ['text' => 'product',
                                        'function' => 'deleteProduct()'])

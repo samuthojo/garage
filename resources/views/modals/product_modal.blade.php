@@ -41,10 +41,15 @@
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="sel3">Model:</label>
-             <select id="sel3" class="form-control" name="car_model_id">
+            <div style="position:relative; display: block;">
+             <select id="sel3" class="form-control" name="car_model_id"
+              style="display: inline;">
                <option disabled selected value="#">Choose model</option>
                <option value="">all</option>
              </select>
+             <i class="fa fa-spinner fa-spin fa-2x fa-fw select_loader text-primary"
+              style="display: none;"></i>
+            </div>
              <span class="text-danger col-sm-offset-2" id="model_error"></span>
         </div>
           <div class="form-group">

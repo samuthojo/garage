@@ -252,19 +252,29 @@ function deleteProduct() {
 }
 
 function fetchModels(id) {
+  $(".select_loader").fadeIn(0);
   var car_id = $('#' + id).val();
-  var link = 'models/' + car_id; //fetch all models of this make
-  $.getJSON(link)
-   .done(function (data) {
-     next_id = (id == 'sel2') ? 'sel3' : 'sel7';
-     setUpModels(data, next_id);
-   })
-   .fail(function ( error ) {
-     console.error('Error', error);
-   });
+  var next_id = (id == 'sel2') ? 'sel3' : 'sel7';
+  if(car_id != "") {
+    var link = 'models/' + car_id; //fetch all models of this make
+    $.getJSON(link)
+     .done(function (data) {
+       setUpModels(data, next_id);
+     })
+     .fail(function ( error ) {
+       console.error('Error', error);
+     });
+  }
+  else {
+    $(".select_loader").fadeOut(0);
+    //Leave the first two options, delete the rest
+    $('#' + next_id).find('option').not(':first, :eq(1)').remove();
+    $('#' + next_id).val("");//select second option
+  }
 }
 
 function setUpModels(models, id) {
+    $(".select_loader").fadeOut(0);
     var mySelect = document.getElementById(id);
 
     //Leave the first two options, delete the rest
