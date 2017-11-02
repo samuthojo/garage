@@ -54,7 +54,8 @@
             placeholder="Confirm Password" class="form-control">
         </div>
         <button type="button" class="btn btn-primary col-sm-offset-2"
-          onclick="validateInput()">Save</button>
+          onclick="validateInput()" id="btn_password">Save</button>
+        @include('small_loader')
       </form>
     </div>
   </div>

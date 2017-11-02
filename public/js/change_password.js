@@ -17,6 +17,8 @@ function validateInput() {
 }
 
 function sendResetRequest(link, formData) {
+  $("#btn_password").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
   $.ajax({
     type: 'post',
     url: link,
@@ -26,6 +28,8 @@ function sendResetRequest(link, formData) {
     contentType: false,
     processData: false,
     success: function (status) {
+      $("#btn_password").prop("disabled", false);
+      $(".my_loader").fadeOut(0);
       feedback(status.status);
     }
   });
