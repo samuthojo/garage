@@ -1,8 +1,3 @@
-<style>
-  .form-control {
-    width: auto;
-  }
-</style>
 <!-- New Service modal -->
 <div id="from_existing_service" class="modal fade" role="dialog">
 <div class="modal-dialog">
