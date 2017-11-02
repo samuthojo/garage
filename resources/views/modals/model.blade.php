@@ -32,6 +32,7 @@
               data-dismiss="modal">Cancel</button>
             <button id="btn_add" type="button" class="btn btn-primary"
               onclick="newModel({{$car_make->id}})">Add</button>
+            @include('small_loader')
           </div>
         </form>
         </div>

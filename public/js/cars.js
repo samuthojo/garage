@@ -58,11 +58,13 @@ function displayErrors(data) {
 }
 
 function viewCar(id) {
+  $(".loader").fadeIn(0);
   var link = "view/car/" + id;
   $.ajax({
     url: link,
     dataType:'html',
     success:function(result){
+        $(".loader").fadeOut(0);
         $("#main_content").html(result);
     }
   });
@@ -82,6 +84,8 @@ function showEditCarModal(car) {
 }
 
 function editCar() {
+  $("#edit_btn_add").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
   clearErrors2();
   var myForm = document.getElementById('edit_car_form');
   var formData = new FormData(myForm);
@@ -95,10 +99,15 @@ function editCar() {
             contentType: false,
             processData: false,
             success: function (result) {
+              $("#edit_btn_add").prop("disabled", false);
+              $(".my_loader").fadeOut(0);
               closeModal('edit_car_modal');
               $("#main_content").html(result);
+              showMyModal('car_edit_success');
             },
             error: function (data) {
+              $("#edit_btn_add").prop("disabled", false);
+              $(".my_loader").fadeOut(0);
               data = JSON.parse(data.responseText);
               displayErrors2(data.errors);
             }
@@ -134,7 +143,8 @@ function showDeleteModal(id) {
 }
 
 function deleteCar() {
-    closeModal('confirmation_modal');
+    $("#btn_delete").prop("disabled", true);
+    $(".my_loader").fadeIn(0);
     var id = {
       'id' : car_id
     };
@@ -146,17 +156,23 @@ function deleteCar() {
         cache: false,
         data: id,
         success: function (result) {
+            $("#btn_delete").prop("disabled", false);
+            $(".my_loader").fadeOut(0);
+            closeModal('confirmation_modal');
             $("#main_content").html(result);
+            showMyModal('car_delete_success');
         }
     });
 }
 
 function viewModels(id) {
+  $(".loader").fadeIn(0);
   var link = 'models/view/' + id; //fetch all models of this make
   $.ajax({
         url: link,
         dataType: 'html',
         success: function (result) {
+          $(".loader").fadeOut(0);
           $("#main_content").html(result);
         }
   });

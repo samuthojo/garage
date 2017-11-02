@@ -2,6 +2,16 @@
 @include('modals.model', ['title' => $car_make->name])
 @include('modals.confirmation_modal', ['text' => 'model',
                                        'function' => 'deleteModel()'])
+@include('modals.status_alert', [
+'modal_id' => 'model_create_success',
+'text_class' => 'text-success',
+'text' => 'Model added successfully',
+])
+@include('modals.status_alert', [
+'modal_id' => 'model_delete_success',
+'text_class' => 'text-success',
+'text' => 'Model deleted successfully',
+])
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 style="font-weight: bold;" class="panel-title pull-left">

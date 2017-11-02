@@ -1,6 +1,8 @@
 var model_id = "";
 
 function newModel(car_id) {
+  $("#btn_add").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
   clearErrors();
   var myForm = document.getElementById('model_form');
   var formData = new FormData(myForm);
@@ -14,10 +16,15 @@ function newModel(car_id) {
       contentType: false,
       processData: false,
       success: function (result) {
+        $("#btn_add").prop("disabled", false);
+        $(".my_loader").fadeOut(0);
         closeModal('model_modal');
         $("#main_content").html(result);
+        showMyModal('model_create_success');
       },
       error: function (data) {
+        $("#btn_add").prop("disabled", false);
+        $(".my_loader").fadeOut(0);
         data = JSON.parse(data.responseText);
         displayErrors(data.errors);
       }
@@ -52,6 +59,8 @@ function showEditModel(model) {
 }
 
 function editModel() {
+  $("#btn_edit").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
   clearErrors2();
   var myForm = document.getElementById('edit_model_form');
   var formData = new FormData(myForm);
@@ -65,10 +74,15 @@ function editModel() {
     contentType: false,
     processData: false,
     success: function (result) {
+      $("#btn_edit").prop("disabled", false);
+      $(".my_loader").fadeOut(0);
       closeModal('edit_model');
       $("#main_content").html(result);
+      showMyModal('model_edit_success');
     },
     error: function (error) {
+      $("#btn_edit").prop("disabled", false);
+      $(".my_loader").fadeOut(0);
       data = JSON.parse(error.responseText);
       displayErrors2(data.errors);
     }
@@ -90,11 +104,27 @@ function displayErrors2(data) {
 }
 
 function deleteModel() {
-  closeModal('confirmation_modal');
+  $("#btn_delete").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
   var formData = new FormData();
   formData.append('id', model_id);
   var link = "models/delete";
-  sendRequest(link, formData);
+  $.ajax({
+    type: 'post',
+    url: link,
+    dataType: 'html',
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function (result) {
+      $("#btn_delete").prop("disabled", false);
+      $(".my_loader").fadeOut(0);
+      closeModal('confirmation_modal');
+      $("#main_content").html(result);
+      showMyModal('model_delete_success');
+    }
+  });
 }
 
 function showModel() {
@@ -107,11 +137,13 @@ function showModel() {
 }
 
 function viewModel(id) {
+  $(".loader").fadeIn(0);
   var link = "models/model/" + id;
   $.ajax({
       url: link,
       dataType: 'html',
       success: function (result) {
+        $(".loader").fadeOut(0);
         $("#main_content").html(result);
       }
   });

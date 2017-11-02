@@ -3,6 +3,16 @@
                                        'function' => 'deleteModel()'])
 
 @include('modals.edit_model', ['title' => $model->car])
+@include('modals.status_alert', [
+'modal_id' => 'model_edit_success',
+'text_class' => 'text-success',
+'text' => 'Model added successfully',
+])
+@include('modals.status_alert', [
+'modal_id' => 'model_delete_success',
+'text_class' => 'text-success',
+'text' => 'Model deleted successfully',
+])
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title pull-left"

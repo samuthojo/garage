@@ -616,7 +616,8 @@ class Cms extends Controller
         Car::where('id', $id)->update(array_add($data, 'num_models',
                                                                 $num_models));
       }
-      return $this->cars();
+      return redirect()->route('view',
+                          ['type' => 'car', 'id' => $id]);
     }
 
     public function update(Request $request, $type) {
@@ -646,8 +647,7 @@ class Cms extends Controller
         Car::where('id', $id)->delete();
         return $this->cars();
       } else if($type == 'model') {
-        CarModel::where('id', $id)->delete();
-        return $this->products();
+
       }
     }
 

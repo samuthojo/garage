@@ -9,20 +9,31 @@
                                        'function' => 'deleteCar()'])
 
 @include('modals.edit_car')
+@include('modals.status_alert', [
+'modal_id' => 'car_edit_success',
+'text_class' => 'text-success',
+'text' => 'Car edited successfully',
+])
+@include('modals.status_alert', [
+'modal_id' => 'car_delete_success',
+'text_class' => 'text-success',
+'text' => 'Car deleted successfully',
+])
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title pull-left"
           style="font-weight: bold;">Car Details:</h3>
       <div class="btn-group pull-right">
         <button type="button" class="btn btn-primary"
-          onclick="menu_links('cars')">
+          onclick="menu_links('cars')" title="Back">
           <i class="fa fa-arrow-left"></i>
         </button>
-        <button type="button" class="btn btn-primary" onclick="showEditCarModal({{$car}})">
+        <button type="button" class="btn btn-primary" onclick="showEditCarModal({{$car}})"
+          title="Edit">
           <i class="fa fa-pencil"></i>
         </button>
         <button type="button" class="btn btn-danger"
-          onclick="showDeleteModal({{$car->id}})">
+          onclick="showDeleteModal({{$car->id}})" title="Delete">
           <i class="fa fa-trash-o"></i>
         </button>
       </div>
