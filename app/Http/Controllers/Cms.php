@@ -684,7 +684,7 @@ class Cms extends Controller
     }
 
     public function viewModels(Car $car_make) {
-      $models = $car_make->models;
+      $models = $car_make->models()->orderBy('updated_at', 'desc')->get();
 
       return view('specific.models', compact('models', 'car_make'));
     }
