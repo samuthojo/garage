@@ -43,7 +43,7 @@
           <div class="form-group">
             <label for="sel8" class="control-label col-sm-2">Model:</label>
             <div class="input-group">
-             <select name='car_model_id' id="sel8" class="form-control">
+             <select name='car_model_id' id="sel8" class="form-control" style="width: 80px;">
                <option disabled selected value="#">Choose model</option>
                <option value="">all</option>
                @if(!is_null($models))
