@@ -102,7 +102,14 @@
           </tr>
           <tr>
             <th>Status: </th>
-              <td>{{ $service->status }}</td>
+            @php
+              $status = $service->status;
+              $color = (strcasecmp($status, "active") == 0) ?
+                                  "text-success" : "text-danger";
+            @endphp
+            <td>
+              <span class="{{$color}}">{{ $service->status }}</span>
+            </td>
           </tr>
         </table>
       </div>
