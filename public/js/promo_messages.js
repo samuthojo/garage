@@ -68,7 +68,8 @@ function getModalId(locationPromo) {
 }
 
 function savePromo(promo_id) {
-  //var my_data =
+  $("#btn_modal").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
   link = getPromoLink(locationPromo, promo_id);
   $.ajax({
     type: 'post',
@@ -79,11 +80,16 @@ function savePromo(promo_id) {
     },
     cache: false,
     success: function (data) {
+      $("#btn_modal").prop("disabled", false);
+      $(".my_loader").fadeOut(0);
       $(getErrorId(locationPromo)).text("");
       closeModal(getModalId(locationPromo));
       $("#promo_text").text(data.promo.message);
+      showMyModal('promo_edit_success');
     },
     error: function(error) {
+      $("#btn_modal").prop("disabled", false);
+      $(".my_loader").fadeOut(0);
       data = JSON.parse(error.responseText);
       $(getErrorId(locationPromo)).text(data.errors.message[0]);
     }

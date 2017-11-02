@@ -25,6 +25,7 @@
         <button id="btn_modal" onclick="{{$function}}" type="button" class="btn btn-primary">
           {{$button_text}}
         </button>
+        @include('small_loader')
       </div>
     </div>
   </div>

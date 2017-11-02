@@ -30,6 +30,11 @@ a {
   'function' => "savePromo($service_promo->id)",
   'button_text' => 'Save',
 ])
+@include('modals.status_alert', [
+ 'modal_id' => 'promo_edit_success',
+ 'text_class' => 'text-success',
+ 'text' => 'Promo edited successfully',
+])
 <ul class="nav nav-tabs" id="promo">
   <li class="active my_link" id="order_promo">
     <a onclick="orderPromo()">OrderPromoMessage</a>

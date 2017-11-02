@@ -137,9 +137,9 @@ class Cms extends Controller
     public function updateService(EditService $request) {
       $data1 = "";
       if($request->exists('car_model_id')) {
-        $data1 = $request->only('service_id', 'car_id', 'car_model_id');
+        $data1 = $request->only('service_id', 'car_id', 'car_model_id', 'price');
       } else {
-        $data1 = $request->only('service_id', 'car_id');
+        $data1 = $request->only('service_id', 'car_id', 'price');
         $data1 = array_add($data1, 'car_model_id', null);
       }
       $description = $request->input('description');

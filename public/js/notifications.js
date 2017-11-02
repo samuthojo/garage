@@ -25,7 +25,6 @@ function sendNotificationRequest(link, formData) {
       $(".loader").fadeOut(0);
       $("#notification_type").val(null);
       showAlert(status);
-      console.log(status);
     }
   });
 }
