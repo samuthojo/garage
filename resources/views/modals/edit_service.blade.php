@@ -1,7 +1,10 @@
 <style>
-  .form-control {
-    width: auto;
-  }
+.input-group .form-control {
+  position: relative;
+  z-index: 2;
+  float: left;
+  margin-bottom: 0;
+}
 </style>
 <!-- New Service modal -->
 <div id="edit_service_modal" class="modal fade" role="dialog">
