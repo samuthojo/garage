@@ -58,7 +58,7 @@
                  @endforeach
                @endif
              </select>
-             <i class="fa fa-spinner fa-spin fa-3x fa-fw select_loader" style="display: none; float: left"></i>
+             <i class="fa fa-spinner fa-spin fa-2x fa-fw select_loader" style="display: none; float: left"></i>
            </div>
            <span  class="text-danger col-sm-offset-2" id="model_error3"></span>
          </div>
