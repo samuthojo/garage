@@ -25,8 +25,8 @@ class CreateServiceFromExisting extends FormRequest
     {
         return [
             'service_id' => 'required|integer',
-            'car_id' => 'nullable|integer',
-            'car_model_id' => 'nullable|integer|required_with:car_id',
+            'car_id' => 'nullable|integer|required_with:car_model_id',
+            'car_model_id' => 'nullable|integer',
             'price' => 'required|integer',
         ];
     }
@@ -36,8 +36,8 @@ class CreateServiceFromExisting extends FormRequest
       return [
         'service_id.required' => 'Please select a service',
         'car_id.integer' => 'Please select a car',
+        'car_id.required_with' => 'A specific model selected without selecting a specific car',
         'car_model_id.integer' => 'Please select a model',
-        'car_model_id.required_with' => 'A specific model selected without selecting a specific car',
         'price.required' => 'Please enter the service price',
         'price.integer' => 'The price must be a valid integer',
       ];
