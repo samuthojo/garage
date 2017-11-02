@@ -251,11 +251,13 @@ function newService2() {
 }
 
 function viewService(id) {
+  $(".loader").fadeIn(0);
   var link = "services/" + id;
   $.ajax({
     url: link,
     dataType: 'html',
     success: function(result) {
+      $(".loader").fadeOut(0);
       $('#main_content').html(result);
     }
   });
@@ -279,9 +281,11 @@ function fetchModel(id) {
    .fail(function ( error ) {
      console.error('Error', error);
    });
+   $(".select_loader").fadeIn(0);
 }
 
 function setUpModels(models, id) {
+  $(".select_loader").fadeOut(0);
   console.log('set' + id);
   var mySelect = document.getElementById(id);
   var length = mySelect.options.length;
