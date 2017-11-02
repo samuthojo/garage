@@ -1,11 +1,13 @@
 var requested_service_id = "";
 
 function viewCustomers(id) {
+  $(".loader").fadeIn(0);
   var link = 'requested_services/' + id;
   $.ajax({
     url: link,
     dataType: 'html',
     success: function(result) {
+      $(".loader").fadeOut(0);
       $('#main_content').html(result);
     }
   });

@@ -51,6 +51,8 @@ function validateInput() {
 }
 
 function postMyData() {
+  $("#btn_submit").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
   link = "";
   if(report_type == 1) {
     link = "reports/requested_services";
@@ -74,6 +76,8 @@ function postMyData() {
     contentType: false,
     processData: false,
     success: function(result) {
+      $("#btn_submit").prop("disabled", false);
+      $(".my_loader").fadeOut(0);
       $("#report_area").html(result);
     }
   });

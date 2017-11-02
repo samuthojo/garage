@@ -51,9 +51,11 @@
             placeholder="End Date" data-toggle="datepicker">
          </div>
          <div class="form-group">
-           <button type="button" class="btn btn-primary" onclick="fetchReport()">
+           <button type="button" class="btn btn-primary" onclick="fetchReport()"
+            id="btn_submit">
              Submit
            </button>
+           @include('small_loader')
          </div>
       </form>
       <div id="report_area">

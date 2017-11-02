@@ -200,29 +200,6 @@ function editService() {
     });
 }
 
-function showDeleteModal(id) {
-  service_id = id;
-  showServiceModal('confirmation_modal');
-}
-
-function deleteService() {
-  closeModal('confirmation_modal');
-  var datas = {
-    'id' : service_id
-  };gar
-  var link = 'delete/service';
-  $.ajax({
-      type: 'delete',
-      dataType: 'html',
-      url: link,
-      cache: false,
-      data: datas,
-      success: function (result) {
-          $("#main_content").html(result);
-      }
-  });
-}
-
 function makeDecision() {
   $("#choice_error").text("");
   var option = $('input[name=optradio]:checked', '#modal_form').val();
