@@ -43,7 +43,7 @@
           <div class="form-group">
             <label for="sel8" class="control-label col-sm-2">Model:</label>
             <div class="input-group">
-             <select name='car_model_id' id="sel8" class="form-control" style="width: 80px;">
+             <select name='car_model_id' id="sel8" class="form-control">
                <option disabled selected value="#">Choose model</option>
                <option value="">all</option>
                @if(!is_null($models))
@@ -52,7 +52,7 @@
                  @endforeach
                @endif
              </select>
-             <span class="input-group-addon select_loader" style="display: none;">
+             <span class="input-group-addon select_loader">
                <i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>
              </span>
            </div>
