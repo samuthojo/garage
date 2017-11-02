@@ -42,8 +42,8 @@
           </div>
           <div class="form-group">
             <label for="sel8" class="control-label col-sm-2">Model:</label>
-            <span>
-             <select name='car_model_id' id="sel8" class="form-control">
+            <span class="form-control">
+             <select name='car_model_id' id="sel8">
                <option disabled selected value="#">Choose model</option>
                <option value="">all</option>
                @if(!is_null($models))
