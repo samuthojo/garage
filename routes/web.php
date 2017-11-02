@@ -84,3 +84,5 @@ Route::get('change_password_form', 'Cms@changePasswordForm');
 Route::post('change_password', 'Cms@changePassword');
 
 Route::get('logout', 'Cms@logout')->name('logout');
+
+Route::view('privacy', 'privacy');
