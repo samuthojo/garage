@@ -48,7 +48,7 @@
           </div>
           <div class="form-group">
             <label for="sel8" class="control-label col-sm-2">Model:</label>
-            <div style="position:relative; display: inline;">
+            <div style="position:relative; display: block;">
              <select name='car_model_id' id="sel8" class="form-control" style="display: inline;">
                <option disabled selected value="#">Choose model</option>
                <option value="">all</option>
