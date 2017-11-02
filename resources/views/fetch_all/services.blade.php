@@ -1,3 +1,14 @@
+<style>
+.input-group .form-control {
+  position: relative;
+  z-index: 2;
+  float: left;
+  margin-bottom: 0;
+}
+.input-group .form-control {
+  width: auto;
+}
+</style>
 <script src="{{ asset('js/services.js') }}"></script>
 @include('modals.decision_modal')
 @include('modals.new_service')

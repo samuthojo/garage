@@ -21,13 +21,13 @@
               <label for="sel3" class="control-label col-sm-2">Service:</label>
               <div style="position:relative; display: block;">
                <select name='service_id' id="sel3" onchange=""
-                class="form-control">
+                class="form-control" style="display: inline;">
                  <option disabled selected value="#">Choose service</option>
                  @foreach($services as $service)
                     <option value="{{$service->service_id}}">{{$service->service}}</option>
                  @endforeach
                </select>
-               <i class="fa fa-spinner fa-spin fa-2x fa-fw select_loader text-primary" 
+               <i class="fa fa-spinner fa-spin fa-2x fa-fw select_loader text-primary"
                 style="display: none;"></i>
               </div>
                <span class="text-danger col-sm-offset-2" id="service_error"></span>

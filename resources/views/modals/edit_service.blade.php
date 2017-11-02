@@ -1,14 +1,3 @@
-<style>
-.input-group .form-control {
-  position: relative;
-  z-index: 2;
-  float: left;
-  margin-bottom: 0;
-}
-.input-group .form-control {
-  width: auto;
-}
-</style>
 <!-- New Service modal -->
 <div id="edit_service_modal" class="modal fade" role="dialog">
 <div class="modal-dialog">
