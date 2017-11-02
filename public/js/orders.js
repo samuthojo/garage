@@ -1,11 +1,13 @@
 var order_id = "";
 
 function viewItems(id) {
+  $(".loader").fadeIn(0);
   var link = 'orders/' + id;
   $.ajax({
     url: link,
     dataType: 'html',
     success: function(result) {
+      $(".loader").fadeOut(0);
       $('#main_content').html(result);
     }
   });
