@@ -285,24 +285,34 @@ function viewService(id) {
 }
 
 function fetchModel(id) {
+  $(".select_loader").fadeIn(0);
   var e = document.getElementById(id);
   var car_id = e.options[e.selectedIndex].value;
-  var link = 'models/' + car_id; //fetch all models of this make
+  var next_id = "";
+  if(id == 'sel1') {
+    next_id =  'sel2';
+  }
+  else {
+    next_id = (id == 'sel4') ? 'sel5' : 'sel8';
+  }
+  var link = "";
+  if(car_id != "") {
+    link = 'models/' + car_id; //fetch all models of this make
+    $.getJSON(link)
+     .done(function (data) {
+       setUpModels(data, next_id);
+     })
+     .fail(function ( error ) {
+       console.error('Error', error);
+     });
+  }
+  else {
+    $(".select_loader").fadeOut(0);
+    //Leave the first two options, delete the rest
+    $('#' + next_id).find('option').not(':first, :eq(1)').remove();
+    $('#' + next_id).val("");//select second option
+  }
 
-  $.getJSON(link)
-   .done(function (data) {
-     var next_id = "";
-     if(id == 'sel1') {
-       next_id =  'sel2';
-     } else {
-       next_id = (id == 'sel4') ? 'sel5' : 'sel8';
-      }
-     setUpModels(data, next_id);
-   })
-   .fail(function ( error ) {
-     console.error('Error', error);
-   });
-   $(".select_loader").fadeIn(0);
 }
 
 function setUpModels(models, id) {
