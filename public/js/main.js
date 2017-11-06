@@ -6,6 +6,13 @@ $(document).ready(function() {
       headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
+
+    statusCode: {
+      401: function() {
+        window.location.href = "{{ url('login') }}";
+    }
+
+});
   });
   previousEl = $('#categories');
   var cols = document.querySelectorAll('#link_section .link');

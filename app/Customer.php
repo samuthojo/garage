@@ -8,6 +8,7 @@ use Carbon\Carbon;
 
 class Customer extends Model
 {
+
   use SoftDeletes;
 
   protected $guarded = ['id', ];

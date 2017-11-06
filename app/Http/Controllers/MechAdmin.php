@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Car;
 use App\Service;
 use App\ServiceAsProduct;
@@ -34,10 +35,16 @@ class MechAdmin extends Controller
   public function login(Request $request) {
     $credentials = $request->only('username', 'password');
 
-    if(Auth::attempt($credentials)) {
-      $user = Auth::user();
+    $feedback = "";
 
-      $feedback = compact('user');
+    if(Auth::attempt($credentials)) {
+
+      $feedback = array();
+      $feedback['user'] = Auth::user();
+
+      $token_info = "";
+      $feedback['token_info'] = "";
+
     }
     else {
       $feedback = ["message" => "Wrong username or password", ];

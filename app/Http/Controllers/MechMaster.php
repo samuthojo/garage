@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Hash;
 use App\Customer;
 use App\Device;
 use App\Product;
@@ -28,8 +28,14 @@ use App\ServicePromoMessage;
 
 class MechMaster extends Controller
 {
+
+    public function __construct() {
+      //$this->middleware('auth:customers')->except(['add_customer', ]);
+    }
+
     //action: add customer
     public function add_customer(Request $request) {
+
       $feedback = "";
       $customer = "";
       $email = $request->only('email');
@@ -43,27 +49,46 @@ class MechMaster extends Controller
             ]);
           });
           $customer_id = Customer::where($email)->first()->id;
-          $feedback = [
-            'message' => [
+          $message = [
               'status' => 'okay',
               'id' => $customer_id,
-            ],
           ];
-          return response()->json($feedback, 201);
+          $email = $request->input('email');
+          
+          $token_info = "";
+
+          $result = [
+            "success" => true,
+            "error" => false,
+          ];
+
+          return response()->json(compact('message', 'token_info', 'result'), 201);
       } else {
           $customer_id = $customer->id;
           $token = $request->input('token');
+          $email = $request->input('email');
           $params = compact('customer_id', 'token');
           if(is_null(Device::where($params)->first())) {
             Device::create($params);
           }
-          $feedback = [
-            'message' => [
+          $message = [
               'status' => 'exists',
               'id' => $customer_id,
-            ],
           ];
-          return response()->json($feedback, 200);
+
+          $token_info = "";
+
+          $result = "";
+
+          $email = $request->input('email');
+          $token_info = "";
+
+          $result = [
+            "success" => true,
+            "error" => false,
+          ];
+
+          return response()->json(compact('message', 'token_info', 'result'), 200);
       }
     }
 

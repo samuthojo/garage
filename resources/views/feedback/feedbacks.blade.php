@@ -3,6 +3,9 @@
   'text' => 'feedback',
   'function' => 'deleteFeedback()',
 ])
+@include('modals.status_alert', [ 'text_class' => 'text-success',
+                                  'modal_id' => 'feedback_delete_success',
+                                  'text' => 'feedback deleted successfully'])
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 style="font-weight: bold;" class="panel-title pull-left">
