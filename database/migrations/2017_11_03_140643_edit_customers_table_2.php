@@ -14,7 +14,7 @@ class EditCustomersTable2 extends Migration
     public function up()
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->text('password')->nullable();
+            // $table->text('password')->nullable();
         });
     }
 

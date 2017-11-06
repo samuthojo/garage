@@ -8,7 +8,7 @@ $(document).ready(function() {
     },
     statusCode: {
       401: function() {
-        window.location.href = "{{ url('login') }}";
+        window.location.href = "admin";
     }
   }
  });

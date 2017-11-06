@@ -6,45 +6,39 @@
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
   <style>
-      @import url(http://fonts.googleapis.com/css?family=Roboto:400);
+      /*@import url(http://fonts.googleapis.com/css?family=Roboto:400);*/
 
-      body {
-      background-color:#fff;
-      -webkit-font-smoothing: antialiased;
-      font: normal 14px Roboto,arial,sans-serif;
-      }
+        body {
+          padding-top: 40px;
+          padding-bottom: 40px;
+          background-color: #f5f5f5;
+        }
 
-      .container {
-        padding: 25px;
-        position: fixed;
-      }
-
-      .form-login {
-        background-color: #EDEDED;
-        padding-top: 10px;
-        padding-bottom: 20px;
-        padding-left: 20px;
-        padding-right: 20px;
-        border-radius: 15px;
-        border-color:#d2d2d2;
-        border-width: 5px;
-        box-shadow:0 1px 0 #cfcfcf;
-      }
-
-      h4 {
-      border:0 solid #fff;
-      border-bottom-width:1px;
-      padding-bottom:10px;
-      text-align: center;
-      }
-
-      .form-control {
-        border-radius: 10px;
-      }
-
-      .wrapper {
-        text-align: center;
-      }
+        .form-signin {
+          padding: 19px 29px 29px;
+          margin: 15% auto;
+          top: 0;
+          position: fixed;
+          background-color: #fff;
+          border: 1px solid #e5e5e5;
+          -webkit-border-radius: 5px;
+             -moz-border-radius: 5px;
+                  border-radius: 5px;
+          -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+             -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                  box-shadow: 0 1px 2px rgba(0,0,0,.05);
+        }
+        .form-signin .form-signin-heading,
+        .form-signin .checkbox {
+          margin-bottom: 10px;
+        }
+        .form-signin input[type="text"],
+        .form-signin input[type="password"] {
+          font-size: 16px;
+          height: auto;
+          margin-bottom: 15px;
+          padding: 7px 9px;
+        }
 
       .loader {
           /*position: fixed;
@@ -70,8 +64,6 @@ function loginReq() {
   // Checking for blank fields.
   if( username =='' || password ==''){
     $(".loader").fadeOut(0);
-    $('input[type="text"],input[type="password"]').css("border","2px solid red");
-    $('input[type="text"],input[type="password"]').css("box-shadow","0 0 3px red");
 
     $("#login_alert").fadeTo(2000, 500).slideUp(500, function(){
       $("#login_alert").slideUp(500);
@@ -109,46 +101,27 @@ function loginReq() {
 }
 
 </script>
-
 </head>
-
 <div class="container">
-    <div class="row">
-        <div class="col-md-offset-5 col-md-3">
-          @include('loader')
-            <div class="alert alert-danger" id="login_alert" style="display:none;">
-              Please fill all fields!
-            </div>
-            <div class="alert alert-danger" id="login_alert2" style="display:none;">
-              Wrong username or password
-            </div>
-            <div class="form-login">
-            <h4>Mechmasters</h4>
-            <form id="login_form">
-              <div class="form-group">
-                <input type="text" id="username"
-                  class="form-control input-sm chat-input"
-                  name="username"
-                  placeholder="username" />
-              </div>
-              <div class="form-group">
-                <input type="password" id="password"
-                  class="form-control input-sm chat-input"
-                  name="password"
-                  placeholder="password" />
-              </div>
-
-            <div class="form-group">
-              <div class="wrapper">
-                <span class="group-btn">
-                    <button type="button" onclick="loginReq()" class="btn btn-primary btn-md"
-                      id="login">login <i class="fa fa-sign-in"></i></button>
-                </span>
-              </div>
-            </div>
-            </form>
-            </div>
+  <div class="row">
+    <div class="col-md-offset-5 col-md-3">
+      <form class="form-signin">
+        @include('loader')
+        <div class="alert alert-danger" id="login_alert" style="display:none;">
+          Please fill all fields!
         </div>
+        <div class="alert alert-danger" id="login_alert2" style="display:none;">
+          Wrong username or password
+        </div>
+        <h2 class="form-signin-heading text-primary">Mechmasters</h2>
+        <input type="text" id="username" class="form-control"
+          placeholder="Username">
+        <input type="password" id="password" class="form-control"
+          placeholder="Password">
+        <button class="btn btn-primary col-sm-offset-4" type="button"
+          id="login" onclick="loginReq()">Log in</button>
+      </form>
     </div>
-</div>
+   </div>
+</div> <!-- container -->
 </html>
