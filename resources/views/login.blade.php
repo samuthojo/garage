@@ -57,6 +57,14 @@
 
 <script language="javascript" type="text/javascript">
 
+$(document).ready( function() {
+  $("#password").on('keydown', function(e) {
+      if (e.which == 13) {
+          loginReq();
+      }
+  });
+});
+
 function loginReq() {
   $(".loader").fadeIn(0);
   var username = $("#username").val();
