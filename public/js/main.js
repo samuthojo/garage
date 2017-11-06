@@ -11,8 +11,7 @@ $(document).ready(function() {
         window.location.href = "{{ url('login') }}";
     }
   }
-});
-  });
+ });
   previousEl = $('#categories');
   var cols = document.querySelectorAll('#link_section .link');
 	[].forEach.call(cols, function(col) {
