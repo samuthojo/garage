@@ -2,7 +2,7 @@
 <html>
 <head>
 
-  <title>Mechmaster</title>
+  <title>Mechmasters</title>
 
   <!-- Csrf token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
