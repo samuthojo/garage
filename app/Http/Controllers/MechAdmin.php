@@ -44,7 +44,7 @@ class MechAdmin extends Controller
       $feedback['user'] = Auth::user();
 
       extract($credentials);
-      return $feedback['token_info'] = $this->getAccessToken($username, $password);
+      $feedback['token_info'] = $this->getAccessToken($username, $password);
 
     }
     else {
