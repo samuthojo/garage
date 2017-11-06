@@ -56,13 +56,14 @@ class MechMaster extends Controller
           ];
 
           $username = request('email');
-          $password = Hash::make(str_random(32));
+          $text_password = str_random(32);
+          $password = Hash::make($text_password);
           $firstname = 'customer';
           $lastname = 'customer';
           User::create(compact('firstname', 'lastname', 'username',
                                     'password'));
 
-          $token_info = $this->getAccessToken($username, $password);
+          $token_info = $this->getAccessToken($username, $text_password);
 
           $result = [
             "success" => true,
@@ -79,7 +80,8 @@ class MechMaster extends Controller
           }
 
           $username = $email;
-          $password = Hash::make(str_random(32));
+          $text_password = str_random(32);
+          $password = Hash::make($text_password);
           User::where('username', $username)->update(compact('password'));
 
           $message = [
@@ -87,7 +89,7 @@ class MechMaster extends Controller
               'id' => $customer_id,
           ];
 
-          $token_info = $this->getAccessToken($username, $password);
+          $token_info = $this->getAccessToken($username, $text_password);
 
           $result = [
             "success" => true,
