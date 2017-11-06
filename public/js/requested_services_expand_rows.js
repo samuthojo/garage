@@ -28,6 +28,7 @@ function myRequestsDataTable(file_name, export_title) {
                  messageTop: export_title
               }
           ],
+          iDisplayLength: 8,
           select: {
               selector:'td:not(:first-child)',
               style:    'os'

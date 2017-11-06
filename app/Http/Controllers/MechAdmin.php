@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use App\Car;
 use App\Service;
 use App\ServiceAsProduct;
@@ -29,7 +30,7 @@ use App\ServicePromoMessage;
 class MechAdmin extends Controller
 {
   public function __construct() {
-    //$this->middleware('auth:api')->except(['login', ]);
+    $this->middleware('auth:api')->except(['login', ]);
   }
 
   public function login(Request $request) {
@@ -42,8 +43,8 @@ class MechAdmin extends Controller
       $feedback = array();
       $feedback['user'] = Auth::user();
 
-      $token_info = "";
-      $feedback['token_info'] = "";
+      extract($credentials);
+      return $feedback['token_info'] = $this->getAccessToken($username, $password);
 
     }
     else {
@@ -51,6 +52,38 @@ class MechAdmin extends Controller
     }
 
     return response()->json($feedback, 200);
+  }
+
+  private function getAccessToken($username, $password) {
+    $client_ids = DB::table('oauth_clients')
+                    ->where('password_client', true)
+                    ->latest('updated_at')
+                    ->take(1)
+                    ->get(['id'])
+                    ->map( function($myId) {
+                      return $myId->id;
+                    });
+  $client_secrets = DB::table('oauth_clients')
+                    ->where('password_client', true)
+                    ->where('id', $client_ids[0])
+                    ->get(['secret'])
+                    ->map( function($mySecret) {
+                      return $mySecret->secret;
+                    });
+
+    $http = new \GuzzleHttp\Client;
+
+    $response = $http->post(env('ACCESS_TOKEN_URL'), [
+        'form_params' => [
+            'grant_type' => 'password',
+            'client_id' => $client_ids[0],
+            'client_secret' => $client_secrets[0],
+            'username' => $username,
+            'password' => $password,
+        ],
+    ]);
+
+    return json_decode((string) $response->getBody(), true);
   }
 
   public function orders() {

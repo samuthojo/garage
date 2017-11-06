@@ -63,7 +63,8 @@ function myDataTable(file_name, export_title) {
                  title: file_name,
                  messageTop: export_title
               }
-          ]
+          ],
+          iDisplayLength: 8
     });
 }
 

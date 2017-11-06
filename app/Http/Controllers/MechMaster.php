@@ -30,15 +30,15 @@ class MechMaster extends Controller
 {
 
     public function __construct() {
-      //$this->middleware('auth:customers')->except(['add_customer', ]);
+      $this->middleware('auth:api')->except(['add_customer', ]);
     }
 
     //action: add customer
     public function add_customer(Request $request) {
 
-      $feedback = "";
       $customer = "";
       $email = $request->only('email');
+      $token_info = $message = $result = "";
       if(is_null($customer = Customer::where($email)->first())) {
           DB::transaction(function() {
             $customer = Customer::create(request()->only('email', 'phonenumber',
@@ -47,22 +47,28 @@ class MechMaster extends Controller
               'customer_id' => $customer->id,
               'token' => request('token'),
             ]);
+
           });
           $customer_id = Customer::where($email)->first()->id;
           $message = [
               'status' => 'okay',
               'id' => $customer_id,
           ];
-          $email = $request->input('email');
-          
-          $token_info = "";
+
+          $username = request('email');
+          $password = Hash::make(str_random(32));
+          $firstname = 'customer';
+          $lastname = 'customer';
+          User::create(compact('firstname', 'lastname', 'username',
+                                    'password'));
+
+          $token_info = $this->getAccessToken($username, $password);
 
           $result = [
             "success" => true,
             "error" => false,
           ];
 
-          return response()->json(compact('message', 'token_info', 'result'), 201);
       } else {
           $customer_id = $customer->id;
           $token = $request->input('token');
@@ -71,26 +77,59 @@ class MechMaster extends Controller
           if(is_null(Device::where($params)->first())) {
             Device::create($params);
           }
+
+          $username = $email;
+          $password = Hash::make(str_random(32));
+          User::where('username', $username)->update(compact('password'));
+
           $message = [
               'status' => 'exists',
               'id' => $customer_id,
           ];
 
-          $token_info = "";
-
-          $result = "";
-
-          $email = $request->input('email');
-          $token_info = "";
+          $token_info = $this->getAccessToken($username, $password);
 
           $result = [
             "success" => true,
             "error" => false,
           ];
-
-          return response()->json(compact('message', 'token_info', 'result'), 200);
       }
+      return response()->json(compact('message', 'token_info', 'result'), 200);
+
     }
+
+    private function getAccessToken($username, $password) {
+      $client_ids = DB::table('oauth_clients')
+                      ->where('password_client', true)
+                      ->latest('updated_at')
+                      ->take(1)
+                      ->get(['id'])
+                      ->map( function($myId) {
+                        return $myId->id;
+                      });
+      $client_secrets = DB::table('oauth_clients')
+                      ->where('password_client', true)
+                      ->where('id', $client_ids[0])
+                      ->get(['secret'])
+                      ->map( function($mySecret) {
+                        return $mySecret->secret;
+                      });
+
+      $http = new \GuzzleHttp\Client;
+
+      $response = $http->post(env('ACCESS_TOKEN_URL'), [
+          'form_params' => [
+              'grant_type' => 'password',
+              'client_id' => $client_ids[0],
+              'client_secret' => $client_secrets[0],
+              'username' => $username,
+              'password' => $password,
+          ],
+      ]);
+
+      return json_decode((string) $response->getBody(), true);
+    }
+
 
     public function products() {
       $cars = Car::all();
