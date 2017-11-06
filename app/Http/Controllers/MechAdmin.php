@@ -55,29 +55,25 @@ class MechAdmin extends Controller
   }
 
   private function getAccessToken($username, $password) {
-    $client_ids = DB::table('oauth_clients')
+    $client_id = DB::table('oauth_clients')
                     ->where('password_client', true)
                     ->latest('updated_at')
-                    ->take(1)
-                    ->get(['id'])
-                    ->map( function($myId) {
-                      return $myId->id;
-                    });
-  $client_secrets = DB::table('oauth_clients')
+                    ->pluck('id')
+                    ->first();
+
+  $client_secret = DB::table('oauth_clients')
                     ->where('password_client', true)
-                    ->where('id', $client_ids[0])
-                    ->get(['secret'])
-                    ->map( function($mySecret) {
-                      return $mySecret->secret;
-                    });
+                    ->where('id', $client_id)
+                    ->pluck('secret')
+                    ->first();
 
     $http = new \GuzzleHttp\Client;
 
     $response = $http->post(env('ACCESS_TOKEN_URL'), [
         'form_params' => [
             'grant_type' => 'password',
-            'client_id' => $client_ids[0],
-            'client_secret' => $client_secrets[0],
+            'client_id' => $client_id,
+            'client_secret' => $client_secret,
             'username' => $username,
             'password' => $password,
         ],
