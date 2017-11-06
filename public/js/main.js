@@ -10,6 +10,7 @@ $(document).ready(function() {
       401: function() {
         window.location.href = "{{ url('login') }}";
     }
+  }
 });
   });
   previousEl = $('#categories');
