@@ -179,7 +179,7 @@ class Cms extends Controller
 
             DB::commit();
 
-            return $this->services();
+            return redirect()->route('my_service', ['service' => $id]);
           } catch(Throwable $e) {
             DB::rollback();
           }
