@@ -16,9 +16,10 @@
 
         .form-signin {
           padding: 19px 29px 29px;
-          margin: 15% auto;
           top: 0;
-          position: fixed;
+          left: 0;
+          margin: 40% auto;
+          /*position: fixed;*/
           background-color: #fff;
           border: 1px solid #e5e5e5;
           -webkit-border-radius: 5px;
