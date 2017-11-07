@@ -42,14 +42,14 @@
               <option value="" selected disabled>Choose status</option>
            </select>
          </div>
-         <div class="form-group">
+         <!-- <div class="form-group">
            <input type="text" id="start_date" name="start_date" class="form-control"
             placeholder="Start Date" data-toggle="datepicker">
          </div>
          <div class="form-group">
            <input type="text" id="end_date" name="end_date" class="form-control"
             placeholder="End Date" data-toggle="datepicker">
-         </div>
+         </div> -->
          <div class="form-group">
            <button type="button" class="btn btn-primary" onclick="fetchReport()"
             id="btn_submit">
