@@ -11,7 +11,7 @@
       <div class="modal-body">
         <div class="container">
           <form id="promo_form">
-            <label for="{{$text_id}}">Description:</label>
+            <label for="{{$text_id}}">Message:</label>
             <textarea id="{{$text_id}}" class='form-control'
               placeholder="Short description" name="message">{{$text}}</textarea>
             <span class="text-danger" id="{{$error_id}}"></span>

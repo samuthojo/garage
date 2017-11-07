@@ -12,6 +12,6 @@ class ServicePromoMessagesTableSeeder extends Seeder
      */
     public function run()
     {
-      ServicePromoMessage::create(['message' => 'MechMaster cares for your car!']);
+      ServicePromoMessage::create(['message' => 'MechMaster services the solution!']);
     }
 }
