@@ -44,8 +44,8 @@ class MechAdmin extends Controller
       $feedback['user'] = Auth::user();
 
       extract($credentials);
-      $feedback['token_info'] = $this->getAccessToken($username, $password);
-      
+      return $feedback['token_info'] = $this->getAccessToken($username, $password);
+
 
     }
     else {
@@ -56,7 +56,7 @@ class MechAdmin extends Controller
   }
 
   private function getAccessToken($username, $password) {
-    $client_id = DB::table('oauth_clients')
+    return $client_id = DB::table('oauth_clients')
                     ->where('password_client', true)
                     ->latest('updated_at')
                     ->pluck('id')
