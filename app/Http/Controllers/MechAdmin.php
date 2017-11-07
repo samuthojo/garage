@@ -44,7 +44,7 @@ class MechAdmin extends Controller
       $feedback['user'] = Auth::user();
 
       extract($credentials);
-      return $feedback['token_info'] = $this->getAccessToken($username, $password);
+      $feedback['token_info'] = $this->getAccessToken($username, $password);
 
 
     }
@@ -56,14 +56,14 @@ class MechAdmin extends Controller
   }
 
   private function getAccessToken($username, $password) {
-    return $client_id = DB::table('oauth_clients')
-                    ->where('password_client', true)
+    $client_id = DB::table('oauth_clients')
+                    ->where('password_client', 1)
                     ->latest('updated_at')
                     ->pluck('id')
                     ->first();
 
   $client_secret = DB::table('oauth_clients')
-                    ->where('password_client', true)
+                    ->where('password_client', 1)
                     ->where('id', $client_id)
                     ->pluck('secret')
                     ->first();
