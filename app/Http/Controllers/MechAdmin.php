@@ -63,7 +63,6 @@ class MechAdmin extends Controller
                     ->first();
 
   $client_secret = DB::table('oauth_clients')
-                    ->where('password_client', 1)
                     ->where('id', $client_id)
                     ->pluck('secret')
                     ->first();
