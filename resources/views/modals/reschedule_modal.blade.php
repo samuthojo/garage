@@ -23,12 +23,12 @@
             <div class="form-group">
 							<label for="date">Date:</label></br>
   							<input type="text" name="date" id="date" data-toggle="datepicker"
-  								placeholder="Date">
+  								placeholder="Date" class="form-control">
 						</div>
 						<div class="form-group">
 							<label for="reason">Reason:</label></br>
 							<input type="text" name="reason" id="reason2"
-								placeholder="Reason (optional)">
+								placeholder="Reason (optional)" class="form-control">
 						</div>
 						<div class="form-group">
 							<button type="button" class="btn btn-default"
