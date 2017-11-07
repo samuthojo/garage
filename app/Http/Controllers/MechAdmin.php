@@ -57,7 +57,7 @@ class MechAdmin extends Controller
 
   private function getAccessToken($username, $password) {
     $client_id = DB::table('oauth_clients')
-                    ->where('password_client', 1)
+                    ->where('password_client', true)
                     ->latest('updated_at')
                     ->pluck('id')
                     ->first();
