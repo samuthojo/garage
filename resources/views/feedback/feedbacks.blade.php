@@ -57,3 +57,10 @@
     Crafted @ <a href="http://ipfsoftwares.com" target="_blank">iPF SOFTWARES</a>
   </div>
 </div>
+<script>
+  $(document).ready( function() {
+    $('#myTable').dataTable({
+          iDisplayLength: 8
+      });
+  });
+</script>
