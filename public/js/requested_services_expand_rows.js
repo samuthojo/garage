@@ -72,7 +72,7 @@ function format(obj) {
             '<td>'+ obj.description +'</td>'+
         '</tr>'+
         '<tr>'+
-          '<th>Comment:</th>'+
+          '<th>Staff Comment:</th>'+
           '<td>' + obj.comment +'</td>'+
         '</tr>'+
         '<tr>'+
@@ -88,7 +88,7 @@ function format(obj) {
               '<td>'+ obj.description +'</td>'+
           '</tr>'+
           '<tr>'+
-            '<th>Comment:</th>'+
+            '<th>Staff Comment:</th>'+
             '<td>' + obj.comment +'</td>'+
           '</tr>'+
           '<tr>'+

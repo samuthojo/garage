@@ -73,7 +73,7 @@ function format(obj) {
   }
   return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<tr>'+
-            '<th>Comment:</th>'+
+            '<th>Staff Comment:</th>'+
             '<td>'+ my_comment +'</td>'+
         '</tr>'+
     '</table>';
