@@ -27,7 +27,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title pull-left"
-          style="font-weight: bold;">Product Details:</h3>
+          style="font-weight: bold;">{{$product->name}}:</h3>
         <div class="btn-group pull-right">
           <button type="button" class="btn btn-primary"
             onclick="menu_links('products')" title="Back">
@@ -47,6 +47,13 @@
         <div class="clearfix"></div>
     </div>
     <div class="panel-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="{{ asset('uploads/products/' . $product->image)}}"
+            class="img-rounded" alt="Product image" width="100%" height="auto">
+        </div>
+      <div class="col-sm-6">
       <div class="table-responsive">
         <table class="table table-striped">
           <tr>
@@ -96,16 +103,6 @@
             </tr>
           @endif
           <tr>
-            <th>Image: </th>
-              <td>
-                <a href="{{ asset('uploads/products/' . $product->image) }}"
-                  target="_blank">
-                  <img src="{{ asset('uploads/products/' . $product->image)}}" class="img-rounded"
-                    alt="Product image" width="25%" height="auto">
-                </a>
-              </td>
-          </tr>
-          <tr>
             <th>Date added: </th>
               <td>{{ $product->date_added }}</td>
           </tr>
@@ -115,6 +112,9 @@
           </tr>
         </table>
       </div>
+    </div>
+    </div><!--row -->
+    </div>
     </div>
     <div class="panel-footer">
       Crafted @ <a href="http://ipfsoftwares.com" target="_blank">iPF SOFTWARES</a>

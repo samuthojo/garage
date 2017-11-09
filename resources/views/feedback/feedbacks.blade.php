@@ -13,7 +13,6 @@
      <div class="clearfix"></div>
   </div>
   <div class="panel-body">
-    <div class="container">
       @if(count($feedbacks) == 0)
         <h4>No feedbacks yet</h4>
       @else
@@ -51,7 +50,6 @@
         </table>
       </div>
     @endif
-    </div>
   </div>
   <div class="panel-footer">
     Crafted @ <a href="http://ipfsoftwares.com" target="_blank">iPF SOFTWARES</a>

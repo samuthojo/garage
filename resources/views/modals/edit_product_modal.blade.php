@@ -124,7 +124,7 @@
           <div class="form-group">
             <label class="" for="edit_product_warranty">Warranty:</label>
             <input type="text" name="warranty" id="edit_product_warranty"
-              placeholder="Warranty" class="form-control">
+              placeholder="eg. 1 month" class="form-control">
             <span class="text-danger " id="warranty_error2"></span>
           </div>
         </div>

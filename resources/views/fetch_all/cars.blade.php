@@ -29,7 +29,7 @@
             <tr>
               <th>No.</th>
               <th>Name</th>
-              <th># models</th>
+              <th># Models</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -42,9 +42,9 @@
                       <td>
                         <div class="btn-group">
                           <button type="button" class="btn btn-small btn-primary"
-                            onclick="viewCar({{ $car->id }})">
-                            <!-- <span class="glyphicon glyphicon-eye-open"></span> -->
-                            Car Details
+                            onclick="viewCar({{ $car->id }})"
+                            title="View Car & Models">
+                            <span class="glyphicon glyphicon-eye-open"></span>
                           </button>
                           <button type="button" class="btn btn-small btn-primary"
                             onclick="viewModels({{ $car->id }})">
