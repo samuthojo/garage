@@ -163,6 +163,9 @@ function showEditProductModal(category, product, car, car_model, location) {
   $("#sel8").val(product.has_includes);
   $("#edit_product_includes").val(product.includes);
   $("#edit_include_price").val(product.include_price);
+  if(product.has_includes == 1) {
+    $("#my_includes2").fadeIn(0);
+  }
   // $("#edit_product_file").val(product.image);
   /* set global variable product_id */
   product_id = product.id;
@@ -326,4 +329,27 @@ function setUpModels(models, id) {
        // then append it to the select element
        mySelect.appendChild(opt);
     }
+}
+
+function bringIncludes(id) {
+  var id1 = id2 = id3 = "";
+  if(id == "sel4") {
+    id1 = "#my_includes";
+    id2 = "#product_includes";
+    id3 = "#include_price";
+  }
+  else if(id == "sel8") {
+    id1 = "#my_includes2";
+    id2 = "#edit_product_includes";
+    id3 = "#edit_include_price";
+  }
+  var has_includes = parseInt($("#" + id).val());
+  if(has_includes) {
+    $(id1).fadeIn(0);
+  }
+  else {
+    $(id2).val("");
+    $(id3).val("");
+    $(id1).fadeOut(0);
+  }
 }

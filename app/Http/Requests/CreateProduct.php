@@ -57,7 +57,7 @@ public function messages()
       'price.integer' => 'Product price must be a number',
       'stock.required' => 'Please enter the product stock',
       'stock.integer' => 'Product stock must be a number',
-      'has_includes.required' => 'Please specify whether a product has includes or not',
+      'has_includes.required' => 'Please specify',
       'has_includes.boolean' => 'Please specify whether a product has includes or not',
       'includes.required_if' => 'Please enter the includes',
       'include_price.required_if' => 'Please enter the include_price',
