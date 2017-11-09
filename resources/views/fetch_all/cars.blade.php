@@ -46,15 +46,14 @@
                             title="View Car & Models">
                             <span class="glyphicon glyphicon-eye-open"></span>
                           </button>
-                          <button type="button" class="btn btn-small btn-primary"
+                          <!-- <button type="button" class="btn btn-small btn-primary"
                             onclick="viewModels({{ $car->id }})">
-                            <!-- <span class="glyphicon glyphicon-eye-open"></span> -->
                             View Models
-                          </button>
+                          </button> -->
                           <button type="button" class="btn btn-danger"
-                           onclick="showDeleteModal({{ $car->id }})">
-                            <!-- <span class="glyphicon glyphicon-trash"></span> -->
-                            Delete Car
+                           onclick="showDeleteModal({{ $car->id }})"
+                           title="Delete this car">
+                            <span class="glyphicon glyphicon-trash"></span>
                           </button>
                        </div>
                       </td>

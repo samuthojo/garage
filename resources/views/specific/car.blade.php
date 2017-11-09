@@ -1,9 +1,3 @@
-<style>
-  .action {
-    margin-right: 10px;
-  }
-</style>
-
 <script src="{{ asset('js/cars.js')}}"></script>
 @include('modals.confirmation_modal', ['text' => 'car',
                                        'function' => 'deleteCar()'])
