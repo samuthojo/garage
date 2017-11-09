@@ -203,8 +203,10 @@ class Cms extends Controller
                            $myProd->product_category = $prod->category()
                                                             ->first()
                                                             ->name;
-                           $myProd->car = $prod->car;
-                           $myProd->car_model = $prod->car_model;
+                           $car = $prod->car;
+                           $model = $prod->car_model;
+                           $myProd->car = $car->name;
+                           $myProd->car_model = $model->model_name;
                            return $myProd;
                          });
       $cars = Car::all();

@@ -48,6 +48,8 @@
               <th>No.</th>
               <th>Name</th>
               <th>Category</th>
+              <th>Car</th>
+              <th>Model</th>
               <th>Unit</th>
               <th>Price (Tshs)</th>
               <th>Stock</th>
@@ -62,6 +64,8 @@
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $product->name }}</td>
                       <td>{{ $product->product_category }}</td>
+                      <td>{{ $product->car }}</td>
+                      <td>{{ $product->car_model }}</td>
                       <td>{{ $product->unit }}</td>
                       <td>{{ sprintf('%s', number_format($product->price, 0)) }}</td>
                       <td>{{ $product->stock }}</td>
