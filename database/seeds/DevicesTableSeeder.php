@@ -12,14 +12,14 @@ class DevicesTableSeeder extends Seeder
      */
     public function run()
     {
-      // $faker = Faker\Factory::create();
-      //
-      // for ($i=1; $i < 12; $i++) {
-      //     $device = [
-      //         'token' => $faker->sha1(),
-      //         'customer_id' => $i,
-      //     ];
-      //     Device::create($device);
-      // }
+      $faker = Faker\Factory::create();
+
+      for ($i=1; $i < 7; $i++) {
+          $device = [
+              'token' => $faker->sha1(),
+              'customer_id' => $i,
+          ];
+          Device::create($device);
+      }
     }
 }

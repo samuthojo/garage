@@ -12,10 +12,18 @@
 <script src="{{ asset('js/products.js') }}"></script>
 <script src="{{ asset('js/jquery.validate.js') }}"></script>
 @include('modals.product_modal')
+@include('modals.confirmation_modal', ['text' => 'product',
+                                       'function' => 'deleteProduct()'])
+@include('modals.edit_product_modal')
 @include('modals.status_alert', [
  'modal_id' => 'product_success',
  'text_class' => 'text-success',
  'text' => 'Product added successfully',
+])
+@include('modals.status_alert', [
+ 'modal_id' => 'product_edit_success',
+ 'text_class' => 'text-success',
+ 'text' => 'Product edited successfully',
 ])
 @include('modals.status_alert', [
  'modal_id' => 'product_delete_success',
@@ -39,6 +47,7 @@
             <tr>
               <th>No.</th>
               <th>Name</th>
+              <th>Category</th>
               <th>Unit</th>
               <th>Price (Tshs)</th>
               <th>Stock</th>
@@ -52,15 +61,26 @@
                     <tr>
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $product->name }}</td>
+                      <td>{{ $product->product_category }}</td>
                       <td>{{ $product->unit }}</td>
                       <td>{{ sprintf('%s', number_format($product->price, 0)) }}</td>
                       <td>{{ $product->stock }}</td>
                       <td>
-												<button id="btn_eye_open" type="button" class="btn btn-primary"
-													onclick="viewProduct({{ $product->id }})"
-                          title="Product Details">
-	          							<span class="glyphicon glyphicon-eye-open"></span>
-	        							</button>
+                        <div class="btn-group">
+  												<button id="btn_eye_open" type="button" class="btn btn-primary"
+  													onclick="viewProduct({{ $product->id }})"
+                            title="Product Details">
+  	          							<span class="glyphicon glyphicon-eye-open"></span>
+  	        							</button>
+                          <button type="button" class="btn btn-primary"
+                            onclick="fetchParticulars({{$product->id}})" title="Edit Product">
+                            <i class="fa fa-pencil"></i>
+                          </button>
+                          <button type="button" class="btn btn-danger"
+                            onclick="showDeleteModal({{$product->id}})" title="Delete Product">
+                            <i class="fa fa-trash-o"></i>
+                          </button>
+                        </div>
 											</td>
                     </tr>
            @endforeach

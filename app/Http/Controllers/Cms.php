@@ -35,7 +35,7 @@ use App\Http\Requests\EditService;
 class Cms extends Controller
 {
     public function __construct() {
-      $this->middleware('auth')->except(['index', 'authenticate', ]);
+      //$this->middleware('auth')->except(['index', 'authenticate', ]);
     }
 
     //perform display login form action
@@ -196,13 +196,41 @@ class Cms extends Controller
 
     public function products() {
       $categories = Category::all();
-      $products = Product::orderBy('date_modified', 'desc')->get();
+      $products = Product::orderBy('date_modified', 'desc')
+                         ->get()
+                         ->map( function($prod) {
+                           $myProd = $prod;
+                           $myProd->product_category = $prod->category()
+                                                            ->first()
+                                                            ->name;
+                           $myProd->car = $prod->car;
+                           $myProd->car_model = $prod->car_model;
+                           return $myProd;
+                         });
       $cars = Car::all();
+
       return view('fetch_all.products', [
           'products' => $products,
           'categories' => $categories,
           'cars' => $cars,
+          'models' => null,
+          'category' => null,
+          'car' => null,
+          'car_model' => null,
       ]);
+    }
+
+    public function productParticulars(Product $product) {
+      $car = $product->car;
+      $car_model = $product->car_model;
+      $category = $product->category;
+      $models = null;
+      if(($product->car()->first()) instanceof Car) {
+        $models = $car->models;
+      }
+
+      return response()->json(compact('models', 'category', 'product',
+                                      'car', 'car_model'), 200);
     }
 
     public function customers() {
@@ -588,7 +616,7 @@ class Cms extends Controller
       }
     }
 
-    public function updateProduct(CreateProduct $request) {
+    public function updateProduct(CreateProduct $request, $location) {
       $id = $request->input('id');
       $data = $request->except('id', 'image');
       if($request->hasFile('image')) {
@@ -601,7 +629,12 @@ class Cms extends Controller
       } else {
         Product::where('id', $id)->update($data);
       }
-      return redirect()->route('view', ['type' => 'product', 'id' => $id]);
+      if($location == "product") {
+        return redirect()->route('view', ['type' => 'product', 'id' => $id]);
+      }
+      else if ($location == "products") {
+        return $this->products();
+      }
     }
 
     public function updateCar(CreateCar $request) {

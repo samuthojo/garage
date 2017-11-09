@@ -19,6 +19,11 @@
  'text_class' => 'text-success',
  'text' => 'Product edited successfully',
 ])
+@include('modals.status_alert', [
+ 'modal_id' => 'product_delete_success',
+ 'text_class' => 'text-success',
+ 'text' => 'Product deleted successfully',
+])
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title pull-left"
@@ -30,7 +35,7 @@
           </button>
           <button type="button" class="btn btn-primary"
             onclick=
-            "showEditProductModal({{$category}}, {{$product}}, {{$car}}, {{$car_model}})"
+            "showEditProductModal({{$category}}, {{$product}}, {{$car}}, {{$car_model}}, 'product')"
             title="Edit Product">
             <i class="fa fa-pencil"></i>
           </button>

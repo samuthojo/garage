@@ -18,7 +18,7 @@
           padding: 19px 29px 29px;
           top: 0;
           margin: 60% auto;
-          left: 0;
+          /*left: 0;*/
           /*position: fixed;*/
           background-color: #fff;
           border: 1px solid #e5e5e5;

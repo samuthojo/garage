@@ -1,5 +1,41 @@
 var product_id = "";
 
+
+function fetchParticulars(id) {
+  $(".loader").fadeIn(0);
+  //models //category //product //car //car_model
+  var link = "product_particulars/" + id;
+  $.getJSON(link)
+   .done( function(data) {
+     if(data.models != null) {
+       appendModels(data.models, "sel7");
+       $(".loader").fadeOut(0);
+     }
+     showEditProductModal(data.category, data.product,
+                          data.car, data.car_model, "products");
+   })
+   .fail( function(error) {
+     console.log(error);
+   });
+}
+
+function appendModels(models, id) {
+  var mySelect = document.getElementById(id);
+
+  //Leave the first two options, delete the rest
+  $('#' + id).find('option').not(':first, :eq(1)').remove();
+  $('#' + id).val('#');//select first option
+
+  for(i = 0; i < models.length; i++) {
+     var opt = document.createElement("option");
+     opt.value= models[i].id;
+     opt.innerHTML = models[i].model_name;
+
+     // then append it to the select element
+     mySelect.appendChild(opt);
+  }
+}
+
 function showProductModal() {
   $("#product_modal").modal({
     backdrop: 'static',
@@ -108,7 +144,8 @@ function viewProduct(id) {
   });
 }
 
-function showEditProductModal(category, product, car, car_model) {
+function showEditProductModal(category, product, car, car_model, location) {
+  our_location = location;
   $('#edit_product_modal').modal({
     backdrop: 'static',
     keyboard: false,
@@ -135,7 +172,7 @@ function editProduct() {
       clearErrors2();
       $("#btn_save").prop("disabled", true);
       $(".my_loader").fadeIn(0);
-      var link = 'products/update';
+      var link = 'products/update/' + our_location;
       var myForm = document.getElementById('edit_product_form');
       var formData = new FormData(myForm);
       formData.append('id', product_id);
@@ -151,7 +188,7 @@ function editProduct() {
                   $(".my_loader").fadeOut(0);
                   closeModal('edit_product_modal');
                   $("#main_content").html(result);
-                  showMyModal("product_edit_success")
+                  showMyModal("product_edit_success");
               },
               error: function (error) {
                 $("#btn_save").prop("disabled", false);

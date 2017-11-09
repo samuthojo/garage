@@ -10,7 +10,7 @@
       </div>
       <div class="modal-body">
         <div class="container">
-        <form name="product_modal" id="product_form" class="form-horizontal col-sm-10">
+        <form name="product_modal" id="product_form" class="form-horizontal">
           <div class="form-group">
               <label class="control-label col-sm-2" for="sel2">Category:</label>
                <select id="sel1" class="form-control" name="category_id">
