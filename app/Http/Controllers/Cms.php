@@ -444,7 +444,7 @@ class Cms extends Controller
           });
       $service_as_products =
           DB::table('customer_services')
-            ->latest('created_at')
+            ->latest('customer_services.created_at')
             ->join('service_as_products', 'service_as_products.id', '=',
                                 'customer_services.service_as_product_id')
             ->join('services', 'services.id', '=', 'service_as_products.service_id')
@@ -457,7 +457,6 @@ class Cms extends Controller
             ->groupBy('service_as_products.id')
             ->get();
       // $service_as_products = ServiceAsProduct::whereIn('id', $service_as_product_ids)
-      //                       ->latest('updated_at')
       //                       ->get()
       //                       ->map( function($serv) {
       //                         $service = $serv;
