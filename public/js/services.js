@@ -2,6 +2,40 @@ var service_id = ""; //This is the Service_as_product_id
 
 var button_txt = "";
 
+function fetchCarModels(my_service_id, service) {
+  $(".loader").fadeIn(0);
+
+  var link = "service_as_product/models/" + my_service_id;
+  $.getJSON(link)
+   .done( function(data) {
+     if(data.models != null) {
+       serviceAppendModels(data.models, "sel8");
+     }
+     $(".loader").fadeOut(0);
+     showEditModal(service);
+   })
+   .fail( function(error) {
+     console.log(error);
+   });
+}
+
+function serviceAppendModels(models, id) {
+  var mySelect = document.getElementById(id);
+
+  //Leave the first two options, delete the rest
+  $('#' + id).find('option').not(':first, :eq(1)').remove();
+  $('#' + id).val('#');//select first option
+
+  for(i = 0; i < models.length; i++) {
+     var opt = document.createElement("option");
+     opt.value= models[i].id;
+     opt.innerHTML = models[i].model_name;
+
+     // then append it to the select element
+     mySelect.appendChild(opt);
+  }
+}
+
 function showServiceModal(id) {
   $('#' + id).modal({
     backdrop: 'static',
@@ -89,8 +123,8 @@ function showEditModal(service) {
   $('#sel6').val(service.service_id);
   $('#sel7').val(service.car_id);
   $('#sel8').val(service.car_model_id);
-  $('#service_price').val(service.price);
-  $('#service_description').val(service.description);
+  $('#edit_service_price').val(service.price);
+  $('#edit_service_description').val(service.description);
 
   //set the service_id global
   service_id = service.id; //This is the Service_as_product_id

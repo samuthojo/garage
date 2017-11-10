@@ -16,6 +16,7 @@
 @include('modals.decision_modal')
 @include('modals.new_service')
 @include('modals.from_existing_service')
+@include('modals.edit_service')
 @include('modals.modal', ['id' => 'activate_modal',
                           'title' => 'Confirmation',
                           'text' => 'You are now offering this service?',
@@ -38,6 +39,11 @@
  'modal_id' => 'service_deactivate_success',
  'text_class' => 'text-success',
  'text' => 'Service deactivated',
+])
+@include('modals.status_alert', [
+ 'modal_id' => 'service_edit_success',
+ 'text_class' => 'text-success',
+ 'text' => 'Service edited successfully',
 ])
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -67,7 +73,7 @@
             @foreach($services as $service)
                     <tr>
                       <td>{{ $loop->iteration }}</td>
-                      <td>{{ $service->service }}</td>
+                      <td>{{ $service->name }}</td>
                       <td>{{ $service->car }}</td>
                       <td>{{ $service->model }}</td>
                       <td>{{ sprintf('%s', number_format($service->price, 0)) }}</td>
@@ -87,6 +93,11 @@
                             title="View Details">
                             <span class="glyphicon glyphicon-eye-open"></span>
                           </button>
+                          <button type="button" class="btn btn-primary"
+                           onclick="fetchCarModels({{$service->id}}, {{$service}})"
+                           title="Edit">
+                           <i class="fa fa-pencil" style="cursor: pointer;"></i>
+                         </button>
                           @if(strcasecmp($service->status,'active') == 0)
                             <!-- <button type="button" class="btn btn-small btn-primary"
                               onclick="showActivateModal({{$service->id}})"

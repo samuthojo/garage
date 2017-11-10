@@ -8,8 +8,8 @@ function fetchParticulars(id) {
    .done( function(data) {
      if(data.models != null) {
        appendModels(data.models, "sel7");
-       $(".loader").fadeOut(0);
      }
+     $(".loader").fadeOut(0);
      showEditProductModal(data.category, data.product,
                           data.car, data.car_model, "products");
    })
@@ -42,6 +42,7 @@ function showProductModal() {
     show: true
   });
   clearErrors();
+  $("#my_includes").fadeOut(0);
 }
 
 function newProduct() {
@@ -150,6 +151,7 @@ function showEditProductModal(category, product, car, car_model, location) {
     keyboard: false,
     show: true
   });
+  $("#my_includes2").fadeOut(0);
   clearErrors2();
   $("#sel5").val(category.id);
   $("#edit_product_name").val(product.name);
@@ -160,9 +162,10 @@ function showEditProductModal(category, product, car, car_model, location) {
   $("#edit_product_price").val(product.price);
   $('#edit_product_warranty').val(product.warranty);
   $("#sel8").val(product.has_includes);
-  $("#edit_product_includes").val(product.includes);
-  $("#edit_include_price").val(product.include_price);
-  if(product.has_includes == 1) {
+  
+  if(parseInt(product.has_includes)) {
+    $("#edit_product_includes").val(product.includes);
+    $("#edit_include_price").val(product.include_price);
     $("#my_includes2").fadeIn(0);
   }
   // $("#edit_product_file").val(product.image);

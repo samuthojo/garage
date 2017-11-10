@@ -43,14 +43,14 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title pull-left"
-          style="font-weight: bold;">Service: {{$service->service}}</h3>
+          style="font-weight: bold;">Service: {{$service->name}}</h3>
           <div class="btn-group pull-right">
             <button type="button" class="btn btn-primary"
-             onclick="menu_links('services')">
+             onclick="menu_links('services')" title="Back">
               <i class="fa fa-arrow-left" style="cursor: pointer;"></i>
             </button>
             <button type="button" class="btn btn-primary"
-             onclick="showEditModal({{ $service }})">
+             onclick="showEditModal({{ $service }})" title="Edit">
              <i class="fa fa-pencil" style="cursor: pointer;"></i>
            </button>
            @if(strcasecmp($service->status,'active') == 0)
@@ -84,14 +84,14 @@
           <div class="col-sm-6">
             <img src="{{ asset('uploads/services/' . $service->picture)}}"
               class="img-rounded" alt="Product image" width="100%"
-              height="auto" title="Service: {{$service->service}}">
+              height="auto" title="{{$service->name}}">
           </div>
           <div class="col-sm-6">
       <div class="table-responsive">
         <table class="table table-striped">
           <tr>
             <th>Service: </th>
-              <td>{{ $service->service }}</td>
+              <td>{{ $service->name }}</td>
           </tr>
           <tr>
             <th>Description: </th>

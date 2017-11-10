@@ -25,6 +25,7 @@
       @endforeach
     <!-- </tbody> -->
     <!-- <tfoot> -->
+      @if($total_amount > 0)
        <tr>
          <th></th>
          <th></th>
@@ -33,6 +34,7 @@
          <th>Total Amount:</th>
          <th>{{sprintf("%s/=", number_format($total_amount))}}</th>
        </tr>
+      @endif
      </tbody>
   </table>
 </div>

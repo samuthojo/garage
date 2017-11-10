@@ -55,13 +55,13 @@ function showEditModel(model) {
   });
   $('#edit_car_id').val(model.car_id);
   $('#edit_model_name').val(model.model_name);
-  clearErrors2();
+  clearErrors3();
 }
 
 function editModel() {
   $("#btn_edit").prop("disabled", true);
   $(".my_loader").fadeIn(0);
-  clearErrors2();
+  clearErrors3();
   var myForm = document.getElementById('edit_model_form');
   var formData = new FormData(myForm);
   formData.append('id', model_id);
@@ -89,7 +89,7 @@ function editModel() {
   });
 }
 
-function clearErrors2() {
+function clearErrors3() {
   $("#name_error2").text("");
   $("#picture_error2").text("");
 }

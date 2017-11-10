@@ -54,19 +54,19 @@
          </div>
           <div class="form-group">
             <label for="service_price2" class="control-label col-sm-2">Price:</label>
-            <input type="text" name="price" id="service_price"
+            <input type="text" name="price" id="edit_service_price"
               placeholder="Price" class="form-control">
             <span  class="text-danger col-sm-offset-2" id="price_error3"></span>
           </div>
           <div class="form-group">
             <label for="service_description" class="control-label col-sm-2">Description:</label>
-            <textarea class='form-control' id="service_description" name="description"
+            <textarea class='form-control' id="edit_service_description" name="description"
               placeholder="Short description" class="form-control"></textarea>
             <span class="text-danger col-sm-offset-2" id="description_error3"></span>
           </div>
           <div class="form-group">
             <label for="picture" class="control-label col-sm-2">Replace Service Picture:</label>
-            <input type="file" class="large" id="picture" name="picture"
+            <input type="file" class="large" id="edit_picture" name="picture"
               class="form-control">
             <span class="text-danger col-sm-offset-2" id="picture_error3"></span>
           </div>

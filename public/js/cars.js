@@ -117,16 +117,12 @@ function editCar() {
 
 function clearErrors2() {
   $("#car_name_error2").text("");
-  $("#num_models_error2").text("");
   $("#image_error2").text("");
 }
 
 function displayErrors2(data) {
   if(data.name != null) {
     $("#car_name_error2").text(data.name[0]);
-  }
-  if(data.num_models != null) {
-    $("#num_models_error2").text(data.num_models[0]);
   }
   if(data.picture != null) {
     $("#image_error2").text(data.picture[0]);

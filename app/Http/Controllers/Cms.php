@@ -65,7 +65,9 @@ class Cms extends Controller
       $services = ServiceAsProduct::orderBy('updated_at', 'desc')
                   ->get()->map(function($serv) {
                     $service = $serv;
-                    $service->service = $serv->service()->first()->name;
+                    // $service->service = $serv->service()->first()->name;
+                    $service->name = $serv->service()->first()->name;
+                    $service->description = $serv->service()->first()->description;
                     $car = $serv->car;
                     $service->car = $car->name;
                     $model = $serv->car_model;
@@ -74,13 +76,15 @@ class Cms extends Controller
                     return $service;
                   });
       $cars = Car::all();
-      return view('fetch_all.services', compact('services', 'cars'));
+      $models = null;
+      return view('fetch_all.services', compact('services', 'cars', 'models'));
     }
 
     public function service(ServiceAsProduct $service) {
       $services = Service::all();
 
-      $service->service = $service->service()->first()->name;
+      // $service->service = $service->service()->first()->name;
+      $service->name = $service->service()->first()->name;
       $car = $service->car;
       $service->car = $car->name;
       $model = $service->car_model;
@@ -842,6 +846,18 @@ class Cms extends Controller
       }
 
       return null;
+    }
+
+    public function getModelsFromServiceId($service_as_product_id) {
+      $service = ServiceAsProduct::find($service_as_product_id);
+      $models = "";
+      if(($service->car()->first()) instanceof Car) {
+        $models = $service->car()->first()->models;
+      }
+      else {
+        $models = null;
+      }
+      return response()->json(compact('models'));
     }
 
 }

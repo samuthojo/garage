@@ -57,6 +57,7 @@ Route::post('services/create', 'Cms@newService');
 Route::post('services/from_existing', 'Cms@newService2');
 Route::post('services/update', 'Cms@updateService');
 Route::post('services/status/update', 'Cms@updateServiceStatus');
+Route::get('service_as_product/models/{my_service_id}', 'Cms@getModelsFromServiceId');
 
 Route::get('requested_services', 'Cms@requestedServices');
 Route::get('requested_services/{service}', 'Cms@requestedServiceDetails')->name('requested_service');
