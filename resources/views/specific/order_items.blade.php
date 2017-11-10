@@ -10,8 +10,11 @@
   <div class="panel-body">
     <div style="line-height: 30px;">
       <span style="font-weight: bold;">Order_No: </span>{{ '# '  . $order->id}}<br/>
+      <span style="font-weight: bold;">Date Ordered: </span>{{$order->date}}<br/>
       <span style="font-weight: bold;">Customer: </span>{{$customer_name}}<br/>
       <span style="font-weight: bold;">Contact: </span>{{$contact}}<br/>
+      <span style="font-weight: bold;"># Items: </span>{{$order->num_items}}<br/>
+      <span style="font-weight: bold;">Amount: </span>{{$order->amount}}<br/>
     </div>
     <span style="margin-top: 30px;" >
       <h3 style="font-weight: bold;" class="text-primary">Order Items:</h3>
