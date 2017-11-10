@@ -26,10 +26,12 @@ function setTabActive(e) {
 }
 
 function orderPromo() {
+  $(".loader").fadeIn(0);
   locationPromo = 0 //OrderPromoMessage Is Active
   var link = "order_promo";
   $.getJSON(link)
     .done( function(data) {
+      $(".loader").fadeOut(0);
       $("#promo_text").text(data.order_promo.message);
     })
     .fail( function(error) {
@@ -38,10 +40,12 @@ function orderPromo() {
 }
 
 function servicePromo() {
+  $(".loader").fadeIn(0);
   locationPromo = 1 //ServicePromoMessage Is Active
   var link = "service_promo";
   $.getJSON(link)
     .done( function(data) {
+      $(".loader").fadeOut(0);
       $("#promo_text").text(data.service_promo.message);
     })
     .fail( function(error) {
