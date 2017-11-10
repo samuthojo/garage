@@ -12,15 +12,15 @@ class CustomerCarsTableSeeder extends Seeder
      */
     public function run()
     {
-      $faker = Faker\Factory::create();
-
-      for ($i=1; $i < 7; $i++) {
-          $customerCar = [
-              'car_id' => $i,
-              'car_model_id' => $i,
-              'customer_id' => $i,
-          ];
-          CustomerCar::create($customerCar);
-      }
+      // $faker = Faker\Factory::create();
+      //
+      // for ($i=1; $i < 7; $i++) {
+      //     $customerCar = [
+      //         'car_id' => $i,
+      //         'car_model_id' => $i,
+      //         'customer_id' => $i,
+      //     ];
+      //     CustomerCar::create($customerCar);
+      // }
     }
 }

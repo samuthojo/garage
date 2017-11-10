@@ -12,14 +12,14 @@ class FeedbackTableSeeder extends Seeder
      */
     public function run()
     {
-      $faker = Faker\Factory::create();
-      for($i = 1; $i < 7; $i++) {
-        Feedback::create([
-          'customer_id' => $i,
-          'email' => $faker->email,
-          'title' => $faker->sentence($faker->numberBetween(3,5)),
-          'message' => $faker->paragraph(3, true),
-        ]);
-      }
+      // $faker = Faker\Factory::create();
+      // for($i = 1; $i < 7; $i++) {
+      //   Feedback::create([
+      //     'customer_id' => $i,
+      //     'email' => $faker->email,
+      //     'title' => $faker->sentence($faker->numberBetween(3,5)),
+      //     'message' => $faker->paragraph(3, true),
+      //   ]);
+      // }
     }
 }
