@@ -442,32 +442,19 @@ class Cms extends Controller
           ->get()->map( function($data) {
             return $mydata = $data->service_as_product_id;
           });
-      $service_as_products =
-          DB::table('customer_services')
-            ->latest('customer_services.created_at')
-            ->join('service_as_products', 'service_as_products.id', '=',
-                                'customer_services.service_as_product_id')
-            ->join('services', 'services.id', '=', 'service_as_products.service_id')
-            ->join('cars', 'cars.id', '=', 'service_as_products.car_id')
-            ->join('car_models', 'car_models.id', '=', 'service_as_products.car_model_id')
-            ->whereIn('service_as_products.id', $service_as_product_ids)
-            ->select('service_as_products.*', 'services.name as service',
-                     'cars.name as car', 'car_models.model_name as model',
-                     DB::raw('count(*) as customers'))
-            ->groupBy('service_as_products.id')
-            ->get();
-      // $service_as_products = ServiceAsProduct::whereIn('id', $service_as_product_ids)
-      //                       ->get()
-      //                       ->map( function($serv) {
-      //                         $service = $serv;
-      //                         $service->service = $serv->service()->first()->name;
-      //                         $car = $serv->car;
-      //                         $model = $serv->car_model;
-      //                         $service->car = $car->name;
-      //                         $service->model = $model->model_name;
-      //                         $service->customers = $serv->customerServices()->count();
-      //                         return $service;
-      //                       });
+
+      $service_as_products = ServiceAsProduct::whereIn('id', $service_as_product_ids)
+                            ->get()
+                            ->map( function($serv) {
+                              $service = $serv;
+                              $service->service = $serv->service()->first()->name;
+                              $car = $serv->car;
+                              $model = $serv->car_model;
+                              $service->car = $car->name;
+                              $service->model = $model->model_name;
+                              $service->customers = $serv->customerServices()->count();
+                              return $service;
+                            });
       return view('fetch_all.requested_services', compact('service_as_products'));
     }
 
