@@ -18,8 +18,8 @@
                <select name='service_id' id="sel3" onchange=""
                 class="form-control" style="display: inline;">
                  <option disabled selected value="#">Choose service</option>
-                 @foreach($services as $service)
-                    <option value="{{$service->service_id}}">{{$service->service}}</option>
+                 @foreach($main_services as $service)
+                    <option value="{{$service->id}}">{{$service->name}}</option>
                  @endforeach
                </select>
                <i class="fa fa-spinner fa-spin fa-2x fa-fw select_loader text-primary"

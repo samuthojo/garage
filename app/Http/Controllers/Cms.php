@@ -62,6 +62,8 @@ class Cms extends Controller
     }
 
     public function services() {
+      $main_services = Service::all();
+
       $services = ServiceAsProduct::orderBy('updated_at', 'desc')
                   ->get()->map(function($serv) {
                     $service = $serv;
@@ -77,11 +79,13 @@ class Cms extends Controller
                   });
       $cars = Car::all();
       $models = null;
-      return view('fetch_all.services', compact('services', 'cars', 'models'));
+      return view('fetch_all.services', compact('services', 'cars',
+                                                  'main_services',
+                                                  'models'));
     }
 
     public function service(ServiceAsProduct $service) {
-      $services = Service::all();
+      $main_services = Service::all();
 
       // $service->service = $service->service()->first()->name;
       $service->name = $service->service()->first()->name;
@@ -100,7 +104,7 @@ class Cms extends Controller
          $models = null;
        }
 
-      return view('specific.service', compact('service', 'services', 'cars', 'models'));
+      return view('specific.service', compact('service', 'main_services', 'cars', 'models'));
     }
 
     public function newService(CreateNewService $request) {

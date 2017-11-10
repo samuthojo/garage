@@ -17,7 +17,7 @@
                <select name='service_id' id="sel6" onchange=""
                 class="form-control">
                  <option disabled selected value="#">Choose service</option>
-                 @foreach($services as $service)
+                 @foreach($main_services as $service)
                     <option value="{{$service->id}}">{{$service->name}}</option>
                  @endforeach
                </select>
