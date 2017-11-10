@@ -453,7 +453,7 @@ class Cms extends Controller
             ->whereIn('service_as_products.id', $service_as_product_ids)
             ->select('service_as_products.*', 'services.name as service',
                      'cars.name as car', 'car_models.model_name as model',
-                     DB::raw('count(customer_services.id) as customers'))
+                     DB::raw('count(*) as customers'))
             ->groupBy('service_as_products.id')
             ->get();
       // $service_as_products = ServiceAsProduct::whereIn('id', $service_as_product_ids)
