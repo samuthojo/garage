@@ -138,7 +138,7 @@ class Cms extends Controller
       return $this->services();
     }
 
-    public function updateService(EditService $request) {
+    public function updateService(EditService $request, $location) {
       $data1 = "";
       if($request->exists('car_model_id')) {
         $data1 = $request->only('service_id', 'car_id', 'car_model_id', 'price');
@@ -168,7 +168,10 @@ class Cms extends Controller
 
             DB::commit();
 
-            return redirect()->route('my_service', ['service' => $id]);
+            if($location == "service") {
+              return redirect()->route('my_service', ['service' => $id]);
+            }
+            return redirect()->route('services');
           } catch(Throwable $e) {
             DB::rollback();
           }
@@ -183,7 +186,10 @@ class Cms extends Controller
 
             DB::commit();
 
-            return redirect()->route('my_service', ['service' => $id]);
+            if($location == "service") {
+              return redirect()->route('my_service', ['service' => $id]);
+            }
+            return redirect()->route('services');
           } catch(Throwable $e) {
             DB::rollback();
           }

@@ -94,14 +94,19 @@ function format(obj) {
           '<tr>'+
               '<th>Pick-Option:</th>'+
               '<td>'+ pickOptionString(obj.pick_option) +'</td>'+
-          '</tr>'+ '<tr>'+
+          '</tr>'+
+          '<tr>'+
                '<th>Latitude:</th>'+
                '<td>'+ obj.latitude +'</td>'+
+          '</tr>'+
+          '<tr>'+
                '<th>Longitude:</th>'+
                '<td>'+ obj.longitude +'</td>'+
+          '</tr>'+
+          '<tr>'+
                '<th>Location Name:</th>'+
                '<td>'+ obj.location_name +'</td>'+
-             '</tr>' +
+           '</tr>'+
       '</table>';
   }
 }

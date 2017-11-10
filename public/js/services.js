@@ -2,6 +2,8 @@ var service_id = ""; //This is the Service_as_product_id
 
 var button_txt = "";
 
+var our_location = "";
+
 function fetchCarModels(my_service_id, service) {
   $(".loader").fadeIn(0);
 
@@ -12,7 +14,7 @@ function fetchCarModels(my_service_id, service) {
        serviceAppendModels(data.models, "sel8");
      }
      $(".loader").fadeOut(0);
-     showEditModal(service);
+     showEditModal(service, "services");
    })
    .fail( function(error) {
      console.log(error);
@@ -118,7 +120,7 @@ function makeTheUpdate(status) {
   }
 }
 
-function showEditModal(service) {
+function showEditModal(service, location) {
   showServiceModal('edit_service_modal');
   $('#sel6').val(service.service_id);
   $('#sel7').val(service.car_id);
@@ -128,6 +130,7 @@ function showEditModal(service) {
 
   //set the service_id global
   service_id = service.id; //This is the Service_as_product_id
+  our_location = location;
   clearErrors3();
 }
 
@@ -220,7 +223,7 @@ function editService() {
   var myForm = document.getElementById('edit_service_form');
   var formData = new FormData(myForm);
   formData.append('id', service_id); //Service_as_product_id
-    var link = 'services/update';
+    var link = 'services/update/' + our_location;
     $.ajax({
       type: 'post',
       url: link,

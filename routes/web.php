@@ -51,11 +51,11 @@ Route::get('orders/{order}', 'Cms@order');
 Route::post('orders/update', 'Cms@updateOrder');
 Route::get('order_comment/{order}', 'Cms@getOrderComment');
 
-Route::get('services', 'Cms@services');
+Route::get('services', 'Cms@services')->name('services');
 Route::get('services/{service}', 'Cms@service')->name('my_service');
 Route::post('services/create', 'Cms@newService');
 Route::post('services/from_existing', 'Cms@newService2');
-Route::post('services/update', 'Cms@updateService');
+Route::post('services/update/{location}', 'Cms@updateService');
 Route::post('services/status/update', 'Cms@updateServiceStatus');
 Route::get('service_as_product/models/{my_service_id}', 'Cms@getModelsFromServiceId');
 

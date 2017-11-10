@@ -50,7 +50,7 @@
               <i class="fa fa-arrow-left" style="cursor: pointer;"></i>
             </button>
             <button type="button" class="btn btn-primary"
-             onclick="showEditModal({{ $service }})" title="Edit">
+             onclick="showEditModal({{ $service }}, 'service')" title="Edit">
              <i class="fa fa-pencil" style="cursor: pointer;"></i>
            </button>
            @if(strcasecmp($service->status,'active') == 0)
