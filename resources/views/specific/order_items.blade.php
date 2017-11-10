@@ -23,6 +23,7 @@
       <table id="myTable" class="table table-striped">
           <thead>
             <tr>
+              <th>No.</th>
               <th>Product</th>
               <th>Price (Tshs)</th>
               <th>Quantity</th>
@@ -34,6 +35,7 @@
           <tbody>
             @foreach($purchases as $purchase)
                     <tr>
+                      <td>{{ $loop->iteration }}</td>
                       <td>{{ $purchase->product }}</td>
                       <td>{{ sprintf("%s", number_format($purchase->price)) }}</td>
                       <td>{{ $purchase->quantity }}</td>
