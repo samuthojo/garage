@@ -1,4 +1,4 @@
-var car_id = "";
+var my_car_id = "";
 
 function showCarModal() {
   $("#car_modal").modal({
@@ -70,9 +70,10 @@ function viewCar(id) {
   });
 }
 
-function showEditCarModal(car) {
+function showEditCarModal(car, location) {
+  our_location = location;
   /*Set global variable*/
-  car_id = car.id;
+  my_car_id = car.id;
   $('#edit_car_modal').modal({
     backdrop: 'static',
     keyboard: false,
@@ -89,8 +90,8 @@ function editCar() {
   clearErrors2();
   var myForm = document.getElementById('edit_car_form');
   var formData = new FormData(myForm);
-  formData.append('id', car_id);
-    var link = 'cars/update';
+  formData.append('id', my_car_id);
+    var link = 'cars/update/' + our_location;
     $.ajax({
             type: 'post',
             url: link,
@@ -132,10 +133,10 @@ function displayErrors2(data) {
   }
 }
 
-function showDeleteModal(id) {
+function showCarDeleteModal(id) {
   /*set global variable*/
-  car_id = id;
-  $('#confirmation_modal').modal({
+  my_car_id = id;
+  $('#car_confirmation_modal').modal({
     backdrop: 'static',
     keyboard: false,
     show: true
@@ -146,7 +147,7 @@ function deleteCar() {
     $("#btn_delete").prop("disabled", true);
     $(".my_loader").fadeIn(0);
     var id = {
-      'id' : car_id
+      'id' : my_car_id
     };
     var link = 'delete/car';
     $.ajax({

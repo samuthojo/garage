@@ -25,7 +25,7 @@ class CreateModel extends FormRequest
   {
       return [
           'model_name' => 'required',
-          'picture' => 'nullable|file|image|max:2048',
+          // 'picture' => 'nullable|file|image|max:2048',
       ];
   }
 
@@ -38,9 +38,9 @@ class CreateModel extends FormRequest
   {
     return [
         'model_name.required'  => 'Please enter the model name',
-        'picture.file' => 'Errors during picture upload, please try again',
-        'picture.image' => 'Picture extensions allowed are: jpeg, jpg, png',
-        'picture.max' => 'Picture exceeds maximum size of 2MB',
+        // 'picture.file' => 'Errors during picture upload, please try again',
+        // 'picture.image' => 'Picture extensions allowed are: jpeg, jpg, png',
+        // 'picture.max' => 'Picture exceeds maximum size of 2MB',
     ];
   }
 }

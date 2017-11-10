@@ -73,12 +73,12 @@
                       </td>
                       <td>
                         <div class="btn-group">
-                          <button type="button" class="btn btn-small btn-primary"
+                          <button type="button" class="btn btn-small btn-default"
                             onclick="viewItems({{$order->id}})" title="View Order Items">
                             <span class="glyphicon glyphicon-eye-open"></span>
                           </button>
                           @if(strcasecmp($status, "accepted") == 0)
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-success"
                               id="accept{{$order->id}}" disabled>
                               Accept
                             </button>
@@ -87,12 +87,12 @@
                               id="service{{$order->id}}">
                               Serviced
                             </button>
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-danger"
                               id="reject{{$order->id}}" disabled>
                               Reject
                             </button>
                           @elseif(strcasecmp($status, "rejected") == 0)
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-success"
                               id="accept{{$order->id}}" disabled>
                               Accept
                             </button>
@@ -100,12 +100,12 @@
                               id="service{{$order->id}}" disabled>
                               Serviced
                             </button>
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-danger"
                               id="reject{{$order->id}}" disabled>
                               Reject
                             </button>
                           @elseif(strcasecmp($status, "serviced") == 0)
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-success"
                               id="accept{{$order->id}}" disabled>
                               Accept
                             </button>
@@ -113,12 +113,12 @@
                               id="service{{$order->id}}" disabled>
                               Serviced
                             </button>
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-danger"
                               id="reject{{$order->id}}" disabled>
                               Reject
                             </button>
                           @else
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-success"
                               onclick="openModal({{$order->id}}, 'accept_modal')"
                               id="accept{{$order->id}}">
                               Accept
@@ -128,7 +128,7 @@
                               id="service{{$order->id}}">
                               Serviced
                             </button>
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-danger"
                               onclick="openModal({{$order->id}}, 'reject_modal')"
                               id="reject{{$order->id}}">
                               Reject

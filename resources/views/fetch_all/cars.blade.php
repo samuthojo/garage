@@ -1,6 +1,6 @@
 <script src="{{ asset('js/cars.js') }}"></script>
 @include('modals.car')
-@include('modals.confirmation_modal', ['text' => 'car',
+@include('modals.car_confirmation_modal', ['text' => 'car',
                                        'function' => 'deleteCar()'])
 @include('modals.status_alert', [
 'modal_id' => 'car_create_success',
@@ -11,6 +11,12 @@
 'modal_id' => 'car_delete_success',
 'text_class' => 'text-success',
 'text' => 'Car deleted successfully',
+])
+@include('modals.edit_car')
+@include('modals.status_alert', [
+'modal_id' => 'car_edit_success',
+'text_class' => 'text-success',
+'text' => 'Car edited successfully',
 ])
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -50,8 +56,12 @@
                             onclick="viewModels({{ $car->id }})">
                             View Models
                           </button> -->
+                          <button type="button" class="btn btn-primary" onclick="showEditCarModal({{$car}}, 'cars')"
+                            title="Edit Car Info">
+                            <i class="fa fa-pencil"></i>
+                          </button>
                           <button type="button" class="btn btn-danger"
-                           onclick="showDeleteModal({{ $car->id }})"
+                           onclick="showCarDeleteModal({{ $car->id }})"
                            title="Delete this car">
                             <span class="glyphicon glyphicon-trash"></span>
                           </button>

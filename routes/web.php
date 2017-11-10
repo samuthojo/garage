@@ -35,7 +35,7 @@ Route::post('customers/update', 'Cms@updateCustomer');
 
 Route::get('cars', 'Cms@cars');
 Route::post('cars/create', 'Cms@createCar');
-Route::post('cars/update', 'Cms@updateCar');
+Route::post('cars/update/{location}', 'Cms@updateCar');
 
 Route::post('models/create', 'Cms@newModel');
 Route::get('models/{car_make}', 'Cms@models');

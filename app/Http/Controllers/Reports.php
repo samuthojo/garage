@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\ServiceAsProduct;
 use App\Order;
 use App\CustomerService;
+use Carbon\Carbon;
 
 class Reports extends Controller {
 
@@ -15,7 +16,15 @@ class Reports extends Controller {
   }
 
   public function reports() {
-    return view('reports.reports');
+    //The earliest order date
+    $first_order_date = Order::oldest('date')->pluck('date')->first();
+    //The earliest requested_service date
+    $first_request_date = CustomerService::oldest('created_at')
+                                         ->pluck('created_at')
+                                         ->first();
+
+    return view('reports.reports', compact('first_order_date',
+                                           'first_request_date'));
   }
 
   public function  orderReports(Request $request) {
@@ -24,7 +33,11 @@ class Reports extends Controller {
       $status++;
     }
     $startDate = $request->input('start_date');
+    $startDate = Carbon::parse($startDate)->format('Y-m-d');
+
     $endDate = $request->input('end_date');
+    $endDate = Carbon::parse($endDate)->format('Y-m-d');
+
     if($request->filled(['start_date', 'end_date'])) {
       return $this->orderReportWithBothDates($status, $startDate, $endDate);
     }
@@ -41,8 +54,8 @@ class Reports extends Controller {
 
     $conditions = [
         ['status', '=', $status],
-        ['updated_at', '>=', $startDate],
-        ['updated_at', '<=', $endDate],
+        ['date', '>=', $startDate],
+        ['date', '<=', $endDate],
      ];
 
      $orders = Order::where($conditions)
@@ -63,7 +76,7 @@ class Reports extends Controller {
   private function orderReportWithStartDate($status, $startDate) {
     $conditions = [
         ['status', '=', $status],
-        ['updated_at', '>=', $startDate],
+        ['date', '>=', $startDate],
      ];
 
      $orders = Order::where($conditions)
@@ -125,8 +138,8 @@ class Reports extends Controller {
   private function serviceReportWithBothDates($status, $startDate, $endDate) {
     $conditions = [
         ['status', '=', $status],
-        ['updated_at', '>=', $startDate],
-        ['updated_at', '<=', $endDate],
+        ['created_at', '>=', $startDate],
+        ['created_at', '<=', $endDate],
      ];
 
      $service_as_product_ids =
@@ -157,7 +170,7 @@ class Reports extends Controller {
   private function serviceReportWithStartDate($status, $startDate) {
     $conditions = [
         ['status', '=', $status],
-        ['updated_at', '>=', $startDate],
+        ['created_at', '>=', $startDate],
      ];
 
      $service_as_product_ids =

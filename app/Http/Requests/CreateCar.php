@@ -25,7 +25,6 @@ class CreateCar extends FormRequest
     {
         return [
             'name' => 'required',
-            'num_models' => 'required|integer',
             'picture' => 'nullable|file|image|max:2048',
         ];
     }
@@ -39,8 +38,6 @@ class CreateCar extends FormRequest
     {
       return [
           'name.required'  => 'Please enter the car name',
-          'num_models.required' => 'Please enter the number of models',
-          'num_models.integer' => 'Number of models must be a valid integer',
           'picture.file' => 'Errors during picture upload, please try again',
           'picture.image' => 'Picture extensions allowed are: jpeg, jpg, png',
           'picture.max' => 'Picture exceeds maximum size of 2MB',

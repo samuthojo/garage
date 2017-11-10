@@ -78,7 +78,7 @@
                       <td>
                         <div class="btn-group">
                           @if(strcasecmp($status,"accepted") == 0)
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-success"
                               id="accept{{$detail->id}}" disabled>
                               Accept
                             </button>
@@ -87,17 +87,17 @@
                               id="service{{$detail->id}}">
                               Serviced
                             </button>
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-warning"
                               onclick="openModal({{$detail->id}}, 'reschedule_modal')"
                               id="reschedule{{$detail->id}}">
                               Reschedule
                             </button>
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-danger"
                               id="reject{{$detail->id}}" disabled>
                               Reject
                             </button>
                           @elseif(strcasecmp($status,"rejected") == 0)
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-success"
                               id="accept{{$detail->id}}" disabled>
                               Accept
                             </button>
@@ -105,16 +105,16 @@
                               id="service{{$detail->id}}" disabled>
                               Serviced
                             </button>
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-warning"
                              id="reschedule{{$detail->id}}" disabled>
                               Reschedule
                             </button>
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-danger"
                               id="reject{{$detail->id}}" disabled>
                               Reject
                             </button>
                           @elseif(strcasecmp($status,"serviced") == 0)
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-success"
                               id="accept{{$detail->id}}" disabled>
                               Accept
                             </button>
@@ -122,16 +122,16 @@
                               id="service{{$detail->id}}" disabled>
                               Serviced
                             </button>
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-warning"
                              id="reschedule{{$detail->id}}" disabled>
                               Reschedule
                             </button>
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-danger"
                               id="reject{{$detail->id}}" disabled>
                               Reject
                             </button>
                           @elseif(strcasecmp($status,"rescheduled") == 0)
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-success"
                               id="accept{{$detail->id}}" disabled>
                               Accept
                             </button>
@@ -140,17 +140,17 @@
                               onclick="openModal({{$detail->id}}, 'modal')">
                               Serviced
                             </button>
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-warning"
                               id="reschedule{{$detail->id}}"
                               onclick="openModal({{$detail->id}}, 'reschedule_modal')">
                               Reschedule
                             </button>
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-danger"
                               id="reject{{$detail->id}}" disabled>
                               Reject
                             </button>
                           @else
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-success"
                               onclick="openModal({{$detail->id}}, 'accept_modal')"
                               id="accept{{$detail->id}}">
                               Accept
@@ -160,12 +160,12 @@
                               id="service{{$detail->id}}">
                               Serviced
                             </button>
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-warning"
                               onclick="openModal({{$detail->id}}, 'reschedule_modal')"
                               id="reschedule{{$detail->id}}">
                               Reschedule
                             </button>
-                            <button type="button" class="btn btn-small btn-primary"
+                            <button type="button" class="btn btn-small btn-danger"
                               onclick="openModal({{$detail->id}}, 'reject_modal')"
                               id="reject{{$detail->id}}">
                               Reject

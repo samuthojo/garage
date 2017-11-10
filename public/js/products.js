@@ -1,6 +1,5 @@
 var product_id = "";
 
-
 function fetchParticulars(id) {
   $(".loader").fadeIn(0);
   //models //category //product //car //car_model

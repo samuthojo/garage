@@ -4,7 +4,7 @@ var start_date = "";
 var end_date = "";
 var today_date = formatDate(new Date());
 
-function fetchStatus() {
+function fetchStatus(order_date, request_date) {
   report_type = parseInt($("#type").val());
   mySelect = document.getElementById('status');
   myStatus = ["Pending", "Accepted", "Serviced", "Rejected", "Rescheduled"];
@@ -16,6 +16,7 @@ function fetchStatus() {
       opt.innerHTML = myStatus[i];
       mySelect.appendChild(opt);
     }
+    $("#start_date").val(request_date);
   }
   else {
     $("#status").find("option").not(":first").remove();
@@ -25,6 +26,7 @@ function fetchStatus() {
       opt.innerHTML = myStatus[i];
       mySelect.appendChild(opt);
     }
+    $("#start_date").val(order_date);
   }
 }
 

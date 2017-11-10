@@ -165,7 +165,7 @@ class MechMaster extends Controller
     }
 
     public function cars() {
-      $cars = Car::all();
+      $cars = Car::where('status', true)->get();
       $feedback = [
         'cars' => $cars,
       ];

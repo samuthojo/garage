@@ -1,6 +1,6 @@
 <!-- Car modal -->
 <div id="edit_model" class="modal fade" role="dialog">
-<div class="modal-dialog">
+<div class="modal-dialog modal-sm">
   <!-- Modal content-->
   <div class="modal-content">
     <div class="modal-header">
@@ -16,19 +16,19 @@
           <div class="container">
             <form name="edit_model_form" id="edit_model_form">
           <div class="form-group">
-            <label for="edit_model_name" class="control-label col-sm-2">Name:</label>
+            <label for="edit_model_name" class="">Name:</label>
             <input type="text" name="model_name" id="edit_model_name"
               placeholder="Model Name" class="form-control">
-            <span class="text-danger col-sm-offset-2" id="name_error2"></span>
+            <span class="text-danger" id="name_error2"></span>
           </div>
-          <div class="form-group">
-            <label for="edit_model_picture" class="control-label col-sm-2">Replace Picture:</label>
+          <!-- <div class="form-group">
+            <label for="edit_model_picture" class="">Replace Picture:</label>
             <input type="file" class="large" id="edit_model_picture" name="picture"
               class="form-control">
-            <span class="text-danger col-sm-offset-2" id="picture_error2"></span>
-          </div>
+            <span class="text-danger" id="picture_error2"></span>
+          </div> -->
           <div class="form-group">
-            <button type="button" class="btn btn-default col-sm-offset-2"
+            <button type="button" class="btn btn-default"
               data-dismiss="modal">Cancel</button>
             <button id="btn_edit" type="button" class="btn btn-primary"
               onclick="editModel()">Save</button>

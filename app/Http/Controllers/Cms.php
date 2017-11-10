@@ -35,7 +35,7 @@ use App\Http\Requests\EditService;
 class Cms extends Controller
 {
     public function __construct() {
-      //$this->middleware('auth')->except(['index', 'authenticate', ]);
+      $this->middleware('auth')->except(['index', 'authenticate', ]);
     }
 
     //perform display login form action
@@ -57,12 +57,12 @@ class Cms extends Controller
 
     //perform return the main page action
     public function adminstart() {
-      $categories = Category::orderBy('id', 'desc')->get();
+      $categories = Category::orderBy('updated_at', 'desc')->get();
       return view('dashboard')->with('categories', $categories);
     }
 
     public function services() {
-      $services = ServiceAsProduct::orderBy('id', 'desc')
+      $services = ServiceAsProduct::orderBy('updated_at', 'desc')
                   ->get()->map(function($serv) {
                     $service = $serv;
                     $service->service = $serv->service()->first()->name;
@@ -236,7 +236,7 @@ class Cms extends Controller
     }
 
     public function customers() {
-      $customers = Customer::orderBy('id', 'desc')->get();
+      $customers = Customer::orderBy('updated_at', 'desc')->get();
       return view('fetch_all.customers')->with('customers', $customers);
     }
 
@@ -251,23 +251,34 @@ class Cms extends Controller
     }
 
     public function cars() {
-      $cars = Car::orderBy('id', 'desc')->get();
+      $cars = Car::orderBy('updated_at', 'desc')
+                 ->where('status', true)
+                  ->get()
+                  ->map( function($car) {
+                    $myCar = $car;
+                    $myCar->num_models = $car->models()
+                                             ->where('status', true)
+                                             ->count();
+                    return $myCar;
+                  });
       return view('fetch_all.cars')->with('cars', $cars);
     }
 
     public function categories() {
-      $categories = Category::orderBy('id', 'desc')->get();
+      $categories = Category::orderBy('updated_at', 'desc')->get();
       return view('fetch_all.categories')->with('categories', $categories);
     }
 
     public function orders() {
-      $orders = Order::all()->map(function($ord){
-            $order = $ord;
-            $order->customer = $ord->customer()->first()->name;
-            $order->contact = $ord->customer()->first()->phonenumber;
+      $orders = Order::orderBy('updated_at', 'desc')
+                     ->get()
+                     ->map(function($ord){
+                      $order = $ord;
+                      $order->customer = $ord->customer()->first()->name;
+                      $order->contact = $ord->customer()->first()->phonenumber;
 
-            return $order;
-        });
+                      return $order;
+                  });
       return view('fetch_all.orders')->with('orders', $orders);
     }
 
@@ -277,7 +288,11 @@ class Cms extends Controller
         $purchase->product = $pur->product()->first()->name;
         return $purchase;
       });
-      return view('specific.order_items', compact('purchases', 'order'));
+      $customer = $order->customer()->first();
+      $customer_name = $customer->name;
+      $contact = $customer->phonenumber;
+      return view('specific.order_items', compact('purchases', 'order',
+                                                  'customer_name', 'contact'));
     }
 
     public function updateOrder(Request $request) {
@@ -414,6 +429,7 @@ class Cms extends Controller
             return $mydata = $data->service_as_product_id;
           });
       $service_as_products = ServiceAsProduct::whereIn('id', $service_as_product_ids)
+                            ->latest('updated_at')
                             ->get()
                             ->map( function($serv) {
                               $service = $serv;
@@ -436,6 +452,7 @@ class Cms extends Controller
       $model = $my_model->model_name;
 
       $details = $service->customerServices()
+                         ->latest('updated_at')
                          ->get()
                          ->map( function($c) {
                            $serv = $c;
@@ -589,19 +606,14 @@ class Cms extends Controller
     }
 
     public function createCar(CreateCar $request) {
-      $data = $request->except('picture', 'num_models');
-      $num_models = request('num_models');
-      $num_models = is_null($num_models) ? 1 : $num_models;
+      $data = $request->except('picture');
       if($request->hasFile('picture')) {
         $logo = $request->file('picture');
-        if($logo->isValid()) {
-          $picture = $logo->getClientOriginalName();
-          $logo->move('uploads/cars', $picture);
-          $data = array_add($data, 'picture', $picture);
-          Car::create(array_add($data, 'num_models', $num_models));
-        }
+        $picture = $logo->getClientOriginalName();
+        $logo->move('uploads/cars', $picture);
+        $data = array_add($data, 'picture', $picture);
+        Car::create($data);
       } else {
-        $data = array_add($data, 'num_models', $num_models);
         Car::create($data);
       }
       return $this->cars();
@@ -639,26 +651,25 @@ class Cms extends Controller
       }
     }
 
-    public function updateCar(CreateCar $request) {
+    public function updateCar(CreateCar $request, $location) {
       $id = $request->input('id');
-      $data = $request->except('picture', 'num_models');
-      $num_models = request('num_models');
-      $num_models = is_null($num_models) ? 1 : $num_models;
+      $data = $request->except('picture');
       if($request->hasFile('picture')) {
         $logo = $request->file('picture');
-        if($logo->isValid()) {
-          $picture = $logo->getClientOriginalName();
-          $logo->move('uploads/cars', $picture);
-          $data = array_add($data, 'picture', $picture);
-          $data = array_add($data, 'num_models', $num_models);
-          Car::where('id', $id)->update($data);
-        }
+        $picture = $logo->getClientOriginalName();
+        $logo->move('uploads/cars', $picture);
+        $data = array_add($data, 'picture', $picture);
+        Car::where('id', $id)->update($data);
       } else {
-        Car::where('id', $id)->update(array_add($data, 'num_models',
-                                                                $num_models));
+        Car::where('id', $id)->update($data);
       }
+      if($location == 'car') {
       return redirect()->route('view',
                           ['type' => 'car', 'id' => $id]);
+      }
+      else if($location == 'cars') {
+        return $this->cars();
+      }
     }
 
     public function update(Request $request, $type) {
@@ -685,10 +696,35 @@ class Cms extends Controller
         Product::where('id', $id)->delete();
         return $this->products();
       } else if($type == 'car') {
-        Car::where('id', $id)->delete();
+        $car = Car::find($id);
+        $this->deleteAllCarModels($car);
+        $this->deactivateCarServices($car);
+        Car::where('id', $id)->update(['status' => false,]);
         return $this->cars();
       } else if($type == 'model') {
 
+      }
+    }
+
+    private function deleteAllCarModels($car) {
+      $model_ids = $car->models()->where('status', true)
+                                 ->get(['id'])
+                                 ->map( function($myId) {
+                                   return $myId->id;
+                                 });
+      foreach ($model_ids as $model_id) {
+        CarModel::where('id', $model_id)->update(['status' => false,]);
+      }
+    }
+
+    private function deactivateCarServices($car) {
+      $service_as_product_ids = $car->service_as_products()
+                                    ->get(['id'])
+                                    ->map( function($myId) {
+                                      return $myId->id;
+                                    });
+      foreach ($service_as_product_ids as $id) {
+        ServiceAsProduct::where('id', $id)->update(['status' => false]);
       }
     }
 
@@ -703,14 +739,19 @@ class Cms extends Controller
         } else {
           $models = null;
         }
-        $cars = Car::all();
+        $cars = Car::where('status', true)->get();
         $car_model = $product->car_model; //the car_model it belongs to
         $categories = Category::all();
         return view('specific.product', compact('product', 'category', 'car',
                                   'models', 'cars', 'categories', 'car_model'));
       } else if($type == 'car') {
         $car = Car::find($id);
-        return view('specific.car', compact('car'));
+        $car->num_models = $car->models()->where('status', true)->count();
+        $car_make = $car;
+        $models = $car->models()->where('status', true)
+                                ->latest('updated_at')
+                                ->get();
+        return view('specific.car', compact('car', 'car_make', 'models'));
       }
     }
 
@@ -719,13 +760,15 @@ class Cms extends Controller
      *@return All Models of that car_make
      */
     public function models(Car $car_make) {
-      $models = $car_make->models()->get();
+      $models = $car_make->models;
 
       return response()->json($models);
     }
 
     public function viewModels(Car $car_make) {
-      $models = $car_make->models()->orderBy('updated_at', 'desc')->get();
+      $models = $car_make->models()
+                         ->where('status', true)
+                         ->orderBy('updated_at', 'desc')->get();
 
       return view('specific.models', compact('models', 'car_make'));
     }
@@ -733,7 +776,7 @@ class Cms extends Controller
     public function modelDetails(CarModel $model) {
       $car = $model->car;
       $model->car = $car->name;
-      $cars = Car::all();
+      $cars = Car::where('status', true)->get();
       return view('specific.model', compact('model', 'cars'));
     }
 
@@ -741,44 +784,21 @@ class Cms extends Controller
       $data = $request->except('picture');
       $car_id = $request->input('car_id');
       $car = Car::find($car_id);
-      $num_models = $car->num_models;
       if($request->hasFile('picture')) {
-        DB::beginTransaction();
-
-        try {
           $file = $request->file('picture');
           $destination = 'uploads/models';
           $file_name = $this->handleFile($file, $destination);
           $data = array_add($data, 'picture', $file_name);
-          $num_models = $num_models +  1;
 
           CarModel::create($data);
-          $car->num_models = $num_models;
-          $car->save();
 
-          DB::commit();
-        } catch(Throwable $e) {
-            DB::rollback();
-            return response()->json(['error' => $e->getMessage(), ], 500);
-          }
       } else {
-        DB::beginTransaction();
-
-        try {
-          $num_models = $num_models +  1;
-
           CarModel::create($data);
-          $car->num_models = $num_models;
-          $car->save();
-
-          DB::commit();
-        } catch(Throwable $e) {
-            DB::rollback();
-            return response()->json(['error' => $e->getMessage(), ], 500);
-          }
-
       }
-      return redirect()->route('models', ['car_make' => $car_id]);
+      return redirect()->route('view', [
+        'type' => 'car',
+        'id' => $car_id,
+      ]);
     }
 
     public function updateModel(CreateModel $request) {
@@ -794,30 +814,24 @@ class Cms extends Controller
       else {
         CarModel::where('id', $model)->update($data);
       }
-      return redirect()->route('model', compact('model'));
+      $car_id = CarModel::find($model)->car()->first()->id;
+      return redirect()->route('view', [
+        'type' => 'car',
+        'id' => $car_id,
+      ]);
     }
 
     public function deleteModel(Request $request) {
-      DB::beginTransaction();
-
-      try {
-        $model_id = $request->input('id');
-        $car = CarModel::find($model_id)->car;
-        $num_models = $car->num_models;
-        $num_models = $num_models - 1;
-
-        CarModel::where('id', $model_id)->delete();
-        $car->num_models = $num_models;
-        $car->save();
-
-        DB::commit();
-
-        return redirect()->route('models', ['car_make' => $car->id]);
-      } catch(Throwable $e) {
-        DB::rollback();
-        return response()->json(['error' => $e->getMessage(), ], 500);
-      }
-
+      $model_id = $request->input('id');
+      $car = CarModel::find($model_id)->car;
+      //Deactivate All Services that used the model
+      $this->deactivateCarServices($car);
+      //Delete the model
+      CarModel::where('id', $model_id)->update(['status' => false,]);
+      return redirect()->route('view', [
+        'type' => 'car',
+        'id' => $car->id,
+      ]);
     }
 
     private function handleFile($file, $destination) {

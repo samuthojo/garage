@@ -58,7 +58,8 @@
 <script>
   $(document).ready( function() {
     $('#myTable').dataTable({
-          iDisplayLength: 8
+          iDisplayLength: 8,
+          bLengthChange: false
       });
   });
 </script>

@@ -84,7 +84,7 @@ function editModel() {
       $("#btn_edit").prop("disabled", false);
       $(".my_loader").fadeOut(0);
       data = JSON.parse(error.responseText);
-      displayErrors2(data.errors);
+      displayErrors3(data.errors);
     }
   });
 }
@@ -94,7 +94,7 @@ function clearErrors2() {
   $("#picture_error2").text("");
 }
 
-function displayErrors2(data) {
+function displayErrors3(data) {
   if(data.model_name != null) {
     $("#name_error2").text(data.model_name[0]);
   }
@@ -119,6 +119,30 @@ function deleteModel() {
     processData: false,
     success: function (result) {
       $("#btn_delete").prop("disabled", false);
+      $(".my_loader").fadeOut(0);
+      closeModal('confirmation_modal');
+      $("#main_content").html(result);
+      showMyModal('model_delete_success');
+    }
+  });
+}
+
+function deleteModel2() {
+  $("#btn_delete2").prop("disabled", true);
+  $(".my_loader").fadeIn(0);
+  var formData = new FormData();
+  formData.append('id', model_id);
+  var link = "models/delete";
+  $.ajax({
+    type: 'post',
+    url: link,
+    dataType: 'html',
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function (result) {
+      $("#btn_delete2").prop("disabled", false);
       $(".my_loader").fadeOut(0);
       closeModal('confirmation_modal');
       $("#main_content").html(result);
@@ -156,5 +180,23 @@ function showDeleteModal(id) {
     backdrop: 'static',
     keyboard: false,
     show: true
+  });
+}
+
+function showDeleteModal2(id) {
+  /*set global variable*/
+  model_id = id;
+  $('#delete_model').modal({
+    backdrop: 'static',
+    keyboard: false,
+    show: true
+  });
+}
+
+function myModelsDataTable() {
+  $.fn.dataTable.moment('DD-MM-YYYY'); //Sort the date column if present
+  $('#myTable').dataTable({
+    iDisplayLength: 8,
+    bLengthChange: false
   });
 }

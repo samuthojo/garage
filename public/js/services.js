@@ -1,5 +1,7 @@
 var service_id = ""; //This is the Service_as_product_id
 
+var button_txt = "";
+
 function showServiceModal(id) {
   $('#' + id).modal({
     backdrop: 'static',
@@ -17,13 +19,22 @@ function showServiceModal(id) {
   }
 }
 
+function changeStatus(id) {
+  button_txt = ($("#button" + id).text()).trim();
+  service_id = id;//Set global variable to be used later
+  if(button_txt == "Activate") {
+    showActivateModal(id);
+  }
+  else if(button_txt == "Deactivate") {
+    showDeactivateModal(id);
+  }
+}
+
 function showActivateModal(id) {
-  service_id = id;
   showServiceModal('activate_modal');
 }
 
 function showDeactivateModal(id) {
-  service_id = id;
   showServiceModal('deactivate_modal');
 }
 
@@ -64,13 +75,12 @@ function makeTheUpdate(status) {
   var color = (status == "Active") ? "text-success" : "text-danger";
   $("#status" + service_id).text(status);
   $("#status" + service_id).attr("class", color);
-   if( $("#button" + service_id).prop('disabled') ) {
-     $("#button" + service_id).prop("disabled", false);
-     $("#button2" + service_id).prop("disabled", true);
-   }
-  else {
-    $("#button" + service_id).prop("disabled", true);
-    $("#button2" + service_id).prop("disabled", false);
+
+  if(button_txt == "Activate") {
+    $("#button" + service_id).text("Deactivate");
+  }
+  else if(button_txt == "Deactivate") {
+    $("#button" + service_id).text("Activate");
   }
 }
 

@@ -8,6 +8,9 @@
 .input-group .form-control {
   width: auto;
 }
+.action {
+  width: 100px;
+}
 </style>
 <script src="{{ asset('js/services.js') }}"></script>
 @include('modals.decision_modal')
@@ -79,37 +82,33 @@
                       </td>
                       <td>
                         <div class="btn-group">
+                          <button type="button" class="btn btn-small btn-primary"
+                            onclick="viewService({{ $service->id }})"
+                            title="View Details">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                          </button>
                           @if(strcasecmp($service->status,'active') == 0)
-                            <button type="button" class="btn btn-small btn-primary"
-                              onclick="viewService({{ $service->id }})"
-                              title="View Details">
-                              <span class="glyphicon glyphicon-eye-open"></span>
-                            </button>
-                            <button type="button" class="btn btn-small btn-primary"
-                              onclick="showActivateModal({{$service->id}})" disabled
-                              id="button2{{$service->id}}">
+                            <!-- <button type="button" class="btn btn-small btn-primary"
+                              onclick="showActivateModal({{$service->id}})"
+                              id="button2{{$service->id}}" style="display: none;">
                               Activate
-                            </button>
-                            <button type="button" class="btn btn-small btn-primary"
-                              onclick="showDeactivateModal({{$service->id}})"
+                            </button> -->
+                            <button type="button" class="btn btn-primary action"
+                              onclick="changeStatus({{$service->id}})"
                               id="button{{$service->id}}">
                               Deactivate
                             </button>
                           @else
-                            <button type="button" class="btn btn-small btn-primary"
-                              onclick="viewService({{ $service->id }})" title="View Details">
-                              <span class="glyphicon glyphicon-eye-open"></span>
-                            </button>
-                            <button type="button" class="btn btn-small btn-primary"
-                              onclick="showActivateModal({{$service->id}})"
+                            <button type="button" class="btn btn-primary action"
+                              onclick="changeStatus({{$service->id}})"
                               id="button{{$service->id}}">
                               Activate
                             </button>
-                            <button type="button" class="btn btn-small btn-primary"
-                              onclick="showDeactivateModal({{$service->id}})" disabled
-                              id="button2{{$service->id}}">
+                            <!-- <button type="button" class="btn btn-small btn-primary"
+                              onclick="showDeactivateModal({{$service->id}})"
+                              id="button2{{$service->id}}" style="display: none;">
                               Deactivate
-                            </button>
+                            </button> -->
                           @endif
                         </div>
                       </td>

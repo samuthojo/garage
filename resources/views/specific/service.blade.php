@@ -8,6 +8,9 @@
 .input-group .form-control {
   width: auto;
 }
+.action {
+  width: 100px;
+}
 </style>
 <script src="{{ asset('js/services.js')}}"></script>
 @include('modals.confirmation_modal', ['text' => 'service',
@@ -51,47 +54,48 @@
              <i class="fa fa-pencil" style="cursor: pointer;"></i>
            </button>
            @if(strcasecmp($service->status,'active') == 0)
-             <button type="button" class="btn btn-small btn-primary"
+             <!-- <button type="button" class="btn btn-small btn-primary"
                onclick="showActivateModal({{$service->id}})" disabled
                id="button2{{$service->id}}">
                Activate
-             </button>
-             <button type="button" class="btn btn-small btn-primary"
-               onclick="showDeactivateModal({{$service->id}})"
+             </button> -->
+             <button type="button" class="btn btn-primary action"
+               onclick="changeStatus({{$service->id}})"
                id="button{{$service->id}}">
                Deactivate
              </button>
            @else
-             <button type="button" class="btn btn-small btn-primary"
-               onclick="showActivateModal({{$service->id}})" id="button{{$service->id}}">
+             <button type="button" class="btn btn-primary action"
+               onclick="changeStatus({{$service->id}})" id="button{{$service->id}}">
                Activate
              </button>
-             <button type="button" class="btn btn-small btn-primary"
+             <!-- <button type="button" class="btn btn-small btn-primary"
                onclick="showDeactivateModal({{$service->id}})" disabled
                id="button2{{$service->id}}">
                Deactivate
-             </button>
+             </button> -->
            @endif
          </div>
         <div class="clearfix"></div>
     </div>
     <div class="panel-body">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <img src="{{ asset('uploads/services/' . $service->picture)}}"
+              class="img-rounded" alt="Product image" width="100%"
+              height="auto" title="Service: {{$service->service}}">
+          </div>
+          <div class="col-sm-6">
       <div class="table-responsive">
         <table class="table table-striped">
           <tr>
-            <th>Description: </th>
-              <td>{{ $service->description }}</td>
+            <th>Service: </th>
+              <td>{{ $service->service }}</td>
           </tr>
           <tr>
-            <th>Picture: </th>
-              <td>
-                <a href="{{asset('uploads/services/' . $service->picture)}}"
-                   target="_blank">
-                  <img src="{{ asset('uploads/services/' . $service->picture)}}"
-                    class="img-rounded" alt="Product image" width="25%"
-                    height="auto">
-                </a>
-              </td>
+            <th>Description: </th>
+              <td>{{ $service->description }}</td>
           </tr>
           <tr>
             <th>Car: </th>
@@ -126,6 +130,9 @@
           </tr>
         </table>
       </div>
+    </div>
+  </div>
+</div>
     </div>
     <div class="panel-footer">
       Crafted @ <a href="http://ipfsoftwares.com" target="_blank">iPF SOFTWARES</a>
