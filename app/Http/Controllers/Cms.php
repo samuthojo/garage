@@ -478,7 +478,7 @@ class Cms extends Controller
       $model = $my_model->model_name;
 
       $details = $service->customerServices()
-                         ->latest('updated_at')
+                         ->latest('created_at')
                          ->get()
                          ->map( function($c) {
                            $serv = $c;
