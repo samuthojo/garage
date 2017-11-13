@@ -123,7 +123,11 @@ class Reports extends Controller {
       $status--;
     }
     $startDate = $request->input('start_date');
+    $startDate = Carbon::parse($startDate)->format('Y-m-d');
+
     $endDate = $request->input('end_date');
+    $endDate = Carbon::parse($endDate)->format('Y-m-d');
+    
     if($request->filled(['start_date', 'end_date'])) {
       return $this->serviceReportWithBothDates($status, $startDate, $endDate);
     }
