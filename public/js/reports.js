@@ -39,6 +39,7 @@ function fetchReport() {
 function validateInput() {
   report_type = $('#type').val();
   my_status = $('#status').val();
+  console.log(my_status);
   start_date = $("#start_date").val();
   end_date = $("#end_date").val();
   if(report_type == null || my_status == null) {
