@@ -29,6 +29,7 @@ function myRequestsDataTable(file_name, export_title) {
               }
           ],
           iDisplayLength: 8,
+          bLengthChange: false,
           select: {
               selector:'td:not(:first-child)',
               style:    'os'

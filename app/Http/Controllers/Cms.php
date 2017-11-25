@@ -116,7 +116,7 @@ class Cms extends Controller
          if($request->hasFile('picture')) {
            $file = $request->file('picture');
            if($file->isValid()) {
-             $file_name = $file->getClientOriginalName();
+             $file_name = time() . '.' . $file->getClientOriginalExtension();
              $file->move('uploads/services', $file_name);
              $service = Service::create(array_add($data, 'picture', $file_name));
            }
@@ -159,7 +159,7 @@ class Cms extends Controller
       if($request->hasFile('picture')) {
         $file = $request->file('picture');
         if($file->isValid()) {
-          $file_name = $file->getClientOriginalName();
+          $file_name = time() . '.' . $file->getClientOriginalExtension();
           $file->move('uploads/services', $file_name);
           $data2 = array_add($data2, 'picture', $file_name);
 
@@ -621,7 +621,7 @@ class Cms extends Controller
       if($request->hasFile('image')) {
         $picture = $request->file('image');
         if($picture->isValid()) {
-          $image = $picture->getClientOriginalName();
+          $image = time() . '.' . $picture->getClientOriginalExtension();
           $picture->move('uploads/products', $image);
           Product::create(array_add($data, 'image', $image));
         }
@@ -635,7 +635,7 @@ class Cms extends Controller
       $data = $request->except('picture');
       if($request->hasFile('picture')) {
         $logo = $request->file('picture');
-        $picture = $logo->getClientOriginalName();
+        $picture = time() . '.' . $logo->getClientOriginalExtension();
         $logo->move('uploads/cars', $picture);
         $data = array_add($data, 'picture', $picture);
         Car::create($data);
@@ -662,7 +662,7 @@ class Cms extends Controller
       if($request->hasFile('image')) {
         $picture = $request->file('image');
         if($picture->isValid()) {
-          $image = $picture->getClientOriginalName();
+          $image = time() . '.' . $picture->getClientOriginalExtension();;
           $picture->move('uploads/products', $image);
           Product::where('id', $id)->update(array_add($data, 'image', $image));
         }
@@ -682,7 +682,7 @@ class Cms extends Controller
       $data = $request->except('picture');
       if($request->hasFile('picture')) {
         $logo = $request->file('picture');
-        $picture = $logo->getClientOriginalName();
+        $picture = time() . '.' . $logo->getClientOriginalExtension();
         $logo->move('uploads/cars', $picture);
         $data = array_add($data, 'picture', $picture);
         Car::where('id', $id)->update($data);
@@ -862,7 +862,7 @@ class Cms extends Controller
 
     private function handleFile($file, $destination) {
       if($file->isValid()) {
-        $file_name = $file->getClientOriginalName();
+        $file_name = time() . '.' . $file->getClientOriginalExtension();
         $file->move($destination, $file_name);
         return $file_name;
       }

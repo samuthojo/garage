@@ -64,7 +64,8 @@ function myDataTable(file_name, export_title) {
                  messageTop: export_title
               }
           ],
-          iDisplayLength: 8
+          iDisplayLength: 8,
+          bLengthChange: false
     });
 }
 

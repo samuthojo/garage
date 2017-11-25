@@ -10,7 +10,6 @@
 }
 </style>
 <script src="{{ asset('js/products.js') }}"></script>
-<script src="{{ asset('js/jquery.validate.js') }}"></script>
 @include('modals.product_modal')
 @include('modals.confirmation_modal', ['text' => 'product',
                                        'function' => 'deleteProduct()'])

@@ -50,7 +50,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
-          <img src="{{ asset('uploads/products/' . $product->image)}}"
+          <img src="{!! asset('uploads/products/' . $product->image)!!}"
             class="img-rounded" alt="Product image" width="100%" height="auto"
             title="{{$product->name}}">
         </div>
