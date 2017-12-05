@@ -140,7 +140,6 @@ class Reports extends Controller {
   }
 
   private function serviceReportWithBothDates($status, $startDate, $endDate) {
-    $nextStartDate = Carb
     $conditions = [
         ['status', '=', $status],
         ['created_at', '>=', $startDate],
