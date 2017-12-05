@@ -55,10 +55,10 @@ class Reports extends Controller {
     $conditions = [
         ['status', '=', $status],
         ['date', '>=', $startDate],
-        ['date', '<=', $endDate],
      ];
 
      $orders = Order::where($conditions)
+                    ->whereDate('date', '<=', $endDate)
                     ->get()
                     ->map( function($order) {
                       $myOrder = $order;
