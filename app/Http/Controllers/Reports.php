@@ -193,8 +193,10 @@ class Reports extends Controller {
                      ->map( function($serv) use($conditions) {
                        $service = $serv;
                        $service->service = $serv->service()->first()->name;
-                       $service->car = $serv->car()->first()->name;
-                       $service->model = $serv->car_model()->first()->model_name;
+                       $car = $serv->car;
+                       $service->car = $car->name;
+                       $model = $serv->car_model;
+                       $service->model = $model->model_name;
                        $service->customers = $serv->customerServices()
                                                   ->where($conditions)
                                                   ->count();
@@ -221,11 +223,12 @@ class Reports extends Controller {
       ServiceAsProduct::whereIn('id', $service_as_product_ids)
                      ->get()
                      ->map( function($serv) use($conditions) {
-
                        $service = $serv;
                        $service->service = $serv->service()->first()->name;
-                       $service->car = $serv->car()->first()->name;
-                       $service->model = $serv->car_model()->first()->model_name;
+                       $car = $serv->car;
+                       $service->car = $car->name;
+                       $model = $serv->car_model;
+                       $service->model = $model->model_name;
                        $service->customers = $serv->customerServices()
                                                   ->where($conditions)
                                                   ->count();
