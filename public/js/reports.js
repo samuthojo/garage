@@ -81,6 +81,9 @@ function postMyData() {
       $("#btn_submit").prop("disabled", false);
       $(".my_loader").fadeOut(0);
       $("#report_area").html(result);
+    },
+    error: function(error) {
+      console.log(error);
     }
   });
 }
