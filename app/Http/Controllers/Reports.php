@@ -140,15 +140,16 @@ class Reports extends Controller {
   }
 
   private function serviceReportWithBothDates($status, $startDate, $endDate) {
+    $nextStartDate = Carb
     $conditions = [
         ['status', '=', $status],
         ['created_at', '>=', $startDate],
-        ['created_at', '<=', $endDate],
      ];
 
      $service_as_product_ids =
        DB::table('customer_services')
          ->where($conditions)
+         ->whereDate('created_at', '<=', $endDate)
          ->select('service_as_product_id')
          ->groupBy('service_as_product_id')
          ->get()->map( function($data) {
