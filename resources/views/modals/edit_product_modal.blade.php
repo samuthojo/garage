@@ -88,6 +88,7 @@
       </div>
     </div>
     <div class="row" style="margin-right: 15px;">
+      <div class="row" style="margin-left: 4px;">
       <div class="col-sm-2">
           <div class="form-group">
             <label class="" for="edit_product_unit">Unit:</label>
@@ -96,7 +97,7 @@
             <span class="text-danger " id="unit_error2"></span>
           </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-2" style="margin-left: 16px;">
           <div class="form-group">
             <label class="" for="edit_product_stock">Stock:</label>
             <input type="text" name="stock" id="edit_product_stock"
@@ -104,6 +105,8 @@
             <span class="text-danger " id="stock_error2"></span>
           </div>
         </div>
+      </div>
+      <div class="row" style="margin-left: 4px;">
         <div class="col-sm-2">
           <div class="form-group">
             <label class="" for="edit_product_price">Price:</label>
@@ -112,6 +115,7 @@
             <span class="text-danger " id="price_error2"></span>
           </div>
         </div>
+      </div>
         </div><!--row-->
         <fieldset>
         <div class="row">
@@ -128,7 +132,7 @@
             <span class="text-danger " id="warranty_error2"></span>
           </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-2" style="margin-left: 16px;">
           <div class="form-group">
             <label class="" for="sel8">Has includes:</label>
              <select id="sel8" name="has_includes" class="form-control"

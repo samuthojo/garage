@@ -124,7 +124,7 @@ function loginReq() {
         </div>
         <h2 class="form-signin-heading text-primary">Mechmasters</h2>
         <input type="text" id="username" class="form-control"
-          placeholder="Username">
+          placeholder="Username" autofocus>
         <input type="password" id="password" class="form-control"
           placeholder="Password">
         <button class="btn btn-primary col-sm-offset-4" type="button"

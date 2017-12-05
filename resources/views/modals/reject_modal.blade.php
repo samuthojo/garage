@@ -13,9 +13,9 @@
 						<div class="container">
               @include('alerts.alert4', ['alert_id' => 'reject_alert'])
 						<div class="form-group">
-							<label for="category_name">Reason:</label></br>
-							<input type="text" name="reason" id="reason"
-								placeholder="Reason" class="form-control">
+							<label for="reason">Reason:</label></br>
+							<textarea name="reason" id="reason"
+								placeholder="Reason" class="form-control"></textarea>
 						</div>
 						<div class="form-group">
 							<button type="button" class="btn btn-default"

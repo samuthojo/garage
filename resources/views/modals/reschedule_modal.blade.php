@@ -27,8 +27,8 @@
 						</div>
 						<div class="form-group">
 							<label for="reason">Reason:</label></br>
-							<input type="text" name="reason" id="reason2"
-								placeholder="Reason (optional)" class="form-control">
+							<textarea name="reason" id="reason2"
+								placeholder="Reason (optional)" class="form-control"></textarea>
 						</div>
 						<div class="form-group">
 							<button type="button" class="btn btn-default"
