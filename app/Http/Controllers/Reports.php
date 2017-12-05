@@ -127,7 +127,7 @@ class Reports extends Controller {
 
     $endDate = $request->input('end_date');
     $endDate = Carbon::parse($endDate)->format('Y-m-d');
-    
+
     if($request->filled(['start_date', 'end_date'])) {
       return $this->serviceReportWithBothDates($status, $startDate, $endDate);
     }
@@ -160,8 +160,10 @@ class Reports extends Controller {
                      ->map( function($serv) use($conditions) {
                        $service = $serv;
                        $service->service = $serv->service()->first()->name;
-                       $service->car = $serv->car()->first()->name;
-                       $service->model = $serv->car_model()->first()->model_name;
+                       $car = $serv->car();
+                       $service->car = $car->name;
+                       $model = $serv->car_model();
+                       $service->model = $model->model_name;
                        $service->customers = $serv->customerServices()
                                                   ->where($conditions)
                                                   ->count();
