@@ -160,9 +160,9 @@ class Reports extends Controller {
                      ->map( function($serv) use($conditions) {
                        $service = $serv;
                        $service->service = $serv->service()->first()->name;
-                       $car = $serv->car();
+                       $car = $serv->car;
                        $service->car = $car->name;
-                       $model = $serv->car_model();
+                       $model = $serv->car_model;
                        $service->model = $model->model_name;
                        $service->customers = $serv->customerServices()
                                                   ->where($conditions)
