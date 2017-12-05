@@ -7,6 +7,10 @@ use App\Feedback;
 
 class Feedbacks extends Controller
 {
+    public function __construct() {
+      $this->middleware('auth');
+    }
+
     public function index() {
       $feedbacks = Feedback::orderBy('id', 'desc')->get();
       return view('feedback.feedbacks', compact('feedbacks'));
