@@ -103,7 +103,7 @@ class MechAdmin extends Controller
 
   public function bookedServices() {
     $customer_services =
-      CustomerService::where('status', 1)
+      CustomerService::where('status', 0)
                      ->get()
                      ->map( function($customer_service){
                           $myService = [];
