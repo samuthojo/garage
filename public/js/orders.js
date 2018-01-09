@@ -54,6 +54,9 @@ function acceptOrder() {
       //$(".loader").fadeOut(0);
       closeLoader();
       notifyAccepted(status);
+    },
+    error: function(error) {
+      console.log(error);
     }
   });
 }
@@ -94,6 +97,9 @@ function rejectOrder() {
       success: function(status) {
         closeLoader();
         notifyRejected(status);
+      },
+      error: function(error) {
+        console.log(error);
       }
     });
   }
@@ -131,6 +137,9 @@ function markAsServiced() {
     success: function(status) {
       closeLoader();
       notifyServiced(status);
+    },
+    error: function(error) {
+      console.log(error);
     }
   });
 }
