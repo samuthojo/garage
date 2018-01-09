@@ -344,6 +344,37 @@ class MechMaster extends Controller
      return response()->json($feedback, 200);
    }
 
+   public function orders(Customer $customer) {
+     $orders = $customer->orders()
+                        ->get()
+                        ->map( function($order){
+                           $myOrder = [];
+                           $customer = $order->customer()->first();
+                           $myOrder['order_id'] = $order->id;
+                          //  $myOrder['customer_name'] = $customer->name;
+                          //  $myOrder['customer_phone'] = $customer->phonenumber;
+                           $myOrder['num_items'] = $order->num_items;
+                           $myOrder['amount'] = $order->amount;
+                           $myOrder['date_ordered'] = $order->date;
+                           $myOrder['items']  =
+                                $order->purchases()
+                                      ->get()
+                                      ->map( function($purchase) {
+                                        $item = [];
+                                        $product = $purchase->product()->first();
+                                        $item['name'] = $product->name;
+                                        $item['price'] = $purchase->price;
+                                        $item['quantity'] = $purchase->quantity;
+
+                                        return $item;
+                                      });
+
+                           return $myOrder;
+                         });
+
+     return response()->json(compact('orders'), 200);
+   }
+
    public function orderItems(Order $order) {
      $items = $order->purchases()
                    ->get()

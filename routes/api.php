@@ -22,6 +22,7 @@ Route::prefix('v1')->group(function() {
   Route::get('services', 'MechMaster@services');
   Route::get('cars', 'MechMaster@cars');
   Route::get('customer_services/{id}', 'MechMaster@customer_services');
+  Route::get('orders/{customer}', 'MechMaster@orders');
   Route::get('order_items/{order}', 'MechMaster@orderItems');
   Route::post('add_cars', 'MechMaster@add_cars');
   Route::post('purchase', 'MechMaster@purchase');
