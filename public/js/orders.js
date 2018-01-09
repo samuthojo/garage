@@ -13,6 +13,41 @@ function viewItems(id) {
   });
 }
 
+function myOrderDataTable(file_name, export_title) {
+  $.fn.dataTable.moment('DD-MM-YYYY'); //Sort the date column if present
+  $('#myTable').DataTable({
+          dom: 'Bfrtip',
+          buttons: [
+              {
+                extend: 'print',
+                exportOptions: {
+                  columns: ":not(:last-child)"
+                },
+                title: file_name,
+                messageTop: export_title
+              },
+               {
+                 extend: 'excel',
+                 exportOptions: {
+                   columns: ":not(:last-child)"
+                 },
+                 title: file_name,
+                 messageTop: export_title
+              },
+               {
+                 extend: 'pdf',
+                 exportOptions: {
+                   columns: ":not(:last-child)"
+                 },
+                 title: file_name,
+                 messageTop: export_title
+              }
+          ],
+          iDisplayLength: 8,
+          bLengthChange: false
+    });
+}
+
 function openModal(id, modal_id) {
   order_id = id; //set order_id variable
   $('#' + modal_id).modal({
