@@ -11,7 +11,7 @@
 				<div class="modal-body">
 					<form name="edit_category" id="edit_category">
 						<div class="container">
-            	@include('alerts.alert1', ['alert_id' => 'edit_category_alert'])
+            	@include('alerts.alert6', ['alert_id' => 'edit_category_alert'])
 						<div class="form-group">
 							<label for="new_name">Name:</label></br>
 							<input type="text" name="name" id="new_name"

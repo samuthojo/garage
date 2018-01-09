@@ -132,7 +132,7 @@ class Cms extends Controller
          return $this->services();
 
        } catch(Throwable $e) {
-           DB::rollback();
+           DB::rollBack();
        }
     }
 
@@ -177,7 +177,7 @@ class Cms extends Controller
             }
             return redirect()->route('services');
           } catch(Throwable $e) {
-            DB::rollback();
+            DB::rollBack();
           }
         }
       } else {
@@ -195,7 +195,7 @@ class Cms extends Controller
             }
             return redirect()->route('services');
           } catch(Throwable $e) {
-            DB::rollback();
+            DB::rollBack();
           }
       }
     }

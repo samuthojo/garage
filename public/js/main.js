@@ -9,6 +9,9 @@ $(document).ready(function() {
     statusCode: {
       401: function() {
         window.location.href = "admin";
+    },
+      419: function() {
+        window.location.href = "admin";
     }
   }
  });

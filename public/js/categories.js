@@ -1,6 +1,17 @@
 var category_id = "";
 var category = "";
 
+$(function() {
+  $("body").on('hidden.bs.modal', '.modal', function (e) {
+    $(".modal-body").find('input, textarea, select').each(function(){
+       $(this).val("");
+    });
+    $(".modal-body").find('span').each(function(){
+       $(this).fadeOut(0);
+    });
+  });
+});
+
 function showCategoryModal() {
   $('#category_modal').modal({
     backdrop: 'static',

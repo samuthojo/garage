@@ -211,7 +211,7 @@ class MechMaster extends Controller
         }
 
       } catch(Throwable $e) {
-          DB::rollback();
+          DB::rollBack();
           return response()->json(['error' => $e->getMessage(), ], 500);
       }
     }
@@ -311,7 +311,7 @@ class MechMaster extends Controller
         }
 
       } catch(Throwable $e) {
-        DB::rollback();
+        DB::rollBack();
         return response()->json(['error' => $e->getMessage(), ], 500);
       }
 

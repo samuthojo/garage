@@ -15,7 +15,8 @@
         }
 
         .form-signin {
-          padding: 19px 29px 29px;
+          width: 300px;
+          padding: 19px 35px 29px;
           top: 0;
           margin: 60% auto;
           /*left: 0;*/
@@ -100,6 +101,7 @@ function loginReq() {
                   window.location.href = "{{ url('dashboard') }}";
                 }else{
                     $(".loader").fadeOut(0);
+                    $("#password").val("");
                     $("#login_alert2").fadeTo(2000, 500).slideUp(500, function(){
                       $("#login_alert2").slideUp(500);
                     });

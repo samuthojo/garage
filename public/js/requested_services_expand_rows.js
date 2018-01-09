@@ -69,14 +69,6 @@ function format(obj) {
   if(obj.pick_option == 0) {
   return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<tr>'+
-            '<th>Customer Descriptions:</th>'+
-            '<td>'+ obj.description +'</td>'+
-        '</tr>'+
-        '<tr>'+
-          '<th>Staff Comment:</th>'+
-          '<td>' + obj.comment +'</td>'+
-        '</tr>'+
-        '<tr>'+
             '<th>Pick-Option:</th>'+
             '<td>'+ pickOptionString(obj.pick_option) +'</td>'+
         '</tr>' +
@@ -84,14 +76,6 @@ function format(obj) {
   }
   else if(obj.pick_option == 1){
     return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
-          '<tr>'+
-              '<th>Customer Descriptions:</th>'+
-              '<td>'+ obj.description +'</td>'+
-          '</tr>'+
-          '<tr>'+
-            '<th>Staff Comment:</th>'+
-            '<td>' + obj.comment +'</td>'+
-          '</tr>'+
           '<tr>'+
               '<th>Pick-Option:</th>'+
               '<td>'+ pickOptionString(obj.pick_option) +'</td>'+
