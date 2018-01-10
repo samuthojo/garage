@@ -63,7 +63,24 @@ function rescheduleRequest() {
     formData.append('date', date);
     formData.append('reason', reason);
     var link = 'requested_services/status/update';
-    sendMyRequest(link, formData, 3);
+    type = 3;
+    openLoader();
+    $.ajax({
+      type: 'post',
+      url: link,
+      dataType: 'json',
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function (result) {
+        //$(".loader").fadeOut(0);
+        closeLoader();
+        $("#new_date").text(date);
+        notifyAdmin(result, type);
+      }
+    });
+    // sendMyRequest(link, formData, 3);
   }
 }
 

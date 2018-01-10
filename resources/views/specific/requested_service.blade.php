@@ -50,7 +50,7 @@
                       <td class="details-control"></td>
                       <td style="display: none;">{{$detail->id}}</td>
                       <td>{{ $detail->created_at }}</td>
-                      <td>{{ $detail->date }}</td>
+                      <td id="new_date">{{ $detail->date }}</td>
                       <td>{{ $detail->customer }}</td>
                       <td>{{ $detail->phonenumber }}</td>
                       <td>{{ sprintf('%s', number_format($detail->price)) }}</td>
