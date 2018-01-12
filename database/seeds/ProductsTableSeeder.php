@@ -31,7 +31,7 @@ class ProductsTableSeeder extends Seeder
               'include_price' => ($index % 2 == 0) ? 2000000 : 175000,
               'unit' => $index,
               'stock' => ($index % 2 == 0) ? 2000 : 175,
-              'warranty' => $index . ($index % 2 == 0) ? ' months':' years',
+              'warranty' => $index . (($index % 2 == 0) ? ' months':' years'),
               'image' => ($index != 6) ? $index . ".jpg" : $index . ".png"
           ];
           Product::create($instance);
