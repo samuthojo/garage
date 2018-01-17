@@ -16,8 +16,6 @@ $(document).ready(function() {
   }
  });
 
- $(".datepicker-container").remove();
-
   previousEl = $('#categories');
   var cols = document.querySelectorAll('#link_section .link');
 	[].forEach.call(cols, function(col) {
