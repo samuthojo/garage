@@ -12,9 +12,9 @@ $(document).ready(function() {
     },
       419: function() {
         window.location.href = "admin";
-    },
-    $(".datepicker-container").remove();
-  }
+    }
+  },
+  $(".datepicker-container").remove();
  });
   previousEl = $('#categories');
   var cols = document.querySelectorAll('#link_section .link');
