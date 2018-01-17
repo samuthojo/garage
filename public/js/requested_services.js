@@ -60,6 +60,7 @@ function rescheduleRequest() {
     showHideAlert('reschedule_alert');
   } else {
     closeModal('reschedule_modal');
+    $(".datepicker-container").remove();
     formData.append('date', date);
     formData.append('reason', reason);
     var link = 'requested_services/status/update';

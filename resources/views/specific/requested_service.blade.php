@@ -186,9 +186,4 @@
   <script>
     myRequestsDataTable("Service: {{$serv}} | Car: {{$car}} | Model: {{$model}}",
           "The List Of Customers Requesting This Service As Per {{now()->format('d-m-Y')}}");
-
-    $("#notification_sent").on('hidden.bs.modal', '.modal', function (e) {
-      console.log("remove");
-      $(".datepicker-container").remove();
-    });
   </script>
