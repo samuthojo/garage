@@ -268,6 +268,7 @@ var methods = {
 
     this.shown = false;
     this.$picker.addClass(CLASS_HIDE).off(EVENT_CLICK, this.click);
+		$(".datepicker-container").remove();
 
     if (!this.inline) {
       $window.off(EVENT_RESIZE, this.onResize);
@@ -278,6 +279,7 @@ var methods = {
   toggle: function toggle() {
     if (this.shown) {
       this.hide();
+			$(".datepicker-container").remove();
     } else {
       this.show();
     }
