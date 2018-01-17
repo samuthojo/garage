@@ -268,8 +268,8 @@ var methods = {
 
     this.shown = false;
     this.$picker.addClass(CLASS_HIDE).off(EVENT_CLICK, this.click);
-		$(".datepicker-container").remove();
-		this.built = false;
+		// $(".datepicker-container").remove();
+		// this.built = false;
 
     if (!this.inline) {
       $window.off(EVENT_RESIZE, this.onResize);
