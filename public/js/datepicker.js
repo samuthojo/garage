@@ -246,7 +246,6 @@ var methods = {
     this.shown = true;
     this.$picker.removeClass(CLASS_HIDE).on(EVENT_CLICK, $.proxy(this.click, this));
     this.showView(this.options.startView);
-		// $(".datepicker-container").fadeIn(0);
 
     if (!this.inline) {
       $window.on(EVENT_RESIZE, this.onResize = proxy(this.place, this));
@@ -269,7 +268,8 @@ var methods = {
 
     this.shown = false;
     this.$picker.addClass(CLASS_HIDE).off(EVENT_CLICK, this.click);
-		$(".datepicker-container").fadeOut(0);
+		$(".datepicker-container").remove();
+		this.built = false;
 
     if (!this.inline) {
       $window.off(EVENT_RESIZE, this.onResize);
