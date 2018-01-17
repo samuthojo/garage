@@ -266,10 +266,8 @@ var methods = {
       return;
     }
 
-    // this.shown = false;
-    // this.$picker.addClass(CLASS_HIDE).off(EVENT_CLICK, this.click);
-		this.destroy();
-		// this.built = false;
+    this.shown = false;
+    this.$picker.addClass(CLASS_HIDE).off(EVENT_CLICK, this.click);
 
     if (!this.inline) {
       $window.off(EVENT_RESIZE, this.onResize);

@@ -12,7 +12,8 @@ $(document).ready(function() {
     },
       419: function() {
         window.location.href = "admin";
-    }
+    },
+    $(".datepicker-container").remove();
   }
  });
   previousEl = $('#categories');
