@@ -76,7 +76,7 @@ function rescheduleRequest() {
       success: function (result) {
         //$(".loader").fadeOut(0);
         closeLoader();
-        $("#new_date").text(date);
+        $("#new_date" + requested_service_id).text(date);
         notifyAdmin(result, type);
       }
     });
