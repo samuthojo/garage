@@ -279,7 +279,6 @@ var methods = {
   toggle: function toggle() {
     if (this.shown) {
       this.hide();
-			$(".datepicker-container").remove();
     } else {
       this.show();
     }
