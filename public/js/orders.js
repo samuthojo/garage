@@ -14,9 +14,10 @@ function viewItems(id) {
 }
 
 function myOrderDataTable(file_name, export_title) {
-  // $.fn.dataTable.moment('YYYYMMDD'); //Sort the date column if present
+  $.fn.dataTable.moment('DD-MM-YYYY'); //Sort the date column if present
   $('#myTable').DataTable({
           dom: 'Bfrtip',
+          "order": [[ 1, "desc" ]] ,
           buttons: [
               {
                 extend: 'print',
