@@ -29,7 +29,6 @@
       <table id="myTable" class="table table-striped">
           <thead>
             <tr>
-              <!-- <th></th> -->
               <th>Date Ordered</th>
               <th>Order No.</th>
               <th>Customer</th>
@@ -43,7 +42,6 @@
           <tbody>
             @foreach($orders as $order)
                     <tr>
-                      <!-- <td class="details-control"></td> -->
                       <td>{{ $order->date }}</td>
                       <td>{{ $order->id }}</td>
                       <td>
