@@ -82,7 +82,7 @@ Route::get('feedbacks', 'Feedbacks@index')->name('feedbacks.index');
 Route::get('feedback/{feedback}', 'Feedbacks@read')->name('feedbacks.read');
 Route::post('feedback/delete', 'Feedbacks@delete');
 
-Route::get('change_password_form', 'Cms@changePasswordForm');
+Route::get('change_password_form', 'Cms@changePasswordForm')->name('change_password');
 Route::post('change_password', 'Cms@changePassword');
 
 Route::get('logout', 'Cms@logout')->name('logout');

@@ -8,7 +8,7 @@
     <h3 class="panel-title pull-left"
       style="font-weight: bold;">Feedback</h3>
     <div class="btn-group pull-right">
-      <button type="button" class="btn btn-primary"
+      <button type="button" class="btn btn-warning"
        onclick="menu_links('feedbacks')" title="Back">
         <i class="fa fa-arrow-left" style="cursor: pointer;"></i>
       </button>
