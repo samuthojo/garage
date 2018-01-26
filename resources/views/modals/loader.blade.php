@@ -9,7 +9,8 @@
     <div class="modal-body">
       <div class="container">
         <span id="my_loader" class="col-xs-offset-1">
-          <i class="fa fa-spinner fa-spin fa-3x fa-fw text-primary"></i>
+          <i class="fa fa-spinner fa-spin fa-3x fa-fw"
+            style="color: #ff9720 !important;"></i>
         </span>
       </div>
     </div>

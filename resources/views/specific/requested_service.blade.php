@@ -22,7 +22,7 @@
   <div class="panel-heading">
     <h3 style="font-weight: bold;" class="panel-title pull-left">
       Service:{{$serv}} | Car:{{$car}} | Model:{{$model}} </h3>
-      <button type="button" class="btn btn-primary pull-right"
+      <button type="button" class="btn btn-warning pull-right"
         onclick="menu_links('requested_services')">
         <i class="fa fa-arrow-left"></i>
       </button>
