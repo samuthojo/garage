@@ -32,18 +32,23 @@
     }
     .form-login {
       position: absolute;
-      left: 0;
-      top: 0;
+      left: 35%;
+      top: 20%;
       bottom: 0;
-    }
-    .my-form {
-      padding: 0;
+      width: 300px;
+      height: 320px;
       border: 1px solid #e5e5e5;
       border-radius: 5px;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
       background: #fff;
     }
-    div.container {
+    .my-form {
+      position: absolute;
+      left: 20%;
+      top: -30%;
+      bottom: 0;
+    }
+    div. {
       text-align: center;
     }
     div>img {
@@ -74,43 +79,40 @@
   <div class="form-login">
 
     <div class="my-form">
-      <div class="container">
-        <img class="img-rounded" src="{{asset('images/logo.png')}}"
-          alt="BiasharaPlus Logo" width="20%" height="auto">
-      </div>
+      <img class="img-rounded col-sm-offset-1" src="{{asset('images/logo.png')}}"
+        alt="BiasharaPlus Logo" width="60%" height="auto">
 
-      <div class="container">
-        @if ($errors->any())
-          <div class="alert alert-danger" style="display: inline-block;">
-              <ul>
-                  @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                  @endforeach
-              </ul>
-          </div>
-        @endif
-        <form id="login_form" name="login_form" action="{{route('login')}}"
-          method="post">
-          {{ csrf_field() }}
-          <div class="form-group">
-            <input type="text" id="username" class="form-control"
-              placeholder="Username" name="username"
-              value="{{ old('username') }}" autofocus>
-          </div>
+      @if ($errors->any())
+        <div class="alert alert-danger" style="display: inline-block;">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+      @endif
 
-          <div class="form-group">
-            <input type="password" id="password" class="form-control"
-              placeholder="Password" name="password">
-          </div>
+      <form id="login_form" name="login_form" action="{{route('login')}}"
+        method="post">
+        {{ csrf_field() }}
+        <div class="form-group">
+          <input type="text" id="username" class="form-control"
+            placeholder="Username" name="username"
+            value="{{ old('username') }}" autofocus>
+        </div>
 
-          <div class="form-group">
-            <button type="submit" class="btn btn-success">
-              Login
-            </button>
-          </div>
+        <div class="form-group">
+          <input type="password" id="password" class="form-control"
+            placeholder="Password" name="password">
+        </div>
 
-        </form>
-      </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-warning col-sm-offset-3">
+            <span style="color: #000;">Login</span>
+          </button>
+        </div>
+
+      </form>
     </div>
 
   </div>
