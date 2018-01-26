@@ -2,7 +2,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 style="font-weight: bold;" class="panel-title pull-left">Order Details:</h3>
-      <button class="btn btn-primary pull-right" onclick="menu_links('orders')">
+      <button class="btn btn-warning pull-right" onclick="menu_links('orders')">
         <i class="fa fa-arrow-left" style="cursor: pointerpx; font-size: 15px;"></i>
       </button>
      <div class="clearfix"></div>
