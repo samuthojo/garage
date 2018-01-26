@@ -23,7 +23,8 @@
     <h3 style="font-weight: bold;"class="panel-title pull-left">
       Product Categories: </h3>
      <span onclick="showCategoryModal()" style="float: right;" title="Add New Category">
-       <i class="fa fa-plus-circle fa-2x text-primary" style="cursor: pointer;"></i></span>
+       <i class="fa fa-plus-circle fa-2x text-primary"
+         style="cursor: pointer; color: #ff9720;"></i></span>
      </button>
      <div class="clearfix"></div>
   </div>

@@ -35,7 +35,8 @@
       Products: </h3>
        <span onclick="showProductModal()" class="pull-right text-primary"
         title="Add New Product">
-         <i class="fa fa-plus-circle fa-2x" style="cursor: pointer;"></i>
+         <i class="fa fa-plus-circle fa-2x"
+           style="cursor: pointer; color: #ff9720;"></i>
        </span>
        <div class="clearfix"></div>
   </div>
@@ -70,12 +71,12 @@
                       <td>{{ $product->stock }}</td>
                       <td>
                         <div class="btn-group">
-  												<button id="btn_eye_open" type="button" class="btn btn-primary"
+  												<button id="btn_eye_open" type="button" class="btn btn-default"
   													onclick="viewProduct({{ $product->id }})"
                             title="Product Details">
   	          							<span class="glyphicon glyphicon-eye-open"></span>
   	        							</button>
-                          <button type="button" class="btn btn-primary"
+                          <button type="button" class="btn btn-warning"
                             onclick="fetchParticulars({{$product->id}})" title="Edit Product">
                             <i class="fa fa-pencil"></i>
                           </button>

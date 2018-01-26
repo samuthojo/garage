@@ -51,7 +51,8 @@
       Services: </h3>
       <span onclick="showServiceModal('decision_modal')" class="pull-right text-primary"
         title="Add Service">
-        <i class="fa fa-plus-circle fa-2x" style="cursor: pointer;"></i>
+        <i class="fa fa-plus-circle fa-2x"
+          style="cursor: pointer; color:#ff9720;"></i>
       </span>
      <div class="clearfix"></div>
   </div>
@@ -88,12 +89,12 @@
                       </td>
                       <td>
                         <div class="btn-group">
-                          <button type="button" class="btn btn-small btn-primary"
+                          <button type="button" class="btn btn-small btn-default"
                             onclick="viewService({{ $service->id }})"
                             title="View Details">
                             <span class="glyphicon glyphicon-eye-open"></span>
                           </button>
-                          <button type="button" class="btn btn-primary"
+                          <button type="button" class="btn btn-warning"
                            onclick="fetchCarModels({{$service->id}}, {{$service}})"
                            title="Edit">
                            <i class="fa fa-pencil" style="cursor: pointer;"></i>

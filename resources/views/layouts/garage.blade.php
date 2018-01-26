@@ -7,7 +7,13 @@
     .alert {
       display:inline-block;
     }
-
+    .btn-warning {
+      background-color: #ff9720 !important;
+      border-color: #ff9720 !important;
+    }
+    .panel-default {
+      border-color: #333;
+    }
     .panel-heading h3 {
       white-space: nowrap;
       overflow: hidden;
@@ -15,24 +21,59 @@
       line-height: normal;
       width: 75%;
       padding-top: 8px;
+      color: #fff;
     }
-
+    .panel-footer {
+      background-color: #333 !important;
+      color: #fff;
+    }
     .region {
       padding-top: 70px;
     }
 
     .loader {
-        /*position: fixed;
-        top: 0;
-        left: 0;*/
-        /*width: 100%;*/
-        /*padding-top: 1.5%;*/
-        /*height: 40px;*/
         z-index: 9999;
         text-align: center;
         align-content: center;
         padding-bottom: 10px;
         display: none;
+    }
+
+    .navbar-default {
+      background-color: #000;
+    }
+    .navbar-brand {
+      color: #fff !important;
+      /*font-weight: bold;*/
+    }
+    .navbar-default .navbar-nav>li>a {
+      color: #fff;
+      /*color: #555;*/
+      /*color: #777;*/
+    }
+    .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+      color: #000;
+      background-color: #ff9720;
+      /*font-weight: bold;*/
+    }
+    .navbar-default .navbar-nav>li>a:hover {
+      background-color: #fff;
+      color: #000;
+    }
+    .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+      color: #000;
+      background-color: #ff9720;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+        color: #000;
+        /*color: #3c763d;*/
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
+        background-color: #ccc;
+        /*color: #3c763d;*/
+    }
+    .panel-heading {
+      background-color: #333 !important;
     }
   </style>
 </head>

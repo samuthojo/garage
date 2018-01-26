@@ -26,7 +26,8 @@
        <h3 style="font-weight: bold;" class="panel-title pull-left">
          Product Categories: </h3>
         <span onclick="showCategoryModal()" class="pull-right" title="Add New Category">
-          <i class="fa fa-plus-circle fa-2x text-primary" style="cursor: pointer;"></i></span>
+          <i class="fa fa-plus-circle fa-2x text-primary"
+            style="cursor: pointer; color: #ff9720;"></i></span>
         <div class="clearfix"></div>
      </div>
      <div class="panel-body">
@@ -46,15 +47,15 @@
                          <td>{{ $category->name }}</td>
                          <td>
                            <div class="btn-group">
-                             <button type="button" class="btn btn-primary"
+                             <button type="button" class="btn btn-warning"
                               onclick="showEditModal({{ $category }})"
                               title="Edit Category">
-                               <span class="glyphicon glyphicon-pencil"></span>
+                               <span class="fa fa-pencil"></span>
                              </button>
                              <button type="button" class="btn btn-danger"
                               onclick="showConfirmation({{ $category->id }})"
                               title="Delete Category">
-                               <span class="glyphicon glyphicon-trash"></span>
+                               <span class="fa fa-trash-o"></span>
                              </button>
                            </div>
                          </td>

@@ -24,7 +24,8 @@
       Cars: </h3>
       <span onclick="showCarModal()" class="pull-right text-primary"
         title="Add New Car">
-        <i class="fa fa-plus-circle fa-2x" style="cursor: pointer;"></i>
+        <i class="fa fa-plus-circle fa-2x"
+          style="cursor: pointer; color: #ff9720;"></i>
       </span>
      <div class="clearfix"></div>
   </div>
@@ -47,7 +48,7 @@
                       <td>{{ $car->num_models }}</td>
                       <td>
                         <div class="btn-group">
-                          <button type="button" class="btn btn-small btn-primary"
+                          <button type="button" class="btn btn-small btn-default"
                             onclick="viewCar({{ $car->id }})"
                             title="View Car & Models">
                             <span class="glyphicon glyphicon-eye-open"></span>
@@ -56,7 +57,7 @@
                             onclick="viewModels({{ $car->id }})">
                             View Models
                           </button> -->
-                          <button type="button" class="btn btn-primary" onclick="showEditCarModal({{$car}}, 'cars')"
+                          <button type="button" class="btn btn-warning" onclick="showEditCarModal({{$car}}, 'cars')"
                             title="Edit Car Info">
                             <i class="fa fa-pencil"></i>
                           </button>

@@ -34,13 +34,13 @@
                 <td>{{$feedback->title}}</td>
                 <td>
                   <div class="btn-group">
-                    <button type="button" class="btn btn-primary"
+                    <button type="button" class="btn btn-default"
                       title="Read" onclick="readFeedback({{$feedback->id}})">
                       <span class="glyphicon glyphicon-eye-open"></span>
                     </button>
                     <button type="button" class="btn btn-danger"
                       title="Delete" onclick="deleteModal({{$feedback->id}})">
-                      <span class="glyphicon glyphicon-trash"></span>
+                      <span class="fa fa-trash-o"></span>
                     </button>
                   </div>
                 </td>
