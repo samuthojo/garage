@@ -39,34 +39,51 @@
     .top-part {
       background:url('/images/garage.jpg') center;
       height: 50vh;
+      position: relative;
+      z-index: 1;
     }
     .bottom-part {
-      background: #ff9720;
+      background: #fb8a0b;
       height: 50vh;
+      position: relative;
+    }
+    .bottom-part::before{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.22;
+      z-index: 1;
+      background-image: url(images/ptn.png);
     }
     .form-login {
+      z-index: 3;
+      padding-top: 40px;
+      padding-bottom: 35px;
       position: absolute;
-      left: 35%;
+      left: 0;
+      right: 0;
       top: 20%;
-      bottom: 0;
+      margin: auto;
+      height: auto;
       width: 300px;
-      height: 340px;
       border: 1px solid #e5e5e5;
-      border-radius: 5px;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      border-radius: 4px;
+      box-shadow: 0 1px 50px rgba(0, 0, 0, 0.05);
       background: #fff;
     }
     .my-form {
-      position: absolute;
-      left: 20%;
-      top: -30%;
-      bottom: 0;
-    }
-    div. {
       text-align: center;
     }
+    .my-form button {
+      text-transform: uppercase;
+      min-width: 120px;
+    }
     div>img {
-      margin: 110px 0 12px 0;
+      display: inline-block;
+      margin-bottom: 20px;
     }
     .form-control {
       display: inline-block;
@@ -74,7 +91,11 @@
       position: relative;
     }
     .loader {
+          position: relative;
           width: 178px;
+          left: 0;
+          right: 0;
+          margin: auto;
           z-index: 9999;
           text-align: center;
           padding-bottom: 10px;
@@ -147,7 +168,7 @@
   <div class="form-login">
 
     <div class="my-form">
-      <img class="img-rounded col-sm-offset-1" src="{{asset('images/logo.png')}}"
+      <img class="img-rounded" src="{{asset('images/logo.png')}}"
         alt="BiasharaPlus Logo" width="60%" height="auto">
 
         @include('loader')
@@ -171,7 +192,7 @@
         </div>
 
         <div class="form-group">
-          <button type="button" class="btn btn-warning col-sm-offset-3"
+          <button type="button" class="btn btn-warning"
             id="login" onclick="loginReq()" style="background-color: #ff9720;">
             <span style="color: #000;">Login</span>
           </button>
