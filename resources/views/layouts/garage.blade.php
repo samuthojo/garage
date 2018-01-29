@@ -31,7 +31,7 @@
       padding-top: 70px;
     }
 
-    .loader {
+    .loader, .tab_loader {
         z-index: 9999;
         text-align: center;
         align-content: center;
