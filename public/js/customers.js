@@ -1,5 +1,25 @@
 var customer_id = "";
 
+function ordersTab() {
+  $(".tab_loader").fadeIn(0);
+  ("#servicesTab").removeAttr();
+  ("#ordersTab").attr("class", "active");
+  var link = 'customer/' + id;
+  $.ajax({
+    url: link,
+    dataType: 'html',
+    success: function(result) {
+      $(".loader").fadeOut(0);
+      $('#main_content').html(result);
+    }
+  });
+
+}
+
+function servicesTab() {
+
+}
+
 function viewCustomer(id) {
   $(".loader").fadeIn(0);
   var link = 'customers/' + id;

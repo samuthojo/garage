@@ -73,4 +73,16 @@
     </div>
 </div>
 
-@include('specific.customer_orders')
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#customerOrders">Orders</a></li>
+  <li><a data-toggle="tab" href="#customerServices">Services</a></li>
+</ul>
+@include('tab_loader')
+<div class="tab-content">
+  <div id="customerOrders" class="tab-pane fade in active">
+    @include('specific.customer_orders')
+  </div>
+  <div id="customerServices" class="tab-pane fade in active">
+    @include('specific.customer_services')
+  </div>
+</div>
