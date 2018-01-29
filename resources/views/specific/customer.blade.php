@@ -82,7 +82,7 @@
   <div id="customerOrders" class="tab-pane fade in active">
     @include('specific.customer_orders')
   </div>
-  <div id="customerServices" class="tab-pane fade in active">
+  <div id="customerServices" class="tab-pane fade">
     @include('specific.customer_services')
   </div>
 </div>

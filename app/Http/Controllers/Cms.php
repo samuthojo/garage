@@ -270,7 +270,7 @@ class Cms extends Controller
                                    } else {
                                      $car = $car->name;
                                    }
-                                   $model = $serviceAsProduct()->car()->first();
+                                   $model = $serviceAsProduct()->car_model()->first();
                                    if(is_null($model)) {
                                      $model = 'All';
                                    } else {
