@@ -255,7 +255,8 @@ class Cms extends Controller
     }
 
     public function customer(Customer $customer) {
-      return view('specific.customer', compact('customer'));
+      $orders = $customer->orders()->get();
+      return view('specific.customer', compact('customer', 'orders'));
     }
 
     public function updateCustomer(Request $request) {
