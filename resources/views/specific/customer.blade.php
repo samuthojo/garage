@@ -72,3 +72,5 @@
       Crafted @ <a href="http://ipfsoftwares.com" target="_blank">iPF SOFTWARES</a>
     </div>
 </div>
+
+@include('specific.customer_orders')
