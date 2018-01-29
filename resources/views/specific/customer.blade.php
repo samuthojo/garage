@@ -68,16 +68,16 @@
         </table>
       </div>
     </div>
-    <div class="panel-footer">
+    {{--<div class="panel-footer">
       Crafted @ <a href="http://ipfsoftwares.com" target="_blank">iPF SOFTWARES</a>
-    </div>
+    </div>--}}
 </div>
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#customerOrders">Orders</a></li>
   <li><a data-toggle="tab" href="#customerServices">Services</a></li>
 </ul>
-<div class="tab-content">
+<div class="tab-content" style="margin-top: 20px;">
   <div id="customerOrders" class="tab-pane fade in active">
     @include('specific.customer_orders')
   </div>

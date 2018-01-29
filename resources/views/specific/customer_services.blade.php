@@ -61,11 +61,11 @@
        </table>
      </div>
   </div>
-  <div class="panel-footer">
+  {{--<div class="panel-footer">
     Crafted @ <a href="http://ipfsoftwares.com" target="_blank">iPF SOFTWARES</a>
-  </div>
+  </div>--}}
   </div>
   <script>
-    myRequestsDataTable("bn",
-          "The List Of Customers Requesting This Service As Per {{now()->format('d-m-Y')}}");
+    myRequestsDataTable("Services Requested",
+          "The Services Requested By {{$customer->name}}");
   </script>

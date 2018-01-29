@@ -59,9 +59,9 @@
        </table>
      </div>
   </div>
-  <div class="panel-footer">
+  {{--<div class="panel-footer">
     Crafted @ <a href="http://ipfsoftwares.com" target="_blank">iPF SOFTWARES</a>
-  </div>
+  </div>--}}
   </div>
   <script>
     myOrderDataTable("Orders", "Orders Made By {{$customer->name}}");
