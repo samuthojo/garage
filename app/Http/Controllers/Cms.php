@@ -264,13 +264,13 @@ class Cms extends Controller
                                    $serviceName = $serviceAsProduct->service()
                                                                    ->first()
                                                                    ->name;
-                                   $car = $serviceAsProduct()->car()->first();
+                                   $car = $serviceAsProduct->car()->first();
                                    if(is_null($car)) {
                                      $car = 'All';
                                    } else {
                                      $car = $car->name;
                                    }
-                                   $model = $serviceAsProduct()->car_model()->first();
+                                   $model = $serviceAsProduct->car_model()->first();
                                    if(is_null($model)) {
                                      $model = 'All';
                                    } else {
