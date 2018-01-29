@@ -66,6 +66,6 @@
   </div>
   </div>
   <script>
-    myRequestsDataTable("",
+    myRequestsDataTable("bn",
           "The List Of Customers Requesting This Service As Per {{now()->format('d-m-Y')}}");
   </script>
