@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/expand_rows.css') }}">
-<script src="{{ asset('js/requested_services.js') }}"></script>
-<script src="{{ asset('js/requested_services_expand_rows.js') }}"></script>
+<script src="{{ asset('js/customer_services.js') }}"></script>
+<script src="{{ asset('js/customer_services_expand_rows.js') }}"></script>
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 style="font-weight: bold;" class="panel-title pull-left">
@@ -9,7 +9,7 @@
   </div>
   <div class="panel-body">
     <div class="table-responsive">
-      <table id="myTable" class="table table-striped">
+      <table id="myServicesTable" class="table table-striped">
           <thead>
             <tr>
               <th></th>
@@ -21,7 +21,6 @@
               <th>Model</th>
               <th>Price</th>
               <th>Status</th>
-              <th>Action</th>
             </tr>
           </thead>
           <tbody>
