@@ -1,4 +1,4 @@
-<script src="{{ asset('js/orders.js') }}"></script>
+<script src="{{ asset('js/customer_orders.js') }}"></script>
 @include('modals.loader')
 <div class="panel panel-default">
   <div class="panel-heading">

@@ -36,7 +36,7 @@ function myRequestsDataTable(file_name, export_title) {
           }
     });
     // Add event listener for opening and closing details
-    $('#myTable tbody').on('click', 'td.details-control', function () {
+    $('#myServicesTable tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
         var row = table.row( tr );
 
