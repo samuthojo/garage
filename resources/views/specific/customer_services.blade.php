@@ -16,21 +16,27 @@
               <th style="display: none;"></th>
               <th>Date Requested</th>
               <th>Date Due</th>
+              <th>Service</th>
+              <th>Car</th>
+              <th>Model</th>
               <th>Price</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            @foreach($details as $detail)
+            @foreach($services as $service)
                     <tr>
                       <td class="details-control"></td>
-                      <td style="display: none;">{{$detail->id}}</td>
-                      <td>{{ $detail->created_at }}</td>
-                      <td id="new_date{{$detail->id}}">{{ $detail->date }}</td>
-                      <td>{{ sprintf('%s', number_format($detail->price)) }}</td>
+                      <td style="display: none;">{{$service->id}}</td>
+                      <td>{{ $service->created_at }}</td>
+                      <td id="new_date{{$service->id}}">{{ $service->date }}</td>
+                      <td>{{ $service->name }}</td>
+                      <td>{{ $service->car }}</td>
+                      <td>{{ $service->model }}</td>
+                      <td>{{ sprintf('%s', number_format($service->price)) }}</td>
                       @php
-                        $status = $detail->status;
+                        $status = $service->status;
                         if(strcasecmp($status, "pending") == 0) {
                           $color = "text-warning";
                         }
@@ -48,7 +54,7 @@
                         }
                       @endphp
                       <td>
-                        <span class="{{$color}}" id="status{{$detail->id}}">{{ $detail->status }}</span>
+                        <span class="{{$color}}" id="status{{$service->id}}">{{ $service->status }}</span>
                       </td>
                     </tr>
            @endforeach
@@ -61,6 +67,6 @@
   </div>
   </div>
   <script>
-    myRequestsDataTable("Service: {{$serv}} | Car: {{$car}} | Model: {{$model}}",
+    myRequestsDataTable("",
           "The List Of Customers Requesting This Service As Per {{now()->format('d-m-Y')}}");
   </script>

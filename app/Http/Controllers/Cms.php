@@ -256,33 +256,33 @@ class Cms extends Controller
 
     public function customer(Customer $customer) {
       $orders = $customer->orders()->get();
-      $services = CustomerService::where('customer_id', $customer->id)
-                                 ->get()
-                                 ->map(function($service) {
-                                   $serviceAsProduct = $service->serviceAsProduct()
-                                                               ->first();
-                                   $serviceName = $serviceAsProduct->service()
-                                                                   ->first()
-                                                                   ->name;
-                                   $car = $serviceAsProduct->car()->first();
-                                   if(is_null($car)) {
-                                     $car = 'All';
-                                   } else {
-                                     $car = $car->name;
-                                   }
-                                   $model = $serviceAsProduct->car_model()->first();
-                                   if(is_null($model)) {
-                                     $model = 'All';
-                                   } else {
-                                     $model = $model->model_name;
-                                   }
+      $services = $customer->customerServices()
+                           ->get()
+                           ->map(function($service) {
+                             $serviceAsProduct = $service->serviceAsProduct()
+                                                         ->first();
+                             $serviceName = $serviceAsProduct->service()
+                                                             ->first()
+                                                             ->name;
+                             $car = $serviceAsProduct->car()->first();
+                             if(is_null($car)) {
+                               $car = 'All';
+                             } else {
+                               $car = $car->name;
+                             }
+                             $model = $serviceAsProduct->car_model()->first();
+                             if(is_null($model)) {
+                               $model = 'All';
+                             } else {
+                               $model = $model->model_name;
+                             }
 
-                                   $service->name = $serviceName;
-                                   $service->car = $car;
-                                   $service->model = $model;
+                             $service->name = $serviceName;
+                             $service->car = $car;
+                             $service->model = $model;
 
-                                   return $service;
-                                 });
+                             return $service;
+                           });
       return view('specific.customer', compact('customer', 'orders', 'services'));
     }
 
