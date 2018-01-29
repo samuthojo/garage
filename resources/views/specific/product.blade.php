@@ -33,7 +33,7 @@
             onclick="menu_links('products')" title="Back">
             <i class="fa fa-arrow-left"></i>
           </button>
-          <button type="button" class="btn btn-primary"
+          <button type="button" class="btn btn-warning"
             onclick=
             "showEditProductModal({{$category}}, {{$product}}, {{$car}}, {{$car_model}}, 'product')"
             title="Edit Product">
